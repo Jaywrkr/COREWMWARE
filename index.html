@@ -4,19 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VMware VCF — Tu guía de decisión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* VMware brand colors */
   :root {
-    --bg: #0d0d0d;
-    --green:  #00c48c;
-    --red:    #e05252;
+    --vmw-bg:      #0A0F14;
+    --vmw-blue:    #007CBA;
+    --vmw-navy:    #003366;
+    --vmw-teal:    #17B3C2;
+    --vmw-green:   #5B8C14;
+    --vmw-slate:   #1E2D3D;
+    --vmw-mid:     #2A3F55;
+    --vmw-text:    #E8EDF2;
+    --vmw-muted:   rgba(232,237,242,0.4);
+    --danger:      #C0392B;
+    --success:     #2E8B57;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--bg);
-    font-family: 'Georgia', serif;
-    color: #fff;
+    background: var(--vmw-bg);
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--vmw-text);
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -24,127 +36,158 @@
   /* HEADER */
   .site-header {
     text-align: center;
-    padding: 52px 24px 0;
+    padding: 56px 24px 0;
   }
-  .site-header .eyebrow {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 14px;
+    color: var(--vmw-blue);
+    margin-bottom: 18px;
   }
   .site-header h1 {
-    font-size: clamp(26px, 4vw, 44px);
-    font-weight: 400;
+    font-size: clamp(24px, 3.5vw, 42px);
+    font-weight: 300;
     line-height: 1.2;
-    color: #fff;
-    margin-bottom: 12px;
+    color: var(--vmw-text);
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
   }
+  .site-header h1 strong { font-weight: 600; }
   .site-header p {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 15px;
-    color: rgba(255,255,255,0.4);
-    max-width: 460px;
-    margin: 0 auto 48px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--vmw-muted);
+    max-width: 440px;
+    margin: 0 auto 52px;
+    line-height: 1.6;
   }
 
   .hint {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.25);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.18);
     text-align: center;
-    margin-bottom: 32px;
-    letter-spacing: 0.5px;
+    margin-bottom: 36px;
   }
 
-  /* DECK */
-  .deck-stage {
-    position: relative;
-    width: 100%;
-    height: 360px;
+  /* CARD ROW */
+  .deck-row {
     display: flex;
-    align-items: flex-end;
     justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 0 24px 60px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 
   .card {
-    position: absolute;
-    width: 210px;
-    height: 310px;
-    border-radius: 18px;
+    flex-shrink: 0;
+    width: 168px;
+    height: 280px;
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(.22,.68,0,1.2), filter 0.2s;
-    transform-origin: bottom center;
-    user-select: none;
+    position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 22px 20px;
+    padding: 20px 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(255,255,255,0.06);
+    /* alternating vertical offset */
   }
 
-  .card:hover { filter: brightness(1.1) saturate(1.1); }
+  .card:nth-child(odd)  { transform: translateY(0); }
+  .card:nth-child(even) { transform: translateY(-20px); }
 
-  .card:nth-child(1) { transform: rotate(-18deg) translateX(-185px); z-index: 1; }
-  .card:nth-child(2) { transform: rotate(-9deg)  translateX(-92px);  z-index: 2; }
-  .card:nth-child(3) { transform: rotate(0deg)   translateX(0);      z-index: 3; }
-  .card:nth-child(4) { transform: rotate(9deg)   translateX(92px);   z-index: 2; }
-  .card:nth-child(5) { transform: rotate(18deg)  translateX(185px);  z-index: 1; }
+  .card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.18);
+    z-index: 10;
+  }
 
-  .card[data-role="cio"] { background: #1a6fc4; }
-  .card[data-role="cfo"] { background: #d94f2b; }
-  .card[data-role="itm"] { background: #f0ebe0; color: #1a1a1a; }
-  .card[data-role="ops"] { background: #3ddc84; color: #0a2a1a; }
-  .card[data-role="ceo"] { background: #222; border: 1px solid #333; }
+  /* VMware palette per role */
+  .card[data-role="cio"] { background: var(--vmw-blue); }
+  .card[data-role="cfo"] { background: var(--vmw-navy); }
+  .card[data-role="itm"] { background: var(--vmw-teal); color: #071318; }
+  .card[data-role="ops"] { background: var(--vmw-green); }
+  .card[data-role="ceo"] { background: var(--vmw-slate); }
 
+  /* Texture — lines only, no curves */
   .card-texture {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 58%;
+    height: 55%;
     pointer-events: none;
+    opacity: 0.4;
   }
-
   .card[data-role="cio"] .card-texture {
-    background:
-      repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0,rgba(255,255,255,0.3) 2px,transparent 2px,transparent 10px),
-      repeating-linear-gradient(0deg,rgba(255,255,255,0.12) 0,rgba(255,255,255,0.12) 1px,transparent 1px,transparent 18px);
+    background: repeating-linear-gradient(
+      90deg, rgba(255,255,255,0.4) 0, rgba(255,255,255,0.4) 1px,
+      transparent 1px, transparent 8px
+    );
   }
   .card[data-role="cfo"] .card-texture {
-    background: repeating-linear-gradient(0deg,rgba(255,255,255,0.28) 0,rgba(255,255,255,0.28) 2px,transparent 2px,transparent 9px);
+    background: repeating-linear-gradient(
+      0deg, rgba(255,255,255,0.35) 0, rgba(255,255,255,0.35) 1px,
+      transparent 1px, transparent 10px
+    );
   }
   .card[data-role="itm"] .card-texture {
     background:
-      linear-gradient(rgba(0,0,0,0.1) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(0,0,0,0.1) 1px,transparent 1px);
-    background-size: 14px 14px;
+      linear-gradient(rgba(0,0,0,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.15) 1px, transparent 1px);
+    background-size: 12px 12px;
+    opacity: 0.6;
   }
   .card[data-role="ops"] .card-texture {
-    background:
-      repeating-linear-gradient(90deg,rgba(0,50,15,0.55) 0,rgba(0,50,15,0.55) 3px,transparent 3px,transparent 8px),
-      repeating-linear-gradient(0deg,rgba(0,50,15,0.35) 0,rgba(0,50,15,0.35) 1px,transparent 1px,transparent 12px);
+    background: repeating-linear-gradient(
+      45deg, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.2) 1px,
+      transparent 1px, transparent 8px
+    );
+    opacity: 0.7;
   }
   .card[data-role="ceo"] .card-texture {
     background:
-      linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);
-    background-size: 26px 26px;
+      linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 1;
+  }
+
+  /* Role indicator bar */
+  .card-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: rgba(255,255,255,0.25);
   }
 
   .card-label {
-    font-size: 21px;
-    font-weight: 400;
-    line-height: 1.15;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
     position: relative;
     z-index: 2;
+    letter-spacing: -0.2px;
   }
+  .card[data-role="itm"] .card-label { color: #071318; }
+
   .card-sub {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 11px;
-    opacity: 0.55;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
     margin-top: 6px;
     position: relative;
     z-index: 2;
+    text-transform: uppercase;
   }
 
   /* OVERLAY */
@@ -153,8 +196,8 @@
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(8px);
+    background: rgba(5,8,12,0.88);
+    backdrop-filter: blur(10px);
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -165,23 +208,24 @@
   .expanded-card {
     width: 100%;
     max-width: 700px;
-    border-radius: 22px;
-    overflow: hidden;
-    animation: pop 0.38s cubic-bezier(.22,.68,0,1.15) forwards;
+    background: var(--vmw-slate);
+    border: 1px solid rgba(255,255,255,0.08);
+    animation: pop 0.32s cubic-bezier(.22,.68,0,1.15) forwards;
     margin: auto;
+    overflow: hidden;
   }
 
   @keyframes pop {
-    from { transform: scale(0.84) translateY(36px); opacity: 0; }
+    from { transform: scale(0.9) translateY(24px); opacity: 0; }
     to   { transform: scale(1) translateY(0); opacity: 1; }
   }
 
   .exp-header {
     position: relative;
-    height: 190px;
+    height: 160px;
     display: flex;
     align-items: flex-end;
-    padding: 26px 30px;
+    padding: 24px 28px;
     overflow: hidden;
   }
 
@@ -191,121 +235,140 @@
     pointer-events: none;
   }
 
+  .exp-header-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+
   .exp-header h2 {
-    font-size: 34px;
-    font-weight: 400;
-    line-height: 1.1;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.15;
     position: relative;
     z-index: 2;
+    letter-spacing: -0.5px;
   }
-  .exp-header .exp-sub {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 12px;
-    opacity: 0.55;
-    margin-top: 5px;
+  .exp-header h2 strong { font-weight: 700; }
+
+  .exp-header .exp-role-sub {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-top: 6px;
     position: relative;
     z-index: 2;
   }
 
   .close-btn {
     position: absolute;
-    top: 16px; right: 18px;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.22);
-    border: none;
-    font-size: 16px;
+    top: 16px; right: 16px;
+    width: 30px; height: 30px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: inherit;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
+    font-family: 'Inter', sans-serif;
     transition: background 0.2s;
   }
-  .close-btn:hover { background: rgba(0,0,0,0.42); }
+  .close-btn:hover { background: rgba(0,0,0,0.55); }
 
   .exp-body {
-    background: #161616;
-    padding: 28px 30px 32px;
+    background: #0F1820;
+    padding: 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
 
   .exp-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 26px;
+    gap: 12px;
+    margin-bottom: 24px;
   }
-  @media (max-width: 540px) { .exp-cols { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .exp-cols { grid-template-columns: 1fr; } }
 
   .exp-box {
-    border-radius: 12px;
     padding: 18px;
+    border: 1px solid rgba(255,255,255,0.07);
   }
-  .exp-box.fears { background: rgba(224,82,82,0.09); border: 1px solid rgba(224,82,82,0.2); }
-  .exp-box.wins  { background: rgba(0,196,140,0.07); border: 1px solid rgba(0,196,140,0.18); }
+  .exp-box.fears { background: rgba(192,57,43,0.08); border-color: rgba(192,57,43,0.18); }
+  .exp-box.wins  { background: rgba(46,139,87,0.08); border-color: rgba(46,139,87,0.18); }
 
   .exp-box-label {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
-  .fears .exp-box-label { color: var(--red); }
-  .wins  .exp-box-label { color: var(--green); }
+  .fears .exp-box-label { color: #E74C3C; }
+  .wins  .exp-box-label { color: #27AE60; }
 
   .exp-list { list-style: none; }
   .exp-list li {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 13px;
-    line-height: 1.45;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
     padding: 7px 0;
     border-bottom: 1px solid rgba(255,255,255,0.05);
     display: flex;
     gap: 8px;
-    color: rgba(255,255,255,0.78);
+    color: rgba(232,237,242,0.75);
   }
   .exp-list li:last-child { border-bottom: none; }
+  .exp-list li span { flex: 1; }
+
+  .args-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 20px;
+  }
 
   .args-label {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    margin-bottom: 12px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 14px;
   }
 
   .arg-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 10px;
-    padding: 15px 17px;
-    margin-bottom: 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border-left-width: 3px;
   }
   .arg-tag {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
   }
   .arg-card p {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.68);
-    line-height: 1.6;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(232,237,242,0.65);
+    line-height: 1.65;
   }
 
+  /* FOOTER */
   .site-footer {
     text-align: center;
-    padding: 60px 24px 36px;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 12px;
-    color: rgba(255,255,255,0.18);
+    padding: 0 24px 40px;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.5px;
   }
 </style>
 </head>
@@ -313,65 +376,78 @@
 
 <div class="site-header">
   <div class="eyebrow">VMware Cloud Foundation</div>
-  <h1>¿Por qué VCF es la<br>decisión correcta para ti?</h1>
-  <p>Selecciona tu perfil y descubre argumentos listos para defender la decisión ante tus superiores.</p>
+  <h1><strong>¿Por qué VCF</strong> es la<br>decisión correcta para ti?</h1>
+  <p>Selecciona tu perfil y descubre los argumentos listos para defender la decisión ante tus superiores.</p>
 </div>
 
-<div class="hint">Toca una carta para explorar tu perfil</div>
+<div class="hint">Selecciona una carta</div>
 
-<div class="deck-stage">
+<div class="deck-row">
+
   <div class="card" data-role="cio" onclick="openCard('cio')">
     <div class="card-texture"></div>
-    <div class="card-label">CIO &amp;<br>Director TI</div>
-    <div class="card-sub">Estrategia &amp; plataforma</div>
+    <div class="card-bar"></div>
+    <div class="card-label">CIO /<br>Director TI</div>
+    <div class="card-sub">Estrategia</div>
   </div>
+
   <div class="card" data-role="cfo" onclick="openCard('cfo')">
     <div class="card-texture"></div>
-    <div class="card-label">CFO &amp;<br>Finanzas</div>
-    <div class="card-sub">TCO &amp; presupuesto</div>
+    <div class="card-bar"></div>
+    <div class="card-label">CFO /<br>Finanzas</div>
+    <div class="card-sub">TCO & Costo</div>
   </div>
+
   <div class="card" data-role="itm" onclick="openCard('itm')">
     <div class="card-texture"></div>
-    <div class="card-label">Gerente de<br>Infraestructura</div>
-    <div class="card-sub">Operación &amp; migración</div>
+    <div class="card-bar" style="background:rgba(0,0,0,0.2);"></div>
+    <div class="card-label">Gerente de<br>Infra</div>
+    <div class="card-sub">Operación</div>
   </div>
+
   <div class="card" data-role="ops" onclick="openCard('ops')">
     <div class="card-texture"></div>
-    <div class="card-label">Arquitecto<br>&amp; Ops</div>
-    <div class="card-sub">Técnico &amp; profundo</div>
+    <div class="card-bar"></div>
+    <div class="card-label">Arquitecto<br>/ Ops</div>
+    <div class="card-sub">Técnico</div>
   </div>
+
   <div class="card" data-role="ceo" onclick="openCard('ceo')">
     <div class="card-texture"></div>
-    <div class="card-label">CEO &amp;<br>Dirección</div>
-    <div class="card-sub">Negocio &amp; visión</div>
+    <div class="card-bar"></div>
+    <div class="card-label">CEO /<br>Dirección</div>
+    <div class="card-sub">Negocio</div>
   </div>
+
 </div>
 
 <div class="overlay" id="overlay" onclick="closeOnBg(event)">
   <div class="expanded-card" id="expandedCard"></div>
 </div>
 
-<div class="site-footer">VMware Cloud Foundation — Material de apoyo post-presentación</div>
+<div class="site-footer">VMware Cloud Foundation &nbsp;·&nbsp; Material de apoyo post-presentación</div>
 
 <script>
 const ROLES = {
   cio: {
-    label: 'CIO / Director de TI', sub: 'Estrategia de plataforma',
-    bg: '#1a6fc4', color: '#fff', accent: '#60aaff',
-    texture: `repeating-linear-gradient(90deg,rgba(255,255,255,0.3) 0,rgba(255,255,255,0.3) 2px,transparent 2px,transparent 10px),repeating-linear-gradient(0deg,rgba(255,255,255,0.12) 0,rgba(255,255,255,0.12) 1px,transparent 1px,transparent 18px)`,
-    fears: ['Apostar a la plataforma equivocada por 5+ años','No poder justificar el presupuesto ante el consejo','Dependencia de Broadcom tras el cambio de licenciamiento','Equipo sin capacidad para operar algo más complejo','Migración que se sale de control'],
-    wins:  ['Ecosistema maduro de 20+ años con hoja de ruta documentada','TCO comparable o menor que cloud pública a escala','Estándar del mercado — talento disponible y certificado','Operación unificada = menos headcount operativo','Migración incremental — sin big bang'],
+    label: 'CIO', label2: 'Director de TI', sub: 'Estrategia de plataforma',
+    bg: '#007CBA', color: '#fff', accent: '#5BB8E8',
+    barColor: 'rgba(255,255,255,0.4)',
+    texture: `repeating-linear-gradient(90deg,rgba(255,255,255,0.35) 0,rgba(255,255,255,0.35) 1px,transparent 1px,transparent 8px)`,
+    fears: ['Apostar a la plataforma equivocada por 5+ años','No poder justificar el presupuesto ante el consejo','Dependencia de Broadcom tras el cambio de licenciamiento','Equipo sin capacidad para operar algo más complejo','Proyecto de migración que se sale de control'],
+    wins:  ['Ecosistema maduro de 20+ años con hoja de ruta documentada','TCO comparable o menor que cloud pública a escala mediana','Estándar del mercado — talento disponible y certificado','Operación unificada = menos headcount operativo necesario','Migración incremental — sin big bang ni riesgo de producción'],
     args:  [
       {tag:'Control estratégico', text:'"Mantener la infraestructura en VCF nos da soberanía sobre datos y operaciones. No dependemos de precios variables de AWS o Azure que pueden cambiar en cualquier trimestre."'},
       {tag:'Predictibilidad financiera', text:'"Con VCF presupuestamos infraestructura con precisión a 3 años. Eliminamos la variabilidad de facturas cloud que en promedio superan el 40% del presupuesto estimado."'},
-      {tag:'Puente, no barrera', text:'"VCF no nos cierra las puertas a la nube. Nos da una rampa controlada hacia AWS o Azure cuando lo necesitemos, con las mismas herramientas que ya operamos."'},
+      {tag:'Puente, no barrera', text:'"VCF no nos cierra las puertas a la nube. Nos da una rampa controlada hacia AWS o Azure cuando lo necesitemos, con las mismas herramientas que ya operamos internamente."'},
     ],
   },
   cfo: {
-    label: 'CFO / Dirección Financiera', sub: 'TCO & presupuesto',
-    bg: '#d94f2b', color: '#fff', accent: '#ff9a7a',
-    texture: `repeating-linear-gradient(0deg,rgba(255,255,255,0.28) 0,rgba(255,255,255,0.28) 2px,transparent 2px,transparent 9px)`,
-    fears: ['CAPEX elevado sin ROI claro ni plazo definido','Broadcom puede volver a cambiar precios — ¿qué garantía hay?','Costos ocultos: capacitación, integración, soporte adicional','Cloud "parece más barata" y es difícil argumentar lo contrario','Compromiso de largo plazo en mercado que cambia rápido'],
+    label: 'CFO', label2: 'Dirección Financiera', sub: 'TCO & presupuesto',
+    bg: '#003366', color: '#fff', accent: '#5B8FCC',
+    barColor: '#007CBA',
+    texture: `repeating-linear-gradient(0deg,rgba(255,255,255,0.28) 0,rgba(255,255,255,0.28) 1px,transparent 1px,transparent 10px)`,
+    fears: ['CAPEX elevado sin ROI claro ni plazo definido','Broadcom puede volver a cambiar precios sin previo aviso','Costos ocultos: capacitación, integración, soporte adicional','Cloud "parece más barata" y es difícil argumentar lo contrario','Compromiso de largo plazo en mercado que cambia rápido'],
     wins:  ['Costo por workload predecible y calculable por adelantado','Suscripción estructurada — sin sorpresas de facturación variable','Stack consolidado reduce licencias, contratos y proveedores','Cloud pública a escala suele ser 2–3x más cara en 3 años','Modelo flexible: on-premise + burst a cloud cuando se necesita'],
     args:  [
       {tag:'El costo real de la nube pública', text:'"AWS y Azure son baratos al inicio. A escala de 500+ VMs y 3 años, las empresas gastan entre 2x y 3x más que con infraestructura privada bien administrada."'},
@@ -380,41 +456,44 @@ const ROLES = {
     ],
   },
   itm: {
-    label: 'Gerente de Infraestructura', sub: 'Operación & migración',
-    bg: '#f0ebe0', color: '#1a1a1a', accent: '#555',
-    texture: `linear-gradient(rgba(0,0,0,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.1) 1px,transparent 1px)`,
-    textureBgSize: '14px 14px',
-    fears: ['Migración que genera downtime y pone en riesgo mi posición','El equipo no sabe operar algo tan complejo','Ser el responsable si algo falla en producción','Más herramientas que aprender y mantener','Soporte que no responde cuando más lo necesito'],
+    label: 'Gerente', label2: 'de Infraestructura', sub: 'Operación & migración',
+    bg: '#17B3C2', color: '#071318', accent: '#005A66',
+    barColor: 'rgba(0,0,0,0.3)',
+    texture: `linear-gradient(rgba(0,0,0,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.12) 1px,transparent 1px)`,
+    textureBgSize: '12px 12px',
+    fears: ['Migración que genera downtime y pone en riesgo mi posición','El equipo no sabe operar algo más complejo que lo actual','Ser el responsable si algo falla en producción','Más herramientas que aprender y mantener en paralelo','Soporte que no responde cuando más lo necesito'],
     wins:  ['Migración incremental — sin big bang, sin apagar producción','El equipo ya conoce vSphere: la curva de aprendizaje es mínima','Lifecycle Management automatizado — actualizaciones validadas','Menos herramientas, no más: un stack que reemplaza a cuatro','Soporte unificado con SLA garantizado — un número, un contrato'],
     args:  [
-      {tag:'Reducción de carga operativa', text:'"VCF consolida vSphere, vSAN, NSX y Aria en un solo ciclo de vida automatizado. Hoy gestionamos 4 herramientas con 4 procesos de actualización distintos. Con VCF, uno."'},
-      {tag:'El equipo ya sabe operar esto', text:'"No necesitamos reentrenar desde cero. VCF extiende las habilidades en vSphere que el equipo ya tiene. La certificación adicional es manejable con oferta de talento disponible."'},
+      {tag:'Reducción de carga operativa', text:'"VCF consolida vSphere, vSAN, NSX y Aria en un solo ciclo de vida automatizado. Hoy gestionamos 4 herramientas con 4 procesos distintos. Con VCF, uno."'},
+      {tag:'El equipo ya sabe operar esto', text:'"No necesitamos reentrenar desde cero. VCF extiende las habilidades en vSphere que el equipo ya tiene. La certificación adicional es manejable."'},
       {tag:'Migración sin riesgo', text:'"La migración es incremental. Movemos cargas de trabajo por etapas, manteniendo producción estable durante todo el proceso. No es un switch de un día para otro."'},
     ],
   },
   ops: {
-    label: 'Arquitecto / Ops', sub: 'Técnico & profundo',
-    bg: '#3ddc84', color: '#0a2a1a', accent: '#006633',
-    texture: `repeating-linear-gradient(90deg,rgba(0,50,15,0.55) 0,rgba(0,50,15,0.55) 3px,transparent 3px,transparent 8px),repeating-linear-gradient(0deg,rgba(0,50,15,0.35) 0,rgba(0,50,15,0.35) 1px,transparent 1px,transparent 12px)`,
+    label: 'Arquitecto', label2: '/ Ops', sub: 'Técnico & profundo',
+    bg: '#5B8C14', color: '#fff', accent: '#A8D44A',
+    barColor: 'rgba(255,255,255,0.35)',
+    texture: `repeating-linear-gradient(45deg,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 1px,transparent 1px,transparent 8px)`,
     fears: ['Perder el control granular que tenía con componentes separados','Compatibilidad con workloads legacy y arquitecturas existentes','Vendor lock-in disfrazado de "plataforma completa"','Limitaciones en personalización de red y almacenamiento','Curva de aprendizaje de SDDC Manager y nuevas APIs'],
-    wins:  ['Control total vía API-first: todo lo de UI disponible en código','Compatibilidad total con workloads vSphere existentes','NSX incluido: micro-segmentación, firewall distribuido, L2/L3','vSAN con políticas granulares por VM y soporte NVMe','Kubernetes nativo vía Tanzu — contenedores en el mismo stack'],
+    wins:  ['Control total vía API-first: todo lo de UI disponible en código','Compatibilidad total con workloads vSphere existentes — misma base','NSX incluido: micro-segmentación, firewall distribuido, L2/L3 completo','vSAN con políticas granulares por VM y soporte NVMe nativo','Kubernetes nativo vía Tanzu — contenedores en el mismo stack'],
     args:  [
       {tag:'No es más complejo — es más automatizado', text:'"SDDC Manager abstrae la orquestación de vSphere + vSAN + NSX. La curva inicial existe, pero a los 3 meses el equipo opera más rápido — sin tickets manuales de actualizaciones."'},
-      {tag:'API-first por diseño', text:'"Todo lo que necesitas automatizar tiene API REST documentada. Terraform, Ansible, PowerCLI funcionan. No pierdes control — lo ganas a escala."'},
+      {tag:'API-first por diseño', text:'"Todo lo que necesitas automatizar tiene API REST documentada. Terraform, Ansible y PowerCLI funcionan sin cambios. No pierdes control — lo ganas a escala."'},
       {tag:'TCO técnico también mejora', text:'"Menos tiempo en parches manuales, menos incidentes de incompatibilidad entre componentes, menos soporte cruzado entre vendors. El equipo se vuelve arquitecto, no bombero."'},
     ],
   },
   ceo: {
-    label: 'CEO / Dirección General', sub: 'Negocio & visión',
-    bg: '#222', color: '#fff', accent: '#aaa',
+    label: 'CEO', label2: '/ Dirección General', sub: 'Negocio & visión',
+    bg: '#1E2D3D', color: '#fff', accent: '#007CBA',
+    barColor: '#007CBA',
     texture: `linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px)`,
-    textureBgSize: '26px 26px',
-    fears: ['Gastar en TI sin ver impacto real en el negocio','Quedar atrapados con un proveedor que sube precios','Quedarse atrás de competidores que se mueven más rápido','Riesgo regulatorio o de seguridad que dañe la reputación','Inversión que no se puede explicar a socios o accionistas'],
-    wins:  ['Infraestructura que se adapta al negocio en horas, no semanas','Costos predecibles que puedes presupuestar con confianza','Velocidad de innovación: nuevos servicios se lanzan más rápido','Seguridad y cumplimiento incluidos en el stack base','ROI documentable con métricas concretas a 12–36 meses'],
+    textureBgSize: '20px 20px',
+    fears: ['Gastar en TI sin ver impacto real en el negocio','Quedar atrapados con un proveedor que sube precios sin aviso','Quedarse atrás de competidores que se mueven más rápido','Riesgo regulatorio o de seguridad que dañe la reputación','Inversión que no se puede explicar a socios o accionistas'],
+    wins:  ['Infraestructura que se adapta al negocio en horas, no semanas','Costos predecibles que puedes presupuestar con confianza a 3 años','Velocidad de innovación: nuevos servicios digitales se lanzan más rápido','Seguridad y cumplimiento incluidos en el stack base — sin capas extra','ROI documentable con métricas concretas a 12–36 meses'],
     args:  [
-      {tag:'Infraestructura como ventaja competitiva', text:'"Las empresas que lanzan productos digitales más rápido ganan mercado. VCF reduce el aprovisionamiento de semanas a horas. Eso es velocidad de negocio, no solo velocidad técnica."'},
+      {tag:'Infraestructura como ventaja competitiva', text:'"Las empresas que lanzan productos digitales más rápido ganan mercado. VCF reduce el aprovisionamiento de infraestructura de semanas a horas. Eso es velocidad de negocio, no solo velocidad técnica."'},
       {tag:'Independencia de cloud pública', text:'"AWS y Azure pueden cambiar precios, términos o disponibilidad. Con VCF, nuestra infraestructura crítica está bajo nuestro control. Usamos nube cuando queremos, no porque no tengamos alternativa."'},
-      {tag:'Cumplimiento sin fricción', text:'"Regulaciones, auditorías, requerimientos de clientes corporativos — todo es más sencillo cuando los datos viven en infraestructura que controlamos. Menos riesgo reputacional."'},
+      {tag:'Cumplimiento sin fricción', text:'"Regulaciones, auditorías, requerimientos de clientes corporativos — todo es más sencillo cuando los datos viven en infraestructura que controlamos completamente. Menos riesgo reputacional."'},
     ],
   },
 };
@@ -427,8 +506,8 @@ function openCard(role) {
   const fearsHtml = d.fears.map(f => `<li>🔴 <span>${f}</span></li>`).join('');
   const winsHtml  = d.wins.map(w  => `<li>🟢 <span>${w}</span></li>`).join('');
   const argsHtml  = d.args.map(a  => `
-    <div class="arg-card">
-      <div class="arg-tag" style="color:${d.accent}">${a.tag}</div>
+    <div class="arg-card" style="border-left-color:${d.accent};">
+      <div class="arg-tag" style="color:${d.accent};">${a.tag}</div>
       <p>${a.text}</p>
     </div>`).join('');
 
@@ -436,24 +515,26 @@ function openCard(role) {
 
   card.innerHTML = `
     <div class="exp-header" style="background:${d.bg};color:${d.color};">
-      <div class="exp-header-texture" style="background-image:${d.texture};${bgSize}opacity:0.5;"></div>
+      <div class="exp-header-texture" style="background-image:${d.texture};${bgSize}opacity:0.45;position:absolute;inset:0;"></div>
+      <div class="exp-header-bar" style="background:${d.barColor};"></div>
       <button class="close-btn" style="color:${d.color};" onclick="closeCard()">✕</button>
       <div>
-        <h2>${d.label}</h2>
-        <div class="exp-sub">${d.sub}</div>
+        <h2><strong>${d.label}</strong> ${d.label2}</h2>
+        <div class="exp-role-sub">${d.sub}</div>
       </div>
     </div>
     <div class="exp-body">
       <div class="exp-cols">
         <div class="exp-box fears">
-          <div class="exp-box-label">⚠ Lo que te preocupa</div>
+          <div class="exp-box-label">Lo que te preocupa</div>
           <ul class="exp-list">${fearsHtml}</ul>
         </div>
         <div class="exp-box wins">
-          <div class="exp-box-label">✓ Lo que VCF te da</div>
+          <div class="exp-box-label">Lo que VCF te da</div>
           <ul class="exp-list">${winsHtml}</ul>
         </div>
       </div>
+      <hr class="args-divider">
       <div class="args-label">Argumentos para usar ante tus superiores</div>
       ${argsHtml}
     </div>`;
@@ -471,7 +552,7 @@ function closeOnBg(e) {
   if (e.target === document.getElementById('overlay')) closeCard();
 }
 
-document.addEventListener('keydown', e => { if (e.key==='Escape') closeCard(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCard(); });
 
 window.addEventListener('load', () => {
   const h = location.hash.replace('#','');
