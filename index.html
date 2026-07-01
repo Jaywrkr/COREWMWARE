@@ -577,59 +577,59 @@
   <div class="section-header">
     <div class="section-eyebrow">Análisis de Costo Total · TCO a 3 años</div>
     <div class="section-title">Los números que<br><strong>cambian la conversación</strong></div>
-    <div class="section-desc">La nube pública parece barata al inicio. A 300+ VMs y 3 años, la realidad es otra. Este análisis compara el costo total de operación — no solo licencias — incluyendo personal, soporte y electricidad. <sup class="ref">[3]</sup></div>
+    <div class="section-desc">La nube pública parece económica al inicio. En una empresa mediana de 50–70 VMs y a 3 años plazo, la diferencia es contundente. Este análisis compara el costo total de operación — licencias, personal, soporte y electricidad. <sup class="ref">[3]</sup></div>
   </div>
 
   <div class="tco-chart">
-    <div class="tco-chart-title">Costo total estimado — 300 VMs · 3 años</div>
+    <div class="tco-chart-title">Costo total estimado — 60 VMs · 3 años · empresa mediana Ecuador</div>
 
     <div class="tco-bar-group">
       <div class="tco-bar-label">
         <span class="tco-bar-name">Cloud pública (AWS / Azure)</span>
-        <span class="tco-bar-value" style="color:var(--danger);">$1.9M+</span>
+        <span class="tco-bar-value" style="color:var(--danger);">~$380K</span>
       </div>
       <div class="tco-bar-track"><div class="tco-bar-fill cloud"></div></div>
-      <div class="tco-bar-note">Instancias + almacenamiento + egress + soporte enterprise. Costo real suele superar proyección inicial en 40%. <sup>[3]</sup></div>
+      <div class="tco-bar-note">Instancias + almacenamiento + egress + soporte. El costo real crece cada año y suele superar la proyección inicial en 30–40%. <sup>[3]</sup></div>
     </div>
 
     <div class="tco-bar-group">
       <div class="tco-bar-label">
         <span class="tco-bar-name">Infraestructura fragmentada (sin VCF)</span>
-        <span class="tco-bar-value" style="color:#E07A30;">$1.5M</span>
+        <span class="tco-bar-value" style="color:#E07A30;">~$290K</span>
       </div>
       <div class="tco-bar-track"><div class="tco-bar-fill frag"></div></div>
-      <div class="tco-bar-note">Licencias separadas (vSphere + NSX + vSAN + Ops) + personal adicional + integraciones complejas.</div>
+      <div class="tco-bar-note">Licencias separadas + personal adicional para operar cada componente + integraciones manuales y soporte dividido entre vendors.</div>
     </div>
 
     <div class="tco-bar-group">
       <div class="tco-bar-label">
         <span class="tco-bar-name">VMware Cloud Foundation (VCF)</span>
-        <span class="tco-bar-value" style="color:var(--vmw-blue);">$980K</span>
+        <span class="tco-bar-value" style="color:var(--vmw-blue);">~$190K</span>
       </div>
       <div class="tco-bar-track"><div class="tco-bar-fill vcf"></div></div>
-      <div class="tco-bar-note">Stack unificado + reducción de headcount operativo + hardware propio amortizado. Incluye educación del equipo.</div>
+      <div class="tco-bar-note">Stack unificado sobre hardware propio amortizado. Menos personal operativo. Incluye educación del equipo. Costo predecible a 3 años.</div>
     </div>
   </div>
 
   <div class="tco-stats">
     <div class="tco-stat">
-      <div class="tco-stat-num green">48%</div>
-      <div class="tco-stat-label">Reducción de costo vs cloud pública a 3 años a escala mediana <sup class="ref">[3]</sup></div>
+      <div class="tco-stat-num green">50%</div>
+      <div class="tco-stat-label">Ahorro estimado vs cloud pública en empresa mediana ecuatoriana a 3 años <sup class="ref">[3]</sup></div>
     </div>
     <div class="tco-stat">
       <div class="tco-stat-num green">35%</div>
-      <div class="tco-stat-label">Reducción de tickets operativos con SDDC Manager vs gestión manual <sup class="ref">[7]</sup></div>
+      <div class="tco-stat-label">Reducción de carga operativa con SDDC Manager vs gestión manual <sup class="ref">[7]</sup></div>
     </div>
     <div class="tco-stat">
       <div class="tco-stat-num">70%</div>
-      <div class="tco-stat-label">Recursos desperdiciados en empresas sin hipervisor optimizado <sup class="ref">[3]</sup></div>
+      <div class="tco-stat-label">Recursos desperdiciados en empresas sin optimización de hipervisor <sup class="ref">[3]</sup></div>
     </div>
     <div class="tco-stat">
       <div class="tco-stat-num green">3x</div>
-      <div class="tco-stat-label">Más rápido el aprovisionamiento de nuevos servidores vs proceso manual tradicional</div>
+      <div class="tco-stat-label">Más rápido el aprovisionamiento de nuevos servicios vs proceso manual tradicional</div>
     </div>
   </div>
-  <div class="tco-note">* Estimaciones basadas en casos reales documentados. Los números exactos varían según el entorno. Podemos hacer un análisis personalizado de tu organización.</div>
+  <div class="tco-note">* Estimaciones orientativas basadas en casos reales documentados para entornos medianos. Los valores exactos dependen del hardware existente, contratos vigentes y número de usuarios. Coresolutions puede hacer un análisis personalizado para tu organización.</div>
 </div>
 
 <div class="divider"></div>
@@ -780,9 +780,9 @@
 <div class="divider"></div>
 
 <!-- ═══════════════════════════════════════════
-     6. PLANES
+     6. PLANES (oculto temporalmente)
 ════════════════════════════════════════════ -->
-<div class="section">
+<div class="section" style="display:none">
   <div class="section-header">
     <div class="section-eyebrow">Planes VCF 9.1 · VVF vs VCF</div>
     <div class="section-title">¿Cuál es el plan<br><strong>que te corresponde?</strong></div>
@@ -857,8 +857,6 @@
   </div>
   <div class="hw-note">Fuente: Broadcom VMware Cloud Foundation Datasheet, mayo 2026. <sup>[7]</sup></div>
 </div>
-
-<div class="divider"></div>
 
 <!-- ═══════════════════════════════════════════
      7. EDUCACIÓN
