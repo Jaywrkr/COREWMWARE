@@ -667,7 +667,7 @@
 <div class="section">
   <div class="section-header">
     <div class="section-eyebrow">Optimización de Hardware</div>
-    <div class="section-title">Más VMs con<br><strong>el hierro que ya tienes</strong></div>
+    <div class="section-title">Más VMs con<br><strong>los servidores que ya tienes</strong></div>
     <div class="section-desc">VMware vSphere tiene la mayor densidad de VMs por servidor físico del mercado. Más VMs por host = menos servidores = menos CAPEX, electricidad y refrigeración. <sup class="ref">[1]</sup></div>
   </div>
 
@@ -899,7 +899,7 @@
 
   <div class="edu-highlight">
     <h3>Broadcom Academy — incluido en VCF</h3>
-    <p>Los clientes de VCF tienen acceso al portal oficial de aprendizaje con cursos en línea, rutas de certificación y laboratorios virtuales guiados. Cubre vSphere, NSX, vSAN, VCF Operations y automatización — sin costo adicional. <sup class="ref">[8][9]</sup></p>
+    <p>Los clientes de VCF tienen acceso al portal oficial de aprendizaje con cursos en línea bajo demanda, cursos con instructor y laboratorios virtuales guiados. Cubre vSphere, NSX, vSAN, VCF Operations y automatización — sin costo adicional. Los exámenes de certificación se contratan por separado. <sup class="ref">[8][9]</sup></p>
   </div>
 
   <div class="edu-grid">
@@ -908,8 +908,8 @@
       <p>Videos, laboratorios y evaluaciones disponibles en cualquier momento en Broadcom Academy. Sin coordinar capacitaciones presenciales. <sup class="ref">[8]</sup></p>
     </div>
     <div class="edu-card">
-      <h4>Rutas de certificación VMware</h4>
-      <p>Preparación para VCP en vSphere, NSX y Cloud Foundation — las certificaciones más valoradas del mercado enterprise. <sup class="ref">[9]</sup></p>
+      <h4>Preparación para certificaciones VMware</h4>
+      <p>Cursos oficiales de preparación para VCP en vSphere, NSX y Cloud Foundation. El acceso a la formación está incluido — el examen de certificación se contrata por separado. <sup class="ref">[9]</sup></p>
     </div>
     <div class="edu-card">
       <h4>Laboratorios virtuales guiados</h4>
@@ -923,7 +923,7 @@
 
   <div style="background:rgba(0,124,186,0.06);border:1px solid rgba(0,124,186,0.15);padding:18px 20px;margin-top:4px;">
     <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--vmw-blue);margin-bottom:8px;">Argumento financiero directo</div>
-    <div style="font-size:13px;color:rgba(232,237,242,0.75);line-height:1.65;">"Una certificación VCP en el mercado cuesta entre $3,000 y $6,000 por persona — curso, examen y preparación incluidos. Con VCF, ese acceso ya está en la suscripción. La capacitación del equipo desaparece del presupuesto de formación." <sup class="ref">[9]</sup></div>
+    <div style="font-size:13px;color:rgba(232,237,242,0.75);line-height:1.65;">"Los cursos oficiales de VMware con instructor cuestan entre $2,000 y $4,000 por persona en el mercado. Con VCF, ese acceso ya está incluido en la suscripción — tanto los cursos bajo demanda como los cursos con instructor. Solo el examen de certificación se contrata aparte, y eso ya depende del plan de cada profesional." <sup class="ref">[9]</sup></div>
   </div>
 </div>
 
@@ -1045,7 +1045,7 @@ const ROLES = {
     texture:`repeating-linear-gradient(0deg,rgba(255,255,255,0.28) 0,rgba(255,255,255,0.28) 1px,transparent 1px,transparent 10px)`,
     fears:['CAPEX elevado sin ROI claro ni plazo definido','Broadcom puede volver a cambiar precios sin previo aviso','Costos ocultos: capacitación, integración, soporte adicional','Cloud "parece más barata" y es difícil argumentar lo contrario','Compromiso de largo plazo en mercado que cambia rápido'],
     wins: ['Costo por workload predecible y calculable por adelantado','Suscripción estructurada — sin sorpresas de facturación variable','Stack consolidado reduce licencias, contratos y proveedores','Cloud pública a escala suele ser 2–3x más cara en 3 años','Formación del equipo incluida — sin presupuesto adicional de capacitación'],
-    args: [{tag:'El costo real de la nube pública',text:'"AWS y Azure son baratos al inicio. A escala de 300+ VMs y 3 años, las empresas gastan entre 2x y 3x más que con infraestructura privada bien administrada. [IDC, 2024]"'},{tag:'Consolidación de gasto existente',text:'"VCF no es un costo nuevo. Es la consolidación de lo que ya pagamos en vSphere, almacenamiento, NSX y monitoreo — más automatización que reduce costo operativo."'},{tag:'Capacitación incluida',text:'"Broadcom Academy está incluido en VCF. Las certificaciones VCP que cuestan $3,000–$6,000 por persona en el mercado, aquí ya están pagadas."'}],
+    args: [{tag:'El costo real de la nube pública',text:'"AWS y Azure son baratos al inicio. A escala de 300+ VMs y 3 años, las empresas gastan entre 2x y 3x más que con infraestructura privada bien administrada. [IDC, 2024]"'},{tag:'Consolidación de gasto existente',text:'"VCF no es un costo nuevo. Es la consolidación de lo que ya pagamos en vSphere, almacenamiento, NSX y monitoreo — más automatización que reduce costo operativo."'},{tag:'Formación incluida sin costo extra',text:'"Broadcom Academy está incluido en VCF: cursos bajo demanda y con instructor para todo el stack. Los cursos oficiales cuestan $2,000–$4,000 por persona en el mercado — con VCF ya están cubiertos en la suscripción."'}],
   },
   itm: {
     label:'Gerente', label2:'de Infraestructura', sub:'Operación & migración',
@@ -1064,7 +1064,7 @@ const ROLES = {
     texture:`repeating-linear-gradient(45deg,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 1px,transparent 1px,transparent 8px)`,
     fears:['Perder el control granular que tenía con componentes separados','Compatibilidad con workloads legacy y arquitecturas existentes','Vendor lock-in disfrazado de "plataforma completa"','Limitaciones en personalización de red y almacenamiento','Curva de aprendizaje de SDDC Manager y nuevas APIs'],
     wins: ['Control total vía API-first: todo lo de UI disponible en código','Compatibilidad total con workloads vSphere — misma base tecnológica','NSX incluido: micro-segmentación, DFW, L2/L3 completo','vSAN ESA con políticas granulares por VM y soporte NVMe nativo','Kubernetes nativo vía VKS Enterprise — contenedores en el mismo stack'],
-    args: [{tag:'No es más complejo — es más automatizado',text:'"SDDC Manager abstrae la orquestación de vSphere + vSAN + NSX. La curva inicial existe, pero a los 3 meses el equipo opera más rápido — sin tickets manuales de actualizaciones."'},{tag:'API-first por diseño',text:'"Todo lo que necesitas automatizar tiene API REST documentada. Terraform, Ansible y PowerCLI funcionan sin cambios. No pierdes control — lo ganas a escala."'},{tag:'DRS + NUMA cambia el juego',text:'"VMware tiene el scheduler de CPU más sofisticado del mercado: 92 VMs por host vs 52 de Hyper-V en el mismo hardware. Eso es 77% más densidad sin comprar más hierro. [Coresolutions, 2025]"'}],
+    args: [{tag:'No es más complejo — es más automatizado',text:'"SDDC Manager abstrae la orquestación de vSphere + vSAN + NSX. La curva inicial existe, pero a los 3 meses el equipo opera más rápido — sin tickets manuales de actualizaciones."'},{tag:'API-first por diseño',text:'"Todo lo que necesitas automatizar tiene API REST documentada. Terraform, Ansible y PowerCLI funcionan sin cambios. No pierdes control — lo ganas a escala."'},{tag:'DRS + NUMA cambia el juego',text:'"VMware tiene el scheduler de CPU más sofisticado del mercado: 92 VMs por host vs 52 de Hyper-V en el mismo hardware. Eso es 77% más densidad sin adquirir más servidores físicos. [Coresolutions, 2025]"'}],
   },
   ceo: {
     label:'CEO', label2:'/ Dirección General', sub:'Negocio & visión',
