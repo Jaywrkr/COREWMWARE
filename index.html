@@ -471,6 +471,79 @@
   }
   .tip:hover::after, .tip:hover::before { opacity: 1; }
 
+  /* ── PRESENTATION MODE ── */
+  .pres-overlay { display:none; position:fixed; inset:0; z-index:1600; background:var(--bg); }
+  body.pres-mode .pres-overlay { display:flex; align-items:center; justify-content:center; }
+  body.pres-mode { overflow:hidden; }
+  .pres-slide { display:none; width:100%; max-width:960px; padding:48px 40px; animation:slide-in 0.35s ease; }
+  .pres-slide.active { display:block; }
+  @keyframes slide-in { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+  .pres-ui {
+    position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
+    display:none; align-items:center; gap:10px; z-index:1700;
+    background:rgba(0,18,51,0.96); border:1px solid var(--border-s); padding:10px 16px;
+    backdrop-filter:blur(12px);
+  }
+  body.pres-mode .pres-ui { display:flex; }
+  .pres-arrow { width:34px; height:34px; background:none; border:1px solid var(--border-s); color:var(--text); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
+  .pres-arrow:hover:not(:disabled) { background:var(--blue-dim); }
+  .pres-arrow:disabled { opacity:0.25; cursor:default; }
+  .pres-count { font-size:11px; color:var(--muted); letter-spacing:2px; min-width:52px; text-align:center; }
+  .pres-exit-btn { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; background:none; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.35); padding:0 12px; height:34px; cursor:pointer; transition:color 0.15s; }
+  .pres-exit-btn:hover { color:var(--text); }
+  .pres-progress-bar { position:fixed; top:0; left:0; right:0; height:2px; background:rgba(255,255,255,0.06); z-index:1700; }
+  body.pres-mode .pres-progress-bar { display:block; }
+  .pres-progress-fill { height:100%; background:var(--blue-lt); transition:width 0.3s ease; }
+  /* present button in topnav */
+  .topnav-pres-btn { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; background:var(--blue); color:#fff; border:none; padding:7px 16px; cursor:pointer; transition:background 0.2s; }
+  .topnav-pres-btn:hover { background:var(--blue-lt); }
+  /* slide typography reuse */
+  .pres-slide .section-title { font-size:clamp(28px,4vw,52px); }
+  .pres-slide .section-eyebrow { margin-bottom:16px; }
+
+  /* ── BEFORE / AFTER ── */
+  .ba-wrap { position:relative; overflow:hidden; height:320px; cursor:col-resize; user-select:none; touch-action:none; border:1px solid var(--border); margin-top:36px; }
+  @media(max-width:600px) { .ba-wrap { height:420px; } }
+  .ba-panel { position:absolute; inset:0; padding:32px 28px; display:flex; flex-direction:column; justify-content:center; }
+  .ba-left { background:#04111e; }
+  .ba-right { background:var(--bg-card); clip-path:inset(0 0 0 50%); transition:clip-path 0s; }
+  .ba-label { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:18px; }
+  .ba-left .ba-label { color:var(--danger); }
+  .ba-right .ba-label { color:var(--success); }
+  .ba-boxes { display:flex; flex-wrap:wrap; gap:8px; }
+  .ba-box { font-size:11px; font-weight:600; padding:10px 14px; border:1px solid; }
+  .ba-left .ba-box { border-color:rgba(239,68,68,0.3); color:rgba(255,255,255,0.5); background:rgba(239,68,68,0.04); }
+  .ba-right .ba-box { border-color:var(--border-s); color:var(--text); background:rgba(26,86,219,0.1); }
+  .ba-right .ba-box.highlight { border-color:var(--blue); background:var(--blue); font-weight:700; }
+  .ba-left .ba-chaos { font-size:11px; color:rgba(239,68,68,0.5); margin-top:16px; line-height:1.6; }
+  .ba-right .ba-unity { font-size:11px; color:var(--muted); margin-top:16px; line-height:1.6; }
+  .ba-handle { position:absolute; top:0; bottom:0; left:50%; width:2px; background:var(--blue-lt); transform:translateX(-50%); z-index:10; }
+  .ba-handle-grip { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:var(--blue-lt); border:3px solid #fff; display:flex; align-items:center; justify-content:center; font-size:14px; box-shadow:0 0 16px rgba(59,130,246,0.5); }
+  .ba-hint { text-align:center; font-size:10px; color:var(--muted); margin-top:10px; letter-spacing:1px; }
+
+  /* ── ADOPTION TIMELINE ── */
+  .tl-wrap { position:relative; margin-top:40px; }
+  .tl-track { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+  .tl-track::before { content:''; position:absolute; top:18px; left:calc(12.5%); right:calc(12.5%); height:2px; background:var(--border); z-index:0; }
+  .tl-node { display:flex; flex-direction:column; align-items:center; position:relative; cursor:pointer; }
+  .tl-dot { width:36px; height:36px; border-radius:50%; border:2px solid var(--border-s); background:var(--bg-card); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--muted); z-index:1; transition:all 0.2s; position:relative; }
+  .tl-node.active .tl-dot { background:var(--blue); border-color:var(--blue); color:#fff; box-shadow:0 0 16px rgba(26,86,219,0.5); }
+  .tl-node:hover .tl-dot { border-color:var(--blue-lt); color:var(--blue-lt); }
+  .tl-month { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:10px; }
+  .tl-node.active .tl-month { color:var(--blue-lt); }
+  .tl-title { font-size:12px; font-weight:700; margin-top:4px; text-align:center; color:var(--muted); }
+  .tl-node.active .tl-title { color:var(--text); }
+  .tl-detail { border:1px solid var(--border); background:var(--bg-card); margin-top:28px; padding:28px; display:none; animation:slide-in 0.3s ease; }
+  .tl-detail.show { display:block; }
+  .tl-detail-header { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+  .tl-detail-num { font-size:40px; font-weight:800; color:var(--blue-lt); line-height:1; }
+  .tl-detail-meta h4 { font-size:16px; font-weight:700; margin-bottom:4px; }
+  .tl-detail-meta p { font-size:12px; color:var(--muted); }
+  .tl-items { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+  .tl-item { background:var(--bg); border:1px solid var(--border); padding:14px 16px; }
+  .tl-item-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .tl-item-text { font-size:12px; line-height:1.5; }
+
   /* ── PRINT STYLES ── */
   @media print {
     .topnav, .wa-btn, #scroll-track, .overlay, .hint,
@@ -611,6 +684,7 @@
 <nav class="topnav">
   <div class="topnav-brand">Coresolutions</div>
   <div class="topnav-tag">VMware Cloud Foundation · VCF 9.1</div>
+  <button class="topnav-pres-btn" onclick="presEnter()">▶ Presentar</button>
 </nav>
 
 <!-- ═══════════════════════════════════════════
@@ -718,6 +792,47 @@
     </div>
   </div>
   <div class="vcf-stack-hint">▲ Selecciona cada capa para conocer su función</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     BEFORE / AFTER
+════════════════════════════════════════════ -->
+<div class="section fade-section" style="padding-bottom:40px;">
+  <div class="section-header">
+    <div class="section-eyebrow">Antes y después</div>
+    <div class="section-title">¿Cómo se ve tu infraestructura<br><strong>con y sin VCF?</strong></div>
+    <div class="section-desc">Arrastra el divisor para comparar la arquitectura fragmentada de hoy vs VCF unificado.</div>
+  </div>
+  <div class="ba-wrap" id="baWrap">
+    <div class="ba-panel ba-left">
+      <div class="ba-label">⚠ Hoy — sin VCF</div>
+      <div class="ba-boxes">
+        <div class="ba-box">vSphere<br><span style="font-size:9px;opacity:0.5;">Contrato A</span></div>
+        <div class="ba-box">vSAN<br><span style="font-size:9px;opacity:0.5;">Contrato B</span></div>
+        <div class="ba-box">NSX<br><span style="font-size:9px;opacity:0.5;">Contrato C</span></div>
+        <div class="ba-box">Ops / Monitoreo<br><span style="font-size:9px;opacity:0.5;">Herramienta D</span></div>
+        <div class="ba-box">Kubernetes<br><span style="font-size:9px;opacity:0.5;">Proyecto aparte</span></div>
+        <div class="ba-box">Soporte<br><span style="font-size:9px;opacity:0.5;">4 vendors distintos</span></div>
+      </div>
+      <div class="ba-chaos">4 contratos · 4 ciclos de parches · sin visibilidad unificada<br>Cada falla requiere coordinar múltiples proveedores.</div>
+    </div>
+    <div class="ba-panel ba-right" id="baRight">
+      <div class="ba-label">✓ Con VCF — stack unificado</div>
+      <div class="ba-boxes">
+        <div class="ba-box">vSphere 9</div>
+        <div class="ba-box">vSAN ESA</div>
+        <div class="ba-box">NSX Enterprise</div>
+        <div class="ba-box">VCF Operations</div>
+        <div class="ba-box">VKS + Automation</div>
+        <div class="ba-box highlight">SDDC Manager</div>
+      </div>
+      <div class="ba-unity">1 contrato · 1 soporte · ciclo de vida automatizado<br>SDDC Manager orquesta todo el stack en un solo flujo.</div>
+    </div>
+    <div class="ba-handle" id="baHandle">
+      <div class="ba-handle-grip">⇄</div>
+    </div>
+  </div>
+  <div class="ba-hint">← Arrastra el divisor para comparar →</div>
 </div>
 
 <div class="divider"></div>
@@ -1196,26 +1311,72 @@
   <div class="cta-title">Sin compromisos.<br><strong>Solo claridad.</strong></div>
   <div class="cta-sub">Si llegaste hasta aquí, probablemente VCF es relevante para ti. El siguiente paso es una conversación — sin presión, sin propuesta de venta inmediata.</div>
 
-  <div class="steps-row">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h4>Workshop de Assessment</h4>
-      <p>2–3 horas. Entendemos tu entorno actual, workloads y objetivos.</p>
+  <div class="tl-wrap">
+    <div class="tl-track">
+      <div class="tl-node active" id="tl0" onclick="tlSelect(0)">
+        <div class="tl-dot">1</div>
+        <div class="tl-month">Semana 1–2</div>
+        <div class="tl-title">Assessment</div>
+      </div>
+      <div class="tl-node" id="tl1" onclick="tlSelect(1)">
+        <div class="tl-dot">2</div>
+        <div class="tl-month">Mes 1</div>
+        <div class="tl-title">TCO Real</div>
+      </div>
+      <div class="tl-node" id="tl2" onclick="tlSelect(2)">
+        <div class="tl-dot">3</div>
+        <div class="tl-month">Mes 2–3</div>
+        <div class="tl-title">Proof of Concept</div>
+      </div>
+      <div class="tl-node" id="tl3" onclick="tlSelect(3)">
+        <div class="tl-dot">4</div>
+        <div class="tl-month">Mes 4–6</div>
+        <div class="tl-title">Producción</div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h4>Análisis de TCO</h4>
-      <p>Calculamos el costo real con tus números, no con estimaciones genéricas.</p>
+    <div class="tl-detail show" id="tld0">
+      <div class="tl-detail-header">
+        <div class="tl-detail-num">1</div>
+        <div class="tl-detail-meta"><h4>Workshop de Assessment</h4><p>2–3 horas · sin costo · sin compromiso</p></div>
+      </div>
+      <div class="tl-items">
+        <div class="tl-item"><div class="tl-item-label">¿Qué hacemos?</div><div class="tl-item-text">Mapeamos tu entorno actual: servidores, VMs, workloads y arquitectura de red.</div></div>
+        <div class="tl-item"><div class="tl-item-label">¿Qué obtienes?</div><div class="tl-item-text">Un diagnóstico claro de tu infraestructura y si VCF realmente aplica a tu caso.</div></div>
+        <div class="tl-item"><div class="tl-item-label">Riesgo</div><div class="tl-item-text" style="color:var(--success);">Ninguno. Es una conversación técnica, no una propuesta de venta.</div></div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h4>Proof of Concept</h4>
-      <p>Validamos VCF en tu entorno real antes de cualquier compromiso.</p>
+    <div class="tl-detail" id="tld1">
+      <div class="tl-detail-header">
+        <div class="tl-detail-num">2</div>
+        <div class="tl-detail-meta"><h4>Análisis de TCO personalizado</h4><p>Con tus números reales — no estimaciones genéricas</p></div>
+      </div>
+      <div class="tl-items">
+        <div class="tl-item"><div class="tl-item-label">¿Qué hacemos?</div><div class="tl-item-text">Calculamos el costo total a 3 años: hardware, licencias, personal, electricidad y soporte.</div></div>
+        <div class="tl-item"><div class="tl-item-label">¿Qué obtienes?</div><div class="tl-item-text">Un documento de TCO específico para tu organización, presentable ante el directorio.</div></div>
+        <div class="tl-item"><div class="tl-item-label">Riesgo</div><div class="tl-item-text" style="color:var(--success);">Bajo. Si los números no justifican VCF, te lo decimos directamente.</div></div>
+      </div>
     </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h4>Decisión informada</h4>
-      <p>Con datos propios en mano, la decisión la tomas tú con total claridad.</p>
+    <div class="tl-detail" id="tld2">
+      <div class="tl-detail-header">
+        <div class="tl-detail-num">3</div>
+        <div class="tl-detail-meta"><h4>Proof of Concept en tu entorno</h4><p>VCF corriendo en tus servidores, con tus workloads</p></div>
+      </div>
+      <div class="tl-items">
+        <div class="tl-item"><div class="tl-item-label">¿Qué hacemos?</div><div class="tl-item-text">Desplegamos VCF en un entorno de pruebas sobre tu hardware real. Validamos compatibilidad y rendimiento.</div></div>
+        <div class="tl-item"><div class="tl-item-label">¿Qué obtienes?</div><div class="tl-item-text">Evidencia técnica real antes de firmar cualquier contrato. Tu equipo opera VCF de primera mano.</div></div>
+        <div class="tl-item"><div class="tl-item-label">Riesgo</div><div class="tl-item-text" style="color:var(--orange);">Bajo. Producción no se toca durante el PoC.</div></div>
+      </div>
+    </div>
+    <div class="tl-detail" id="tld3">
+      <div class="tl-detail-header">
+        <div class="tl-detail-num">4</div>
+        <div class="tl-detail-meta"><h4>Migración y producción</h4><p>Incremental · sin big bang · sin apagar producción</p></div>
+      </div>
+      <div class="tl-items">
+        <div class="tl-item"><div class="tl-item-label">¿Qué hacemos?</div><div class="tl-item-text">Migramos workloads por etapas con HCX. Cada servicio se mueve validado, sin ventanas de corte.</div></div>
+        <div class="tl-item"><div class="tl-item-label">¿Qué obtienes?</div><div class="tl-item-text">Infraestructura VCF en producción completa, equipo capacitado, SDDC Manager operativo.</div></div>
+        <div class="tl-item"><div class="tl-item-label">Riesgo</div><div class="tl-item-text" style="color:var(--success);">Controlado. Rollback disponible en cada etapa hasta confirmar estabilidad.</div></div>
+      </div>
     </div>
   </div>
 
@@ -1246,6 +1407,82 @@
     <li id="ref-9">[9] VMware. <em>VMware Certified Professional (VCP) Certification Program</em>. Broadcom Education Services, 2025. <a href="https://www.broadcom.com/support/education-services/certifications" target="_blank">broadcom.com/certifications</a></li>
   </ol>
 </div>
+
+<!-- ═══════════════════════════════════════════
+     PRESENTATION MODE OVERLAY
+════════════════════════════════════════════ -->
+<div class="pres-overlay" id="presOverlay">
+  <div class="pres-slide active" id="ps0">
+    <div class="section-eyebrow">VMware Cloud Foundation · VCF 9.1</div>
+    <div class="section-title" style="margin:20px 0 16px;">Tu infraestructura,<br><strong>a la velocidad de la nube.</strong></div>
+    <div class="section-desc" style="max-width:560px;font-size:16px;line-height:1.7;">Una nube privada completa — cómputo, red, almacenamiento, Kubernetes y gestión — integrada, certificada y operada como una sola plataforma. En tu datacenter. Bajo tu control.</div>
+    <div style="margin-top:36px;display:flex;gap:32px;flex-wrap:wrap;">
+      <div><div class="tco-stat-num green" style="font-size:52px;">50%</div><div class="tco-stat-label">Menos costo que cloud pública a 3 años</div></div>
+      <div><div class="tco-stat-num" style="font-size:52px;">92</div><div class="tco-stat-label">VMs por host vs 52 de Hyper-V</div></div>
+      <div><div class="tco-stat-num green" style="font-size:52px;">40%</div><div class="tco-stat-label">Menos DRAM con Memory Tiering</div></div>
+    </div>
+  </div>
+  <div class="pres-slide" id="ps1">
+    <div class="section-eyebrow">¿Qué incluye VCF?</div>
+    <div class="section-title" style="margin:20px 0 24px;">5 capas de tecnología.<br><strong>Un solo stack integrado.</strong></div>
+    <div style="border:1px solid var(--border);overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+        <div style="padding:20px 24px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">CÓMPUTO</div><div style="font-size:13px;color:var(--muted);">vSphere 9 · ESXi · vCenter · HA · DRS · vMotion</div></div>
+        <div style="padding:20px 24px;border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">ALMACENAMIENTO</div><div style="font-size:13px;color:var(--muted);">vSAN ESA · All-NVMe · SPBM · sin SAN externa</div></div>
+        <div style="padding:20px 24px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">RED Y SEGURIDAD</div><div style="font-size:13px;color:var(--muted);">NSX Enterprise · SDN · micro-segmentación · DFW</div></div>
+        <div style="padding:20px 24px;border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">KUBERNETES</div><div style="font-size:13px;color:var(--muted);">VKS Enterprise · Harbor Registry · VCF Automation</div></div>
+      </div>
+      <div style="padding:20px 24px;background:var(--blue);"><div style="font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:4px;">GESTIÓN UNIFICADA</div><div style="font-size:13px;opacity:0.85;">SDDC Manager — ciclo de vida de todo el stack, automatizado y en orden seguro</div></div>
+    </div>
+  </div>
+  <div class="pres-slide" id="ps2">
+    <div class="section-eyebrow">TCO · 3 años · 60 VMs</div>
+    <div class="section-title" style="margin:20px 0 32px;">Los números que<br><strong>cambian la conversación.</strong></div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;">Cloud pública (AWS / Azure)</span><span style="font-size:32px;font-weight:800;color:var(--danger);">~$380K</span></div>
+      <div style="background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.2);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;">Infraestructura fragmentada</span><span style="font-size:32px;font-weight:800;color:var(--orange);">~$290K</span></div>
+      <div style="background:rgba(26,86,219,0.1);border:1px solid var(--blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;font-weight:700;">VMware Cloud Foundation</span><span style="font-size:36px;font-weight:800;color:var(--blue-lt);">~$190K</span></div>
+    </div>
+    <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,0.2);">Estimación orientativa para entorno mediano en Ecuador. Coresolutions puede calcular el tuyo con datos reales.</div>
+  </div>
+  <div class="pres-slide" id="ps3">
+    <div class="section-eyebrow">Eficiencia de hardware</div>
+    <div class="section-title" style="margin:20px 0 8px;">Más VMs con<br><strong>los servidores que ya tienes.</strong></div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:28px;">Cada punto = 1 VM. Mismo servidor físico (2 sockets, 32 cores, 512 GB RAM).</div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span style="font-size:13px;font-weight:700;">VMware vSphere</span><span style="font-size:22px;font-weight:800;color:var(--blue-lt);">92 VMs</span></div><div id="ps3-dots-vmw" style="display:flex;flex-wrap:wrap;gap:3px;"></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span style="font-size:13px;color:var(--muted);">Proxmox / KVM</span><span style="font-size:18px;font-weight:700;color:var(--muted);">65 VMs</span></div><div id="ps3-dots-prx" style="display:flex;flex-wrap:wrap;gap:3px;"></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span style="font-size:13px;color:var(--muted);">Microsoft Hyper-V</span><span style="font-size:18px;font-weight:700;color:var(--muted);">52 VMs</span></div><div id="ps3-dots-hyp" style="display:flex;flex-wrap:wrap;gap:3px;"></div></div>
+    </div>
+  </div>
+  <div class="pres-slide" id="ps4">
+    <div class="section-eyebrow">Operación sin estrés</div>
+    <div class="section-title" style="margin:20px 0 24px;">Son las 2 AM.<br><strong>Un servidor falla. Nadie llama.</strong></div>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);">
+      <div style="display:flex;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);"><span style="font-size:18px;">🔴</span><div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">ESXi-03 sin respuesta <span style="background:rgba(239,68,68,0.12);color:var(--danger);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:04</span></div><div style="font-size:12px;color:var(--muted);">Servidor físico pierde comunicación. vSphere detecta la falla en 3 segundos.</div></div></div>
+      <div style="display:flex;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);"><span style="font-size:18px;">⚡</span><div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">vSphere HA activa respuesta automática <span style="background:rgba(26,86,219,0.15);color:var(--blue-lt);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:07</span></div><div style="font-size:12px;color:var(--muted);">Las 14 VMs afectadas reinician en los hosts disponibles. Sin intervención manual.</div></div></div>
+      <div style="display:flex;gap:14px;padding:18px 20px;"><span style="font-size:18px;">✅</span><div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">Todos los servicios operativos <span style="background:rgba(34,197,94,0.1);color:var(--success);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:19:42</span></div><div style="font-size:12px;color:var(--muted);">Resuelto en 2m 38s. Ningún usuario impactado. El operador siguió durmiendo.</div></div></div>
+    </div>
+  </div>
+  <div class="pres-slide" id="ps5">
+    <div class="section-eyebrow">Próximos pasos · Sin compromisos</div>
+    <div class="section-title" style="margin:20px 0 32px;">El camino hacia<br><strong>una decisión informada.</strong></div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">1</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Workshop de Assessment</div><div style="font-size:12px;color:var(--muted);">2–3 horas. Entendemos tu entorno, workloads y objetivos reales.</div></div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">2</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Análisis de TCO personalizado</div><div style="font-size:12px;color:var(--muted);">Calculamos el costo real con tus números, no con estimaciones genéricas.</div></div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">3</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Proof of Concept</div><div style="font-size:12px;color:var(--muted);">Validamos VCF en tu entorno real antes de cualquier compromiso de compra.</div></div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">4</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Decisión informada</div><div style="font-size:12px;color:var(--muted);">Con datos propios en mano, la decisión la tomas tú con total claridad.</div></div>
+    </div>
+    <div style="font-size:14px;color:var(--muted);">Coresolutions Ecuador · <strong style="color:var(--text);">ventas@coresolutions.ec</strong></div>
+  </div>
+</div>
+<div class="pres-ui" id="presUI">
+  <button class="pres-arrow" id="presPrev" onclick="presNav(-1)">←</button>
+  <div class="pres-count" id="presCount">1 / 6</div>
+  <button class="pres-arrow" id="presNext" onclick="presNav(1)">→</button>
+  <button class="pres-exit-btn" onclick="presExit()">ESC · Salir</button>
+</div>
+<div class="pres-progress-bar" style="display:none" id="presProgBar"><div class="pres-progress-fill" id="presProgFill"></div></div>
 
 <div class="site-footer">VMware Cloud Foundation &nbsp;·&nbsp; Material de apoyo post-presentación &nbsp;·&nbsp; Coresolutions &nbsp;·&nbsp; 2026</div>
 
@@ -1335,6 +1572,70 @@ function closeCard() {
 function closeOnBg(e) { if (e.target===document.getElementById('overlay')) closeCard(); }
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeCard(); });
 window.addEventListener('load', () => { const h=location.hash.replace('#',''); if(ROLES[h]) openCard(h); });
+
+// ── PRESENTATION MODE ──
+const PRES_SLIDES = 6;
+let presIdx = 0;
+function presEnter() {
+  presIdx = 0;
+  document.body.classList.add('pres-mode');
+  document.getElementById('presProgBar').style.display = 'block';
+  presShow();
+  buildDots('ps3-dots-vmw', 92, 92, 'vmw');
+  setTimeout(() => buildDots('ps3-dots-prx', 65, 92, 'prx'), 200);
+  setTimeout(() => buildDots('ps3-dots-hyp', 52, 92, 'hyp'), 400);
+}
+function presExit() {
+  document.body.classList.remove('pres-mode');
+  document.getElementById('presProgBar').style.display = 'none';
+}
+function presShow() {
+  document.querySelectorAll('.pres-slide').forEach((s,i) => s.classList.toggle('active', i === presIdx));
+  document.getElementById('presCount').textContent = (presIdx + 1) + ' / ' + PRES_SLIDES;
+  document.getElementById('presPrev').disabled = presIdx === 0;
+  document.getElementById('presNext').disabled = presIdx === PRES_SLIDES - 1;
+  document.getElementById('presProgFill').style.width = ((presIdx + 1) / PRES_SLIDES * 100) + '%';
+}
+function presNav(dir) {
+  presIdx = Math.max(0, Math.min(PRES_SLIDES - 1, presIdx + dir));
+  presShow();
+}
+document.addEventListener('keydown', e => {
+  if (!document.body.classList.contains('pres-mode')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') presNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   presNav(-1);
+  if (e.key === 'Escape') presExit();
+});
+
+// ── BEFORE / AFTER SLIDER ──
+(function() {
+  const wrap = document.getElementById('baWrap');
+  const handle = document.getElementById('baHandle');
+  const right = document.getElementById('baRight');
+  if (!wrap) return;
+  let dragging = false;
+  function setPos(x) {
+    const rect = wrap.getBoundingClientRect();
+    const pct = Math.max(5, Math.min(95, (x - rect.left) / rect.width * 100));
+    handle.style.left = pct + '%';
+    right.style.clipPath = `inset(0 0 0 ${pct}%)`;
+  }
+  handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+  document.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+  document.addEventListener('mouseup', () => { dragging = false; });
+  handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
+  document.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
+  document.addEventListener('touchend', () => { dragging = false; });
+})();
+
+// ── ADOPTION TIMELINE ──
+function tlSelect(idx) {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('tl' + i).classList.toggle('active', i === idx);
+    const d = document.getElementById('tld' + i);
+    d.classList.toggle('show', i === idx);
+  }
+}
 
 // ── SCROLL PROGRESS ──
 const fill = document.getElementById('scroll-fill');
