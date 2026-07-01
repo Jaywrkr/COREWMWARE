@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VMware VCF — Tu guía de decisión</title>
+<title>VMware Cloud Foundation — Guía de decisión | Coresolutions Ecuador</title>
+<meta name="description" content="Guía completa post-presentación de VMware VCF 9.1. Argumentos por rol, análisis de TCO, comparativas técnicas y autodiagnóstico. Elaborado por Coresolutions Ecuador.">
+<meta property="og:title" content="VMware Cloud Foundation — ¿Es la decisión correcta para tu empresa?">
+<meta property="og:description" content="Guía interactiva para evaluar VCF: TCO a 3 años, densidad de VMs, argumentos por cargo y autodiagnóstico. Coresolutions Ecuador.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,6 +38,36 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  /* ── SCROLL PROGRESS ── */
+  #scroll-track {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 200; pointer-events: none;
+    background: rgba(255,255,255,0.04);
+  }
+  #scroll-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #1a56db, #3b82f6, #0ea5e9);
+    transition: width 0.08s linear;
+    position: relative;
+  }
+  #scroll-fill::after {
+    content: '';
+    position: absolute; right: -1px; top: -3px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #7dd3fc;
+    box-shadow: 0 0 8px 3px rgba(125,211,252,0.7);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  #scroll-fill.active::after { opacity: 1; }
+
+  /* ── SECTION FADE-IN ── */
+  .fade-section {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .fade-section.in { opacity: 1; transform: none; }
 
   body {
     background: var(--bg);
@@ -501,6 +536,8 @@
 </head>
 <body>
 
+<div id="scroll-track"><div id="scroll-fill"></div></div>
+
 <!-- TOP NAV -->
 <nav class="topnav">
   <div class="topnav-brand">Coresolutions</div>
@@ -547,7 +584,7 @@
 <!-- ═══════════════════════════════════════════
      2. QUÉ ES VCF
 ════════════════════════════════════════════ -->
-<div class="section">
+<div class="section fade-section">
   <div class="section-header">
     <div class="section-eyebrow">¿Qué es VMware Cloud Foundation?</div>
     <div class="section-title">Una nube privada completa.<br><strong>En tu datacenter. Bajo tu control.</strong></div>
@@ -668,7 +705,7 @@
 <!-- ═══════════════════════════════════════════
      4. TRANQUILIDAD OPERATIVA
 ════════════════════════════════════════════ -->
-<div class="peace-section">
+<div class="peace-section fade-section">
   <div class="peace-inner">
     <div class="section-header">
       <div class="section-eyebrow">Operación sin estrés</div>
@@ -747,7 +784,7 @@
 <!-- ═══════════════════════════════════════════
      5. TCO (was 4)
 ════════════════════════════════════════════ -->
-<div class="section">
+<div class="section fade-section">
   <div class="section-header">
     <div class="section-eyebrow">Análisis de Costo Total · TCO a 3 años</div>
     <div class="section-title">Los números que<br><strong>cambian la conversación</strong></div>
@@ -811,7 +848,7 @@
 <!-- ═══════════════════════════════════════════
      5. HARDWARE EFFICIENCY
 ════════════════════════════════════════════ -->
-<div class="section">
+<div class="section fade-section">
   <div class="section-header">
     <div class="section-eyebrow">Optimización de Hardware</div>
     <div class="section-title">Más VMs con<br><strong>los servidores que ya tienes</strong></div>
@@ -991,7 +1028,7 @@
 <!-- ═══════════════════════════════════════════
      7. EDUCACIÓN
 ════════════════════════════════════════════ -->
-<div class="section">
+<div class="section fade-section">
   <div class="section-header">
     <div class="section-eyebrow">Beneficio incluido · Formación</div>
     <div class="section-title">Con VCF viene<br><strong>educación gratuita para tu equipo</strong></div>
@@ -1033,7 +1070,7 @@
 <!-- ═══════════════════════════════════════════
      8. NO ES PARA TODOS
 ════════════════════════════════════════════ -->
-<div class="section">
+<div class="section fade-section">
   <div class="section-header">
     <div class="section-eyebrow">Honestidad como diferenciador</div>
     <div class="section-title">VCF no es para todo el mundo<br><strong>— y eso está bien</strong></div>
@@ -1085,7 +1122,7 @@
 <!-- ═══════════════════════════════════════════
      9. QUÉ SIGUE / CTA
 ════════════════════════════════════════════ -->
-<div class="cta-section">
+<div class="cta-section fade-section">
   <div class="cta-eyebrow">Próximos pasos</div>
   <div class="cta-title">Sin compromisos.<br><strong>Solo claridad.</strong></div>
   <div class="cta-sub">Si llegaste hasta aquí, probablemente VCF es relevante para ti. El siguiente paso es una conversación — sin presión, sin propuesta de venta inmediata.</div>
@@ -1229,6 +1266,20 @@ function closeCard() {
 function closeOnBg(e) { if (e.target===document.getElementById('overlay')) closeCard(); }
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeCard(); });
 window.addEventListener('load', () => { const h=location.hash.replace('#',''); if(ROLES[h]) openCard(h); });
+
+// ── SCROLL PROGRESS ──
+const fill = document.getElementById('scroll-fill');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  fill.style.width = Math.min(pct, 100) + '%';
+  fill.classList.toggle('active', pct > 1 && pct < 99);
+}, { passive: true });
+
+// ── FADE-IN ON SCROLL ──
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-section').forEach(el => fadeObs.observe(el));
 
 // ── VCF LAYER STACK ──
 function toggleLayer(el) {
