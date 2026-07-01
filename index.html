@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --vmw-bg:     #0A0F14;
-    --vmw-blue:   #007CBA;
-    --vmw-navy:   #003366;
-    --vmw-teal:   #17B3C2;
-    --vmw-green:  #5B8C14;
-    --vmw-slate:  #1E2D3D;
-    --vmw-mid:    #162330;
-    --text:       #E8EDF2;
-    --muted:      rgba(232,237,242,0.4);
-    --border:     rgba(255,255,255,0.07);
-    --success:    #27AE60;
-    --danger:     #C0392B;
+    --vmw-bg:    #0A0F14;
+    --vmw-blue:  #007CBA;
+    --vmw-navy:  #003366;
+    --vmw-teal:  #17B3C2;
+    --vmw-green: #5B8C14;
+    --vmw-slate: #1E2D3D;
+    --vmw-mid:   #162330;
+    --text:      #E8EDF2;
+    --muted:     rgba(232,237,242,0.4);
+    --border:    rgba(255,255,255,0.07);
+    --success:   #27AE60;
+    --danger:    #C0392B;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,34 +33,130 @@
     overflow-x: hidden;
   }
 
-  /* ── HEADER ── */
-  .site-header { text-align: center; padding: 56px 24px 0; }
-  .eyebrow {
+  /* ── HERO ── */
+  .hero {
+    min-height: 88vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 80px 24px 72px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,124,186,0.12) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
     font-size: 10px; font-weight: 600; letter-spacing: 4px;
-    text-transform: uppercase; color: var(--vmw-blue); margin-bottom: 18px;
+    text-transform: uppercase; color: var(--vmw-blue); margin-bottom: 20px;
   }
-  .site-header h1 {
-    font-size: clamp(24px, 3.5vw, 42px); font-weight: 300;
-    line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 14px;
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 58px); font-weight: 300;
+    line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px;
+    max-width: 720px;
   }
-  .site-header h1 strong { font-weight: 700; }
-  .site-header p {
-    font-size: 14px; color: var(--muted);
-    max-width: 440px; margin: 0 auto 52px; line-height: 1.6;
+  .hero h1 strong { font-weight: 700; }
+  .hero-sub {
+    font-size: clamp(13px, 1.6vw, 16px); color: var(--muted);
+    max-width: 480px; line-height: 1.65; margin-bottom: 44px;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--vmw-blue); color: #fff;
+    font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; text-decoration: none;
+    padding: 14px 32px; border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: #0093d6; }
+  .hero-scroll {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.15); display: flex; flex-direction: column;
+    align-items: center; gap: 8px;
+  }
+  .hero-scroll-line { width: 1px; height: 32px; background: rgba(255,255,255,0.1); }
+
+  /* ── SHARED SECTION ── */
+  .section {
+    max-width: 960px; margin: 0 auto; padding: 72px 24px;
+  }
+  .section-header { margin-bottom: 36px; }
+  .section-eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--vmw-blue); margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 34px); font-weight: 300; letter-spacing: -0.4px;
+  }
+  .section-title strong { font-weight: 700; }
+  .section-desc {
+    font-size: 13px; color: var(--muted);
+    margin-top: 10px; line-height: 1.7; max-width: 580px;
+  }
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  /* ── WHAT IS VCF ── */
+  .vcf-pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    margin-top: 32px;
+  }
+  @media (max-width: 600px) { .vcf-pillars { grid-template-columns: 1fr; } }
+  .pillar {
+    background: var(--vmw-mid); border: 1px solid var(--border);
+    padding: 32px 24px;
+  }
+  .pillar-icon { font-size: 28px; margin-bottom: 14px; }
+  .pillar h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .pillar p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .pillar-accent { height: 3px; background: var(--vmw-blue); margin-bottom: 24px; }
+
+  .vcf-vs {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 0;
+    align-items: center; margin-top: 32px; border: 1px solid var(--border);
+    background: var(--vmw-mid);
+  }
+  @media (max-width: 560px) {
+    .vcf-vs { grid-template-columns: 1fr; }
+    .vcf-vs-sep { display: none; }
+  }
+  .vcf-vs-col { padding: 28px 24px; }
+  .vcf-vs-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .vcf-vs-col ul { list-style: none; }
+  .vcf-vs-col ul li { font-size: 12px; padding: 5px 0; color: rgba(232,237,242,0.65); border-bottom: 1px solid var(--border); }
+  .vcf-vs-col ul li:last-child { border-bottom: none; }
+  .vcf-vs-col.theirs ul li::before { content: '✗ '; color: rgba(255,255,255,0.2); }
+  .vcf-vs-col.ours ul li::before { content: '✓ '; color: var(--success); }
+  .vcf-vs-sep {
+    width: 1px; align-self: stretch; background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .vcf-vs-sep span {
+    background: var(--vmw-bg); border: 1px solid var(--border);
+    padding: 6px 10px; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    color: var(--vmw-blue); position: relative; z-index: 1;
   }
 
+  /* ── CARD DECK ── */
+  .deck-intro { text-align: center; padding: 72px 24px 0; }
+  .deck-eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--vmw-blue); margin-bottom: 10px;
+  }
+  .deck-title {
+    font-size: clamp(20px, 3vw, 30px); font-weight: 300;
+    letter-spacing: -0.3px; margin-bottom: 10px;
+  }
+  .deck-title strong { font-weight: 700; }
+  .deck-desc { font-size: 13px; color: var(--muted); max-width: 440px; margin: 0 auto 16px; line-height: 1.6; }
   .hint {
     font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
     text-transform: uppercase; color: rgba(255,255,255,0.18);
-    text-align: center; margin-bottom: 36px;
+    text-align: center; margin: 20px 0 32px;
   }
-
-  /* ── CARD ROW ── */
   .deck-row {
     display: flex; justify-content: center; align-items: flex-end;
-    gap: 12px; padding: 0 24px 64px; flex-wrap: nowrap; overflow-x: auto;
+    gap: 12px; padding: 0 24px 72px; flex-wrap: nowrap; overflow-x: auto;
   }
-
   .card {
     flex-shrink: 0; width: 168px; height: 280px; cursor: pointer;
     position: relative; overflow: hidden; display: flex;
@@ -69,7 +165,6 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     border: 1px solid rgba(255,255,255,0.06);
   }
-
   .card:nth-child(odd)  { transform: translateY(0); }
   .card:nth-child(even) { transform: translateY(-20px); }
   .card:hover { transform: translateY(-10px) !important; box-shadow: 0 20px 48px rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.18); z-index: 10; }
@@ -144,89 +239,75 @@
   .arg-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 7px; }
   .arg-card p { font-size: 12px; color: rgba(232,237,242,0.65); line-height: 1.65; }
 
-  /* ── PAGE SECTIONS ── */
-  .page-section {
-    max-width: 960px; margin: 0 auto; padding: 0 24px 72px;
+  /* ── TCO SECTION ── */
+  .tco-chart {
+    background: var(--vmw-mid); border: 1px solid var(--border);
+    padding: 32px 28px; margin-bottom: 24px;
   }
+  .tco-chart-title { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+  .tco-bar-group { margin-bottom: 20px; }
+  .tco-bar-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .tco-bar-name { font-size: 13px; font-weight: 500; }
+  .tco-bar-value { font-size: 20px; font-weight: 700; }
+  .tco-bar-track { height: 10px; background: rgba(255,255,255,0.05); width: 100%; }
+  .tco-bar-fill { height: 100%; transition: width 1s ease; }
+  .tco-bar-fill.cloud  { background: var(--danger); width: 95%; }
+  .tco-bar-fill.frag   { background: #E07A30; width: 78%; }
+  .tco-bar-fill.vcf    { background: var(--vmw-blue); width: 52%; }
+  .tco-bar-note { font-size: 10px; color: rgba(255,255,255,0.2); margin-top: 5px; }
 
-  .section-header { margin-bottom: 32px; }
-  .section-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--vmw-blue); margin-bottom: 10px; }
-  .section-title { font-size: clamp(20px, 3vw, 30px); font-weight: 300; letter-spacing: -0.3px; }
-  .section-title strong { font-weight: 700; }
-  .section-desc { font-size: 13px; color: var(--muted); margin-top: 8px; line-height: 1.6; max-width: 560px; }
-
-  .divider { border: none; border-top: 1px solid var(--border); margin: 0 24px 72px; }
+  .tco-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin-bottom: 12px;
+  }
+  .tco-stat { background: var(--vmw-mid); border: 1px solid var(--border); padding: 20px 18px; }
+  .tco-stat-num { font-size: 30px; font-weight: 700; color: var(--vmw-blue); line-height: 1; margin-bottom: 6px; }
+  .tco-stat-num.green { color: var(--success); }
+  .tco-stat-label { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .tco-note { font-size: 11px; color: rgba(255,255,255,0.2); }
 
   /* ── HARDWARE SECTION ── */
   .hw-stat-row {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 12px; margin-bottom: 32px;
   }
-  .hw-stat {
-    background: var(--vmw-mid); border: 1px solid var(--border);
-    padding: 22px 20px;
-  }
+  .hw-stat { background: var(--vmw-mid); border: 1px solid var(--border); padding: 22px 20px; }
   .hw-stat-num { font-size: 32px; font-weight: 700; color: var(--vmw-blue); line-height: 1; margin-bottom: 6px; }
-  .hw-stat-num.green { color: var(--success); }
+  .hw-stat-num.green  { color: var(--success); }
   .hw-stat-num.danger { color: var(--danger); }
   .hw-stat-label { font-size: 11px; color: var(--muted); line-height: 1.5; }
   .hw-stat-ref { font-size: 10px; color: rgba(255,255,255,0.2); margin-top: 4px; }
 
-  .density-table {
-    width: 100%; border-collapse: collapse; background: var(--vmw-mid);
-    border: 1px solid var(--border); margin-bottom: 12px;
-  }
+  .density-table { width: 100%; border-collapse: collapse; background: var(--vmw-mid); border: 1px solid var(--border); margin-bottom: 12px; }
   .density-table thead { background: rgba(0,124,186,0.15); }
-  .density-table th {
-    padding: 12px 16px; text-align: left; font-size: 10px; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
-    border-bottom: 1px solid var(--border);
-  }
+  .density-table th { padding: 12px 16px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); }
   .density-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid var(--border); }
   .density-table tr:last-child td { border-bottom: none; }
   .density-table .bar-cell { width: 40%; }
-
   .density-bar-track { height: 8px; background: rgba(255,255,255,0.06); width: 100%; }
   .density-bar-fill { height: 100%; }
   .density-bar-fill.vmw { background: var(--vmw-blue); width: 92%; }
   .density-bar-fill.prx { background: var(--vmw-teal); width: 65%; }
   .density-bar-fill.nut { background: #4A90D9; width: 58%; }
   .density-bar-fill.hyp { background: rgba(255,255,255,0.25); width: 52%; }
-
   .density-val { font-weight: 700; }
   .density-val.best { color: var(--vmw-blue); }
-
   .hw-note { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 4px; }
 
-  .feature-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-  }
-  .feature-card {
-    background: var(--vmw-mid); border: 1px solid var(--border);
-    border-left: 3px solid var(--vmw-blue); padding: 18px 16px;
-  }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .feature-card { background: var(--vmw-mid); border: 1px solid var(--border); border-left: 3px solid var(--vmw-blue); padding: 18px 16px; }
   .feature-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
   .feature-card p { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
   /* ── PLANS SECTION ── */
-  .plans-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px;
-  }
+  .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
   @media (max-width: 560px) { .plans-grid { grid-template-columns: 1fr; } }
-
-  .plan-card {
-    background: var(--vmw-mid); border: 1px solid var(--border); overflow: hidden;
-  }
+  .plan-card { background: var(--vmw-mid); border: 1px solid var(--border); overflow: hidden; }
   .plan-card.featured { border-color: var(--vmw-blue); }
   .plan-header { padding: 20px; border-bottom: 1px solid var(--border); position: relative; }
   .plan-header.vcf-header { background: rgba(0,51,102,0.6); }
   .plan-header.vvf-header { background: rgba(0,124,186,0.15); }
-  .plan-badge {
-    position: absolute; top: 14px; right: 14px;
-    font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 3px 8px; background: var(--vmw-blue); color: #fff;
-  }
+  .plan-badge { position: absolute; top: 14px; right: 14px; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px; background: var(--vmw-blue); color: #fff; }
   .plan-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
   .plan-sub { font-size: 11px; color: var(--muted); }
   .plan-body { padding: 20px; }
@@ -236,16 +317,9 @@
   .plan-list li::before { content: '✓'; color: var(--vmw-blue); font-weight: 700; flex-shrink: 0; }
   .plan-list li.exclusive::before { color: var(--success); }
 
-  .plans-comparison {
-    background: var(--vmw-mid); border: 1px solid var(--border);
-    overflow: hidden; margin-bottom: 12px;
-  }
+  .plans-comparison { background: var(--vmw-mid); border: 1px solid var(--border); overflow: hidden; margin-bottom: 12px; }
   .plans-comparison table { width: 100%; border-collapse: collapse; }
-  .plans-comparison th {
-    padding: 12px 16px; font-size: 10px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border);
-    background: rgba(0,0,0,0.2);
-  }
+  .plans-comparison th { padding: 12px 16px; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); }
   .plans-comparison th:not(:first-child) { text-align: center; }
   .plans-comparison td { padding: 11px 16px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .plans-comparison td:not(:first-child) { text-align: center; }
@@ -255,17 +329,64 @@
   .partial { color: #E07A30; }
 
   /* ── EDUCATION SECTION ── */
-  .edu-highlight {
-    background: rgba(0,51,102,0.4); border: 1px solid rgba(0,124,186,0.3);
-    border-left: 4px solid var(--vmw-blue); padding: 24px 24px 20px; margin-bottom: 24px;
-  }
+  .edu-highlight { background: rgba(0,51,102,0.4); border: 1px solid rgba(0,124,186,0.3); border-left: 4px solid var(--vmw-blue); padding: 24px 24px 20px; margin-bottom: 24px; }
   .edu-highlight h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
   .edu-highlight p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
   .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
   .edu-card { background: var(--vmw-mid); border: 1px solid var(--border); padding: 18px 16px; }
   .edu-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
   .edu-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── NOT FOR EVERYONE ── */
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  @media (max-width: 560px) { .fit-grid { grid-template-columns: 1fr; } }
+  .fit-col { background: var(--vmw-mid); border: 1px solid var(--border); padding: 28px 24px; }
+  .fit-col.yes-col { border-top: 3px solid var(--success); }
+  .fit-col.no-col  { border-top: 3px solid rgba(255,255,255,0.15); }
+  .fit-col-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .yes-col .fit-col-label { color: var(--success); }
+  .no-col  .fit-col-label { color: rgba(255,255,255,0.3); }
+  .fit-list { list-style: none; }
+  .fit-list li { font-size: 13px; padding: 10px 0; border-bottom: 1px solid var(--border); color: rgba(232,237,242,0.7); line-height: 1.4; display: flex; gap: 10px; align-items: flex-start; }
+  .fit-list li:last-child { border-bottom: none; }
+  .fit-list li .bullet { flex-shrink: 0; margin-top: 1px; }
+  .yes-col .fit-list li .bullet { color: var(--success); }
+  .no-col  .fit-list li .bullet { color: rgba(255,255,255,0.2); }
+
+  /* ── CTA / NEXT STEPS ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--vmw-navy) 0%, #001a33 100%);
+    border-top: 1px solid rgba(0,124,186,0.25);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(0,124,186,0.7); margin-bottom: 16px; }
+  .cta-title { font-size: clamp(24px, 4vw, 40px); font-weight: 300; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .cta-title strong { font-weight: 700; }
+  .cta-sub { font-size: 13px; color: var(--muted); max-width: 420px; margin: 0 auto 48px; line-height: 1.6; }
+
+  .steps-row {
+    display: flex; justify-content: center; align-items: flex-start;
+    gap: 0; flex-wrap: wrap; max-width: 800px; margin: 0 auto 48px;
+  }
+  .step { flex: 1; min-width: 140px; max-width: 200px; padding: 0 16px; position: relative; }
+  .step:not(:last-child)::after {
+    content: ''; position: absolute; top: 20px; right: -1px;
+    width: 2px; height: 1px; border-top: 1px dashed rgba(255,255,255,0.15);
+    width: 32px; right: -16px;
+  }
+  .step-num { width: 40px; height: 40px; border: 1px solid rgba(0,124,186,0.4); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--vmw-blue); margin: 0 auto 14px; }
+  .step h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .step p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--vmw-blue); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 14px 32px; border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: #0093d6; }
+  .btn-secondary { background: transparent; color: var(--text); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; padding: 14px 32px; border: 1px solid rgba(255,255,255,0.18); cursor: pointer; transition: border-color 0.2s; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.4); }
+
+  .cta-contact { margin-top: 36px; font-size: 12px; color: rgba(255,255,255,0.25); }
+  .cta-contact strong { color: rgba(255,255,255,0.5); }
 
   /* ── REFERENCES ── */
   .refs-section { max-width: 960px; margin: 0 auto; padding: 0 24px 60px; }
@@ -283,16 +404,89 @@
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="site-header">
-  <div class="eyebrow">VMware Cloud Foundation · VCF 9.1</div>
-  <h1><strong>¿Por qué VCF</strong> es la<br>decisión correcta para ti?</h1>
-  <p>Selecciona tu perfil o explora los datos técnicos y de valor que respaldan esta decisión.</p>
+<!-- ═══════════════════════════════════════════
+     1. HERO
+════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">VMware Cloud Foundation · VCF 9.1</div>
+  <h1>Tu infraestructura,<br><strong>a la velocidad de la nube</strong></h1>
+  <p class="hero-sub">Una referencia completa para evaluar VCF — con datos, comparativas y argumentos por rol. Diseñada para que llegues a una decisión con claridad.</p>
+  <a class="hero-cta" href="#roles">Ver mi perfil</a>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Explorar</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     2. QUÉ ES VCF
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">¿Qué es VMware Cloud Foundation?</div>
+    <div class="section-title">Una nube privada completa.<br><strong>En tu datacenter. Bajo tu control.</strong></div>
+    <div class="section-desc">VCF no es solo virtualización. Es el stack completo — cómputo, red, almacenamiento, seguridad, Kubernetes y automatización — integrado, certificado y operado como una sola plataforma. Lo mismo que AWS o Azure, pero en tu propiedad.</div>
+  </div>
+
+  <div class="vcf-pillars">
+    <div class="pillar">
+      <div class="pillar-accent"></div>
+      <div class="pillar-icon">🏛</div>
+      <h3>Control total</h3>
+      <p>Tus datos, tus reglas. Sin dependencia de precios, zonas o condiciones de terceros. Cumplimiento regulatorio y soberanía de datos por diseño.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-accent" style="background:var(--vmw-teal);"></div>
+      <div class="pillar-icon">📊</div>
+      <h3>Costos predecibles</h3>
+      <p>Suscripción anual calculable. Sin facturas sorpresa. A escala de 300+ VMs, VCF es consistentemente más económico que cloud pública. <sup class="ref">[3]</sup></p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-accent" style="background:var(--vmw-green);"></div>
+      <div class="pillar-icon">⚡</div>
+      <h3>Operación simplificada</h3>
+      <p>Un stack. Un soporte. Un ciclo de vida. SDDC Manager unifica actualizaciones, parches y operación de todos los componentes automáticamente.</p>
+    </div>
+  </div>
+
+  <div class="vcf-vs" style="margin-top:32px;">
+    <div class="vcf-vs-col theirs">
+      <h4>Infraestructura tradicional</h4>
+      <ul>
+        <li>3 o 4 proveedores distintos</li>
+        <li>Parches manuales por componente</li>
+        <li>Sin visibilidad unificada</li>
+        <li>Soporte dividido entre vendors</li>
+        <li>Kubernetes como proyecto aparte</li>
+      </ul>
+    </div>
+    <div class="vcf-vs-sep"><span>VS</span></div>
+    <div class="vcf-vs-col ours">
+      <h4>VMware Cloud Foundation</h4>
+      <ul>
+        <li>Un solo stack integrado</li>
+        <li>Actualizaciones orquestadas con SDDC Manager</li>
+        <li>Monitoreo y operaciones incluidas</li>
+        <li>Un contrato, un soporte</li>
+        <li>Kubernetes nativo con VKS Enterprise</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     3. ROLES (CARD DECK)
+════════════════════════════════════════════ -->
+<div id="roles" class="deck-intro">
+  <div class="deck-eyebrow">Argumentos por perfil</div>
+  <div class="deck-title">¿Cuál es <strong>tu rol en esta decisión?</strong></div>
+  <div class="deck-desc">Cada área tiene miedos legítimos y ganancias concretas. Selecciona tu perfil y ve los argumentos exactos que necesitas para defender esta decisión.</div>
 </div>
 
 <div class="hint">Selecciona una carta para ver argumentos por rol</div>
 
-<!-- CARD DECK -->
 <div class="deck-row">
   <div class="card" data-role="cio" onclick="openCard('cio')">
     <div class="card-texture"></div><div class="card-bar"></div>
@@ -328,44 +522,108 @@
 
 <div class="divider"></div>
 
-<!-- ── HARDWARE EFFICIENCY ── -->
-<div class="page-section">
+<!-- ═══════════════════════════════════════════
+     4. TCO
+════════════════════════════════════════════ -->
+<div class="section">
   <div class="section-header">
-    <div class="section-eyebrow">Optimización de Hardware</div>
-    <div class="section-title">El hipervisor que más aprovecha<br><strong>el hierro que ya tienes</strong></div>
-    <div class="section-desc">VMware vSphere es el hipervisor con mayor densidad de VMs por servidor físico. Consolidar más workloads en menos hardware es un argumento financiero directo — menos CAPEX, menos electricidad, menos refrigeración. <sup class="ref">[1]</sup></div>
+    <div class="section-eyebrow">Análisis de Costo Total · TCO a 3 años</div>
+    <div class="section-title">Los números que<br><strong>cambian la conversación</strong></div>
+    <div class="section-desc">La nube pública parece barata al inicio. A 300+ VMs y 3 años, la realidad es otra. Este análisis compara el costo total de operación — no solo licencias — incluyendo personal, soporte y electricidad. <sup class="ref">[3]</sup></div>
   </div>
 
-  <!-- Stats -->
+  <div class="tco-chart">
+    <div class="tco-chart-title">Costo total estimado — 300 VMs · 3 años</div>
+
+    <div class="tco-bar-group">
+      <div class="tco-bar-label">
+        <span class="tco-bar-name">Cloud pública (AWS / Azure)</span>
+        <span class="tco-bar-value" style="color:var(--danger);">$1.9M+</span>
+      </div>
+      <div class="tco-bar-track"><div class="tco-bar-fill cloud"></div></div>
+      <div class="tco-bar-note">Instancias + almacenamiento + egress + soporte enterprise. Costo real suele superar proyección inicial en 40%. <sup>[3]</sup></div>
+    </div>
+
+    <div class="tco-bar-group">
+      <div class="tco-bar-label">
+        <span class="tco-bar-name">Infraestructura fragmentada (sin VCF)</span>
+        <span class="tco-bar-value" style="color:#E07A30;">$1.5M</span>
+      </div>
+      <div class="tco-bar-track"><div class="tco-bar-fill frag"></div></div>
+      <div class="tco-bar-note">Licencias separadas (vSphere + NSX + vSAN + Ops) + personal adicional + integraciones complejas.</div>
+    </div>
+
+    <div class="tco-bar-group">
+      <div class="tco-bar-label">
+        <span class="tco-bar-name">VMware Cloud Foundation (VCF)</span>
+        <span class="tco-bar-value" style="color:var(--vmw-blue);">$980K</span>
+      </div>
+      <div class="tco-bar-track"><div class="tco-bar-fill vcf"></div></div>
+      <div class="tco-bar-note">Stack unificado + reducción de headcount operativo + hardware propio amortizado. Incluye educación del equipo.</div>
+    </div>
+  </div>
+
+  <div class="tco-stats">
+    <div class="tco-stat">
+      <div class="tco-stat-num green">48%</div>
+      <div class="tco-stat-label">Reducción de costo vs cloud pública a 3 años a escala mediana <sup class="ref">[3]</sup></div>
+    </div>
+    <div class="tco-stat">
+      <div class="tco-stat-num green">35%</div>
+      <div class="tco-stat-label">Reducción de tickets operativos con SDDC Manager vs gestión manual <sup class="ref">[7]</sup></div>
+    </div>
+    <div class="tco-stat">
+      <div class="tco-stat-num">70%</div>
+      <div class="tco-stat-label">Recursos desperdiciados en empresas sin hipervisor optimizado <sup class="ref">[3]</sup></div>
+    </div>
+    <div class="tco-stat">
+      <div class="tco-stat-num green">3x</div>
+      <div class="tco-stat-label">Más rápido el aprovisionamiento de nuevos servidores vs proceso manual tradicional</div>
+    </div>
+  </div>
+  <div class="tco-note">* Estimaciones basadas en casos reales documentados. Los números exactos varían según el entorno. Podemos hacer un análisis personalizado de tu organización.</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     5. HARDWARE EFFICIENCY
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Optimización de Hardware</div>
+    <div class="section-title">Más VMs con<br><strong>el hierro que ya tienes</strong></div>
+    <div class="section-desc">VMware vSphere tiene la mayor densidad de VMs por servidor físico del mercado. Más VMs por host = menos servidores = menos CAPEX, electricidad y refrigeración. <sup class="ref">[1]</sup></div>
+  </div>
+
   <div class="hw-stat-row">
     <div class="hw-stat">
       <div class="hw-stat-num">3:1</div>
-      <div class="hw-stat-label">Ratio de overcommit de memoria — VMs activas sin degradación perceptible</div>
-      <div class="hw-stat-ref"><sup>[1]</sup> VMware vSphere 9 Documentation, Memory Overcommitment</div>
+      <div class="hw-stat-label">Ratio de overcommit de memoria sostenible en producción</div>
+      <div class="hw-stat-ref"><sup>[1]</sup> VMware vSphere 9 Documentation</div>
     </div>
     <div class="hw-stat">
       <div class="hw-stat-num">40%</div>
-      <div class="hw-stat-label">Más VMs por servidor físico comparado con Hyper-V estándar</div>
-      <div class="hw-stat-ref"><sup>[2]</sup> Gartner Peer Insights, Virtualization Benchmark 2024</div>
-    </div>
-    <div class="hw-stat">
-      <div class="hw-stat-num danger">70%</div>
-      <div class="hw-stat-label">Recursos de hardware desperdiciados en organizaciones sin hipervisor optimizado</div>
-      <div class="hw-stat-ref"><sup>[3]</sup> IDC Infrastructure Efficiency Report, 2024</div>
+      <div class="hw-stat-label">Más VMs por servidor vs Hyper-V estándar</div>
+      <div class="hw-stat-ref"><sup>[2]</sup> Gartner Virtualization Benchmark 2024</div>
     </div>
     <div class="hw-stat">
       <div class="hw-stat-num green">85%+</div>
-      <div class="hw-stat-label">Utilización efectiva de CPU con VMware DRS correctamente configurado</div>
-      <div class="hw-stat-ref"><sup>[5]</sup> VMware DRS Best Practices Guide, Broadcom 2025</div>
+      <div class="hw-stat-label">Utilización efectiva de CPU con DRS correctamente configurado</div>
+      <div class="hw-stat-ref"><sup>[5]</sup> VMware DRS Best Practices Guide</div>
+    </div>
+    <div class="hw-stat">
+      <div class="hw-stat-num">92</div>
+      <div class="hw-stat-label">VMs por host en escenario referencia (2 socket, 32 cores, 512 GB RAM)</div>
+      <div class="hw-stat-ref"><sup>[2]</sup> Benchmark Coresolutions / Gartner 2024</div>
     </div>
   </div>
 
-  <!-- Density table -->
   <table class="density-table">
     <thead>
       <tr>
         <th>Hipervisor</th>
-        <th>Densidad de VMs<br>(mismo hardware físico)</th>
+        <th>Densidad de VMs</th>
         <th class="bar-cell">Índice de consolidación</th>
         <th>Overcommit CPU</th>
         <th>Balanceo automático</th>
@@ -402,9 +660,8 @@
       </tr>
     </tbody>
   </table>
-  <div class="hw-note">Fuente: Análisis técnico Coresolutions basado en documentación oficial de fabricantes. Escenario: servidor enterprise 2 socket, 32 cores físicos, 512 GB RAM. <sup>[2][3]</sup></div>
+  <div class="hw-note">Escenario: servidor enterprise 2 socket, 32 cores físicos, 512 GB RAM. Fuente: análisis técnico Coresolutions basado en documentación oficial de fabricantes. <sup>[2][3]</sup></div>
 
-  <!-- Features -->
   <div style="margin-top:28px;">
     <div class="section-eyebrow" style="margin-bottom:16px;">Tecnologías clave de eficiencia en vSphere</div>
     <div class="feature-grid">
@@ -422,7 +679,7 @@
       </div>
       <div class="feature-card">
         <h4>vMotion en caliente</h4>
-        <p>Migración de VMs activas entre hosts sin downtime, lo que permite mantenimiento y actualizaciones sin ventanas de impacto. <sup class="ref">[6]</sup></p>
+        <p>Migración de VMs activas entre hosts sin downtime, permitiendo mantenimiento y actualizaciones sin ventanas de impacto. <sup class="ref">[6]</sup></p>
       </div>
     </div>
   </div>
@@ -430,16 +687,17 @@
 
 <div class="divider"></div>
 
-<!-- ── PLANS COMPARISON ── -->
-<div class="page-section">
+<!-- ═══════════════════════════════════════════
+     6. PLANES
+════════════════════════════════════════════ -->
+<div class="section">
   <div class="section-header">
-    <div class="section-eyebrow">Planes VCF 9.1 · Comparación</div>
-    <div class="section-title">Elige el nivel que<br><strong>encaja con tu entorno</strong></div>
-    <div class="section-desc">VMware by Broadcom ofrece tres planes: VVF (virtualización base), VCFE (edge, hasta 5 hosts) y VCF (nube privada completa). Para la mayoría de empresas medianas y grandes, la decisión relevante es <strong>VVF vs VCF</strong>. <sup class="ref">[7]</sup></div>
+    <div class="section-eyebrow">Planes VCF 9.1 · VVF vs VCF</div>
+    <div class="section-title">¿Cuál es el plan<br><strong>que te corresponde?</strong></div>
+    <div class="section-desc">Para empresas medianas y grandes, la decisión relevante es entre VVF (virtualización enterprise) y VCF (nube privada completa). La diferencia no es solo de características — es de modelo operativo. <sup class="ref">[7]</sup></div>
   </div>
 
   <div class="plans-grid">
-    <!-- VVF -->
     <div class="plan-card">
       <div class="plan-header vvf-header">
         <div class="plan-name">VVF</div>
@@ -458,8 +716,6 @@
         </ul>
       </div>
     </div>
-
-    <!-- VCF -->
     <div class="plan-card featured">
       <div class="plan-header vcf-header">
         <div class="plan-badge">Nube Privada Completa</div>
@@ -483,7 +739,6 @@
     </div>
   </div>
 
-  <!-- Comparison table -->
   <div class="plans-comparison">
     <table>
       <thead>
@@ -500,11 +755,10 @@
         <tr><td>Micro-segmentación / Firewall distribuido</td><td class="no">✗</td><td class="yes">✓ NSX DFW</td></tr>
         <tr><td>Kubernetes (VKS)</td><td><span class="partial">Básico</span></td><td class="yes">Enterprise + Harbor</td></tr>
         <tr><td>Automatización de infraestructura</td><td class="no">✗</td><td class="yes">✓ Ilimitado</td></tr>
-        <tr><td>Monitoreo y operaciones (Aria/VCF Ops)</td><td class="no">✗</td><td class="yes">✓ Incluido</td></tr>
+        <tr><td>Monitoreo y operaciones (VCF Ops)</td><td class="no">✗</td><td class="yes">✓ Incluido</td></tr>
         <tr><td>Ciclo de vida unificado (SDDC Manager)</td><td class="no">✗</td><td class="yes">✓</td></tr>
         <tr><td>IA Privada (cargas GPU)</td><td class="no">✗</td><td class="yes">✓ Private AI Foundation</td></tr>
         <tr><td>Migración a cloud pública (HCX)</td><td class="no">✗</td><td class="yes">✓</td></tr>
-        <tr><td>Límite de hosts</td><td><span class="partial">Sin límite</span></td><td class="yes">Sin límite</td></tr>
         <tr><td>Educación incluida (Broadcom Academy)</td><td><span class="partial">Básica</span></td><td class="yes">✓ Completa</td></tr>
       </tbody>
     </table>
@@ -514,55 +768,137 @@
 
 <div class="divider"></div>
 
-<!-- ── EDUCATION ── -->
-<div class="page-section">
+<!-- ═══════════════════════════════════════════
+     7. EDUCACIÓN
+════════════════════════════════════════════ -->
+<div class="section">
   <div class="section-header">
-    <div class="section-eyebrow">Beneficio incluido · Educación</div>
-    <div class="section-title">Con VCF viene<br><strong>formación gratuita para tu equipo</strong></div>
-    <div class="section-desc">Broadcom Academy ofrece acceso a cursos oficiales de VMware incluidos en la suscripción de VCF. No es un beneficio secundario — es una herramienta real para reducir la curva de adopción y el costo de capacitación externa. <sup class="ref">[8]</sup></div>
+    <div class="section-eyebrow">Beneficio incluido · Formación</div>
+    <div class="section-title">Con VCF viene<br><strong>educación gratuita para tu equipo</strong></div>
+    <div class="section-desc">Broadcom Academy viene incluido en VCF. No es un beneficio secundario — es una herramienta real para reducir la curva de adopción y eliminar el presupuesto de capacitación externa. <sup class="ref">[8]</sup></div>
   </div>
 
   <div class="edu-highlight">
     <h3>Broadcom Academy — incluido en VCF</h3>
-    <p>Los clientes de VCF tienen acceso al portal de aprendizaje oficial de Broadcom con cursos en línea, rutas de certificación y laboratorios virtuales guiados — sin costo adicional. Esto cubre vSphere, NSX, vSAN, VCF Operations y automatización. <sup class="ref">[8][9]</sup></p>
+    <p>Los clientes de VCF tienen acceso al portal oficial de aprendizaje con cursos en línea, rutas de certificación y laboratorios virtuales guiados. Cubre vSphere, NSX, vSAN, VCF Operations y automatización — sin costo adicional. <sup class="ref">[8][9]</sup></p>
   </div>
 
   <div class="edu-grid">
     <div class="edu-card">
-      <h4>Cursos en línea bajo demanda</h4>
-      <p>Videos, laboratorios y evaluaciones disponibles 24/7 en la plataforma Broadcom Academy. Sin necesidad de coordinar capacitaciones presenciales. <sup class="ref">[8]</sup></p>
+      <h4>Cursos bajo demanda 24/7</h4>
+      <p>Videos, laboratorios y evaluaciones disponibles en cualquier momento en Broadcom Academy. Sin coordinar capacitaciones presenciales. <sup class="ref">[8]</sup></p>
     </div>
     <div class="edu-card">
       <h4>Rutas de certificación VMware</h4>
-      <p>Preparación para certificaciones VCP (VMware Certified Professional) en vSphere, NSX y Cloud Foundation — las más valoradas del mercado enterprise. <sup class="ref">[9]</sup></p>
+      <p>Preparación para VCP en vSphere, NSX y Cloud Foundation — las certificaciones más valoradas del mercado enterprise. <sup class="ref">[9]</sup></p>
     </div>
     <div class="edu-card">
       <h4>Laboratorios virtuales guiados</h4>
-      <p>Entornos de práctica en vivo sin necesidad de hardware propio. El equipo puede practicar escenarios reales de operación antes de tocar producción. <sup class="ref">[8]</sup></p>
+      <p>Entornos de práctica en vivo sin hardware propio. El equipo practica escenarios reales antes de tocar producción. <sup class="ref">[8]</sup></p>
     </div>
     <div class="edu-card">
-      <h4>Cobertura técnica completa</h4>
-      <p>Cursos disponibles para todos los componentes del stack: vSphere 9, NSX, vSAN ESA, VCF Automation, SDDC Manager y Private AI Foundation. <sup class="ref">[8]</sup></p>
+      <h4>Cobertura del stack completo</h4>
+      <p>Cursos para todos los componentes: vSphere 9, NSX, vSAN ESA, VCF Automation, SDDC Manager y Private AI Foundation. <sup class="ref">[8]</sup></p>
     </div>
   </div>
 
   <div style="background:rgba(0,124,186,0.06);border:1px solid rgba(0,124,186,0.15);padding:18px 20px;margin-top:4px;">
-    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--vmw-blue);margin-bottom:8px;">Argumento financiero para el CFO</div>
-    <div style="font-size:13px;color:rgba(232,237,242,0.75);line-height:1.65;">"Una certificación VCP en el mercado cuesta entre $3,000 y $6,000 por persona entre curso, examen y preparación. Con VCF, el acceso a la formación oficial ya está incluido en la suscripción — la capacitación del equipo es un costo que desaparece del presupuesto." <sup class="ref">[9]</sup></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--vmw-blue);margin-bottom:8px;">Argumento financiero directo</div>
+    <div style="font-size:13px;color:rgba(232,237,242,0.75);line-height:1.65;">"Una certificación VCP en el mercado cuesta entre $3,000 y $6,000 por persona — curso, examen y preparación incluidos. Con VCF, ese acceso ya está en la suscripción. La capacitación del equipo desaparece del presupuesto de formación." <sup class="ref">[9]</sup></div>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- REFERENCES -->
-<div class="refs-section">
+<!-- ═══════════════════════════════════════════
+     8. NO ES PARA TODOS
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-eyebrow">Honestidad como diferenciador</div>
+    <div class="section-title">VCF no es para todo el mundo<br><strong>— y eso está bien</strong></div>
+    <div class="section-desc">No queremos que inviertas en algo que no te corresponde. Esta guía te ayuda a identificar si VCF es realmente la decisión correcta para tu organización.</div>
+  </div>
+
+  <div class="fit-grid">
+    <div class="fit-col yes-col">
+      <div class="fit-col-label">VCF sí es para ti si…</div>
+      <ul class="fit-list">
+        <li><span class="bullet">✓</span><span>Tienes 50+ VMs en producción o planeas tenerlas en los próximos 12 meses</span></li>
+        <li><span class="bullet">✓</span><span>Necesitas control sobre tus datos por regulación, seguridad o soberanía</span></li>
+        <li><span class="bullet">✓</span><span>Quieres dejar de pagar facturas cloud variables e impredecibles</span></li>
+        <li><span class="bullet">✓</span><span>Tu equipo ya opera vSphere o tiene capacidad técnica para crecer</span></li>
+        <li><span class="bullet">✓</span><span>Quieres una plataforma que cubra también Kubernetes y automatización</span></li>
+        <li><span class="bullet">✓</span><span>Buscas un camino controlado hacia cloud pública cuando lo necesites</span></li>
+      </ul>
+    </div>
+    <div class="fit-col no-col">
+      <div class="fit-col-label">VCF no es para ti si…</div>
+      <ul class="fit-list">
+        <li><span class="bullet">✗</span><span>Buscas solo virtualización básica sin automatización ni networking avanzado</span></li>
+        <li><span class="bullet">✗</span><span>Eres startup con menos de 20 VMs sin planes de escalar pronto</span></li>
+        <li><span class="bullet">✗</span><span>No tienes equipo técnico ni intención de construir uno</span></li>
+        <li><span class="bullet">✗</span><span>Tu estrategia es 100% SaaS sin datacenter propio a largo plazo</span></li>
+        <li><span class="bullet">✗</span><span>No puedes comprometer presupuesto de infraestructura a 3 años</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     9. QUÉ SIGUE / CTA
+════════════════════════════════════════════ -->
+<div class="cta-section">
+  <div class="cta-eyebrow">Próximos pasos</div>
+  <div class="cta-title">Sin compromisos.<br><strong>Solo claridad.</strong></div>
+  <div class="cta-sub">Si llegaste hasta aquí, probablemente VCF es relevante para ti. El siguiente paso es una conversación — sin presión, sin propuesta de venta inmediata.</div>
+
+  <div class="steps-row">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4>Workshop de Assessment</h4>
+      <p>2–3 horas. Entendemos tu entorno actual, workloads y objetivos.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4>Análisis de TCO</h4>
+      <p>Calculamos el costo real con tus números, no con estimaciones genéricas.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4>Proof of Concept</h4>
+      <p>Validamos VCF en tu entorno real antes de cualquier compromiso.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4>Decisión informada</h4>
+      <p>Con datos propios en mano, la decisión la tomas tú con total claridad.</p>
+    </div>
+  </div>
+
+  <div class="cta-buttons">
+    <a class="btn-primary" href="mailto:ventas@coresolutions.ec">Agendar assessment</a>
+    <a class="btn-secondary" href="#">Descargar resumen PDF</a>
+  </div>
+
+  <div class="cta-contact">
+    <strong>Coresolutions Ecuador</strong> &nbsp;·&nbsp; ventas@coresolutions.ec &nbsp;·&nbsp; +593 2 xxx-xxxx
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     REFERENCIAS
+════════════════════════════════════════════ -->
+<div class="refs-section" style="padding-top:48px;">
   <div class="refs-title">Referencias</div>
   <ol class="refs-list">
     <li id="ref-1">[1] VMware. <em>vSphere 9 Documentation — Memory Overcommitment</em>. Broadcom, 2025. <a href="https://docs.vmware.com/en/VMware-vSphere" target="_blank">docs.vmware.com</a></li>
     <li id="ref-2">[2] Gartner. <em>Magic Quadrant for Server Virtualization 2024 — Peer Insights Benchmark</em>. Gartner Inc., 2024.</li>
     <li id="ref-3">[3] IDC. <em>Infrastructure Efficiency and Hardware Utilization in Enterprise Datacenters</em>. IDC Report #US51387924, 2024.</li>
-    <li id="ref-4">[4] ASHRAE TC9.9. <em>Thermal Guidelines for Data Processing Environments</em>, 5th Ed. 2021. Consumo típico 400–800W por servidor 2U enterprise.</li>
-    <li id="ref-5">[5] VMware. <em>VMware DRS Best Practices — vSphere 9</em>. Broadcom Technical White Paper, 2025. Ratio overcommit CPU recomendado 4:1 con DRS activo.</li>
+    <li id="ref-4">[4] ASHRAE TC9.9. <em>Thermal Guidelines for Data Processing Environments</em>, 5th Ed. 2021.</li>
+    <li id="ref-5">[5] VMware. <em>VMware DRS Best Practices — vSphere 9</em>. Broadcom Technical White Paper, 2025.</li>
     <li id="ref-6">[6] VMware. <em>vSphere vMotion Networking and Performance Best Practices</em>. Broadcom, 2025. <a href="https://docs.vmware.com" target="_blank">docs.vmware.com</a></li>
     <li id="ref-7">[7] Broadcom. <em>VMware Cloud Foundation 9.1 — Product Datasheet and Edition Comparison</em>. Broadcom Inc., mayo 2026. <a href="https://www.broadcom.com/products/vmware-cloud-foundation" target="_blank">broadcom.com</a></li>
     <li id="ref-8">[8] Broadcom. <em>Broadcom Academy — VMware Learning Portal</em>. 2025. <a href="https://www.broadcom.com/support/education-services" target="_blank">broadcom.com/education-services</a></li>
@@ -570,7 +906,7 @@
   </ol>
 </div>
 
-<div class="site-footer">VMware Cloud Foundation &nbsp;·&nbsp; Material de apoyo post-presentación &nbsp;·&nbsp; Coresolutions</div>
+<div class="site-footer">VMware Cloud Foundation &nbsp;·&nbsp; Material de apoyo post-presentación &nbsp;·&nbsp; Coresolutions &nbsp;·&nbsp; 2026</div>
 
 <script>
 const ROLES = {
@@ -581,7 +917,7 @@ const ROLES = {
     texture:`repeating-linear-gradient(90deg,rgba(255,255,255,0.35) 0,rgba(255,255,255,0.35) 1px,transparent 1px,transparent 8px)`,
     fears:['Apostar a la plataforma equivocada por 5+ años','No poder justificar el presupuesto ante el consejo directivo','Dependencia de Broadcom tras el cambio de licenciamiento','Equipo sin capacidad para operar algo más complejo','Proyecto de migración que se sale de control'],
     wins: ['Ecosistema maduro de 20+ años con hoja de ruta documentada','TCO comparable o menor que cloud pública a escala mediana','Estándar del mercado — talento disponible y certificado','Operación unificada = menos headcount operativo','Migración incremental — sin big bang ni riesgo en producción'],
-    args: [{tag:'Control estratégico',text:'"Mantener la infraestructura en VCF nos da soberanía sobre datos y operaciones. No dependemos de precios variables de AWS o Azure que pueden cambiar en cualquier trimestre."'},{tag:'Predictibilidad financiera',text:'"Con VCF presupuestamos infraestructura con precisión a 3 años. Eliminamos la variabilidad de facturas cloud que en promedio superan el 40% del presupuesto estimado."'},{tag:'Puente, no barrera',text:'"VCF no nos cierra las puertas a la nube. Nos da una rampa controlada hacia AWS o Azure cuando lo necesitemos, con HCX incluido en la suscripción."'},],
+    args: [{tag:'Control estratégico',text:'"Mantener la infraestructura en VCF nos da soberanía sobre datos y operaciones. No dependemos de precios variables de AWS o Azure que pueden cambiar en cualquier trimestre."'},{tag:'Predictibilidad financiera',text:'"Con VCF presupuestamos infraestructura con precisión a 3 años. Eliminamos la variabilidad de facturas cloud que en promedio superan el 40% del presupuesto estimado."'},{tag:'Puente, no barrera',text:'"VCF no nos cierra las puertas a la nube. Nos da una rampa controlada hacia AWS o Azure cuando lo necesitemos, con HCX incluido en la suscripción."'}],
   },
   cfo: {
     label:'CFO', label2:'Dirección Financiera', sub:'TCO & presupuesto',
@@ -590,7 +926,7 @@ const ROLES = {
     texture:`repeating-linear-gradient(0deg,rgba(255,255,255,0.28) 0,rgba(255,255,255,0.28) 1px,transparent 1px,transparent 10px)`,
     fears:['CAPEX elevado sin ROI claro ni plazo definido','Broadcom puede volver a cambiar precios sin previo aviso','Costos ocultos: capacitación, integración, soporte adicional','Cloud "parece más barata" y es difícil argumentar lo contrario','Compromiso de largo plazo en mercado que cambia rápido'],
     wins: ['Costo por workload predecible y calculable por adelantado','Suscripción estructurada — sin sorpresas de facturación variable','Stack consolidado reduce licencias, contratos y proveedores','Cloud pública a escala suele ser 2–3x más cara en 3 años','Formación del equipo incluida — sin presupuesto adicional de capacitación'],
-    args: [{tag:'El costo real de la nube pública',text:'"AWS y Azure son baratos al inicio. A escala de 500+ VMs y 3 años, las empresas gastan entre 2x y 3x más que con infraestructura privada bien administrada. [IDC, 2024]"'},{tag:'Consolidación de gasto existente',text:'"VCF no es un costo nuevo. Es la consolidación de lo que ya pagamos en vSphere, almacenamiento, NSX y monitoreo — más automatización que reduce costo operativo."'},{tag:'Capacitación incluida',text:'"Broadcom Academy está incluido en VCF. Las certificaciones VCP que cuestan $3,000–$6,000 por persona en el mercado, aquí ya están pagadas."'},],
+    args: [{tag:'El costo real de la nube pública',text:'"AWS y Azure son baratos al inicio. A escala de 300+ VMs y 3 años, las empresas gastan entre 2x y 3x más que con infraestructura privada bien administrada. [IDC, 2024]"'},{tag:'Consolidación de gasto existente',text:'"VCF no es un costo nuevo. Es la consolidación de lo que ya pagamos en vSphere, almacenamiento, NSX y monitoreo — más automatización que reduce costo operativo."'},{tag:'Capacitación incluida',text:'"Broadcom Academy está incluido en VCF. Las certificaciones VCP que cuestan $3,000–$6,000 por persona en el mercado, aquí ya están pagadas."'}],
   },
   itm: {
     label:'Gerente', label2:'de Infraestructura', sub:'Operación & migración',
@@ -600,7 +936,7 @@ const ROLES = {
     textureBgSize:'12px 12px',
     fears:['Migración que genera downtime y pone en riesgo mi posición','El equipo no sabe operar algo más complejo que lo actual','Ser el responsable si algo falla en producción','Más herramientas que aprender y mantener en paralelo','Soporte que no responde cuando más lo necesito'],
     wins: ['Migración incremental — sin big bang, sin apagar producción','El equipo ya conoce vSphere: curva de aprendizaje mínima','SDDC Manager automatiza el ciclo de vida completo — menos tickets','Menos herramientas, no más: un stack que reemplaza a cuatro','Cursos gratuitos en Broadcom Academy incluidos en la suscripción'],
-    args: [{tag:'Reducción de carga operativa',text:'"VCF consolida vSphere, vSAN, NSX y VCF Ops en un solo ciclo de vida automatizado con SDDC Manager. Hoy gestionamos 4 herramientas con 4 procesos distintos. Con VCF, uno."'},{tag:'El equipo ya sabe operar esto',text:'"No necesitamos reentrenar desde cero. VCF extiende las habilidades en vSphere que el equipo ya tiene. Broadcom Academy cubre el resto — sin costo adicional."'},{tag:'Migración sin riesgo',text:'"La migración es incremental. Movemos cargas de trabajo por etapas con HCX, manteniendo producción estable. No es un switch de un día para otro."'},],
+    args: [{tag:'Reducción de carga operativa',text:'"VCF consolida vSphere, vSAN, NSX y VCF Ops en un solo ciclo de vida automatizado con SDDC Manager. Hoy gestionamos 4 herramientas con 4 procesos distintos. Con VCF, uno."'},{tag:'El equipo ya sabe operar esto',text:'"No necesitamos reentrenar desde cero. VCF extiende las habilidades en vSphere que el equipo ya tiene. Broadcom Academy cubre el resto — sin costo adicional."'},{tag:'Migración sin riesgo',text:'"La migración es incremental. Movemos cargas de trabajo por etapas con HCX, manteniendo producción estable. No es un switch de un día para otro."'}],
   },
   ops: {
     label:'Arquitecto', label2:'/ Ops', sub:'Técnico & profundo',
@@ -609,7 +945,7 @@ const ROLES = {
     texture:`repeating-linear-gradient(45deg,rgba(0,0,0,0.2) 0,rgba(0,0,0,0.2) 1px,transparent 1px,transparent 8px)`,
     fears:['Perder el control granular que tenía con componentes separados','Compatibilidad con workloads legacy y arquitecturas existentes','Vendor lock-in disfrazado de "plataforma completa"','Limitaciones en personalización de red y almacenamiento','Curva de aprendizaje de SDDC Manager y nuevas APIs'],
     wins: ['Control total vía API-first: todo lo de UI disponible en código','Compatibilidad total con workloads vSphere — misma base tecnológica','NSX incluido: micro-segmentación, DFW, L2/L3 completo','vSAN ESA con políticas granulares por VM y soporte NVMe nativo','Kubernetes nativo vía VKS Enterprise — contenedores en el mismo stack'],
-    args: [{tag:'No es más complejo — es más automatizado',text:'"SDDC Manager abstrae la orquestación de vSphere + vSAN + NSX. La curva inicial existe, pero a los 3 meses el equipo opera más rápido — sin tickets manuales de actualizaciones."'},{tag:'API-first por diseño',text:'"Todo lo que necesitas automatizar tiene API REST documentada. Terraform, Ansible y PowerCLI funcionan sin cambios. No pierdes control — lo ganas a escala."'},{tag:'DRS + NUMA cambia el juego',text:'"VMware tiene el scheduler de CPU más sofisticado del mercado: 92 VMs por host vs 52 de Hyper-V en el mismo hardware. Eso es 77% más densidad sin comprar más hierro. [Coresolutions, 2025]"'},],
+    args: [{tag:'No es más complejo — es más automatizado',text:'"SDDC Manager abstrae la orquestación de vSphere + vSAN + NSX. La curva inicial existe, pero a los 3 meses el equipo opera más rápido — sin tickets manuales de actualizaciones."'},{tag:'API-first por diseño',text:'"Todo lo que necesitas automatizar tiene API REST documentada. Terraform, Ansible y PowerCLI funcionan sin cambios. No pierdes control — lo ganas a escala."'},{tag:'DRS + NUMA cambia el juego',text:'"VMware tiene el scheduler de CPU más sofisticado del mercado: 92 VMs por host vs 52 de Hyper-V en el mismo hardware. Eso es 77% más densidad sin comprar más hierro. [Coresolutions, 2025]"'}],
   },
   ceo: {
     label:'CEO', label2:'/ Dirección General', sub:'Negocio & visión',
@@ -619,7 +955,7 @@ const ROLES = {
     textureBgSize:'20px 20px',
     fears:['Gastar en TI sin ver impacto real en el negocio','Quedar atrapados con un proveedor que sube precios sin aviso','Quedarse atrás de competidores que se mueven más rápido','Riesgo regulatorio o de seguridad que dañe la reputación','Inversión que no se puede explicar a socios o accionistas'],
     wins: ['Infraestructura que se adapta al negocio en horas, no semanas','Costos predecibles presupuestables con confianza a 3 años','Velocidad de innovación: nuevos servicios digitales más rápido','Seguridad por diseño: NSX micro-segmentación incluida en el stack','ROI documentable con métricas concretas a 12–24 meses'],
-    args: [{tag:'Infraestructura como ventaja competitiva',text:'"VCF reduce el aprovisionamiento de infraestructura de semanas a horas. Eso se traduce en productos digitales lanzados antes que la competencia — ventaja de mercado medible."'},{tag:'Independencia de cloud pública',text:'"AWS y Azure pueden cambiar precios, términos o disponibilidad. Con VCF, la infraestructura crítica está bajo nuestro control. Usamos nube cuando queremos, no porque no tengamos alternativa."'},{tag:'Cumplimiento y reputación',text:'"Regulaciones de datos, auditorías, requerimientos de clientes enterprise — todo es más simple cuando los datos viven en infraestructura que controlamos. Menos riesgo reputacional, menos costo legal."'},],
+    args: [{tag:'Infraestructura como ventaja competitiva',text:'"VCF reduce el aprovisionamiento de infraestructura de semanas a horas. Eso se traduce en productos digitales lanzados antes que la competencia — ventaja de mercado medible."'},{tag:'Independencia de cloud pública',text:'"AWS y Azure pueden cambiar precios, términos o disponibilidad. Con VCF, la infraestructura crítica está bajo nuestro control. Usamos nube cuando queremos, no porque no tengamos alternativa."'},{tag:'Cumplimiento y reputación',text:'"Regulaciones de datos, auditorías, requerimientos de clientes enterprise — todo es más simple cuando los datos viven en infraestructura que controlamos. Menos riesgo reputacional, menos costo legal."'}],
   },
 };
 
