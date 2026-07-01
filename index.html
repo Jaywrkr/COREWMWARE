@@ -239,6 +239,35 @@
   .arg-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 7px; }
   .arg-card p { font-size: 12px; color: rgba(232,237,242,0.65); line-height: 1.65; }
 
+  /* ── PEACE OF MIND ── */
+  .peace-section {
+    background: linear-gradient(135deg, rgba(0,51,102,0.35) 0%, rgba(10,15,20,0) 100%);
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .peace-inner {
+    max-width: 960px; margin: 0 auto; padding: 72px 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+  @media (max-width: 680px) { .peace-inner { grid-template-columns: 1fr; gap: 32px; } }
+  .peace-quote {
+    font-size: clamp(20px, 3vw, 30px); font-weight: 300; line-height: 1.4;
+    letter-spacing: -0.3px; color: var(--text);
+  }
+  .peace-quote strong { font-weight: 700; color: var(--vmw-blue); }
+  .peace-quote cite {
+    display: block; font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted); margin-top: 16px; font-style: normal;
+  }
+  .peace-cards { display: flex; flex-direction: column; gap: 10px; }
+  .peace-card {
+    background: var(--vmw-mid); border: 1px solid var(--border);
+    border-left: 3px solid var(--vmw-blue); padding: 16px 18px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .peace-card-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .peace-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .peace-card p { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
   /* ── TCO SECTION ── */
   .tco-chart {
     background: var(--vmw-mid); border: 1px solid var(--border);
@@ -520,10 +549,56 @@
   <div class="expanded-card" id="expandedCard"></div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     4. TRANQUILIDAD OPERATIVA
+════════════════════════════════════════════ -->
+<div class="peace-section">
+  <div class="peace-inner">
+    <div>
+      <div class="section-eyebrow" style="margin-bottom:14px;">Operación sin estrés</div>
+      <div class="peace-quote">
+        "La tranquilidad del operador<br>y el tiempo en familia<br><strong>son más valiosos<br>que cualquier SLA."</strong>
+        <cite>— Principio de diseño de VCF</cite>
+      </div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-top:20px;">Con VMware, los mantenimientos preventivos no requieren ventanas de impacto ni noches de trabajo. El hardware puede fallar — y VCF lo maneja solo, sin llamadas de emergencia a las 2 AM.</p>
+    </div>
+    <div class="peace-cards">
+      <div class="peace-card">
+        <div class="peace-card-icon">🔄</div>
+        <div>
+          <h4>vMotion — mantenimiento sin downtime</h4>
+          <p>Migra VMs activas entre hosts en segundos. Actualiza, reinicia o reemplaza servidores físicos mientras producción corre sin interrupción. <sup class="ref">[6]</sup></p>
+        </div>
+      </div>
+      <div class="peace-card">
+        <div class="peace-card-icon">🛡</div>
+        <div>
+          <h4>vSphere HA — falla el HW, no el servicio</h4>
+          <p>Si un servidor físico falla, HA reinicia automáticamente todas sus VMs en otros hosts del clúster en minutos — sin intervención manual, sin alarmar a nadie. <sup class="ref">[5]</sup></p>
+        </div>
+      </div>
+      <div class="peace-card">
+        <div class="peace-card-icon">⚖️</div>
+        <div>
+          <h4>DRS — balance automático de carga</h4>
+          <p>DRS detecta picos de carga y redistribuye workloads entre hosts automáticamente. El operador duerme. El clúster se autogestiona. <sup class="ref">[5]</sup></p>
+        </div>
+      </div>
+      <div class="peace-card">
+        <div class="peace-card-icon">📋</div>
+        <div>
+          <h4>SDDC Manager — parches sin drama</h4>
+          <p>Actualizaciones coordinadas de todo el stack en orden seguro y probado. Sin sorpresas de compatibilidad, sin ventanas de mantenimiento caóticas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="divider"></div>
 
 <!-- ═══════════════════════════════════════════
-     4. TCO
+     5. TCO (was 4)
 ════════════════════════════════════════════ -->
 <div class="section">
   <div class="section-header">
@@ -617,6 +692,11 @@
       <div class="hw-stat-label">VMs por host en escenario referencia (2 socket, 32 cores, 512 GB RAM)</div>
       <div class="hw-stat-ref"><sup>[2]</sup> Benchmark Coresolutions / Gartner 2024</div>
     </div>
+    <div class="hw-stat">
+      <div class="hw-stat-num green">40%</div>
+      <div class="hw-stat-label">Reducción de DRAM necesaria con Memory Tiering (NVMe como nivel secundario de RAM)</div>
+      <div class="hw-stat-ref"><sup>[1]</sup> VMware vSphere 8+ Memory Tiering, Broadcom 2025</div>
+    </div>
   </div>
 
   <table class="density-table">
@@ -681,7 +761,46 @@
         <h4>vMotion en caliente</h4>
         <p>Migración de VMs activas entre hosts sin downtime, permitiendo mantenimiento y actualizaciones sin ventanas de impacto. <sup class="ref">[6]</sup></p>
       </div>
+      <div class="feature-card" style="border-left-color:var(--vmw-teal);">
+        <h4>Memory Tiering (vSphere 8+)</h4>
+        <p>Extiende la memoria efectiva usando NVMe o PMem como nivel secundario de RAM. Reduce hasta un 40% la DRAM necesaria — impacto directo en CAPEX cuando la RAM está por las nubes. <sup class="ref">[1]</sup></p>
+      </div>
     </div>
+  </div>
+
+  <!-- Feature comparison table -->
+  <div style="margin-top:36px;">
+    <div class="section-eyebrow" style="margin-bottom:16px;">Comparativa de funciones enterprise — VMware vs alternativas</div>
+    <div class="plans-comparison">
+      <table>
+        <thead>
+          <tr>
+            <th>Función</th>
+            <th style="color:var(--vmw-blue);">VMware vSphere</th>
+            <th>Proxmox VE</th>
+            <th>Microsoft Hyper-V</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Alta disponibilidad (HA) automática</td><td class="yes">✓ Nativo</td><td><span class="partial">Manual / básico</span></td><td><span class="partial">Con clúster WSFC</span></td></tr>
+          <tr><td>Balanceo automático de carga (DRS)</td><td class="yes">✓ Automático</td><td class="no">✗</td><td><span class="partial">Con SCVMM</span></td></tr>
+          <tr><td>Migración en caliente (vMotion)</td><td class="yes">✓ Sin fricción</td><td><span class="partial">Online migration</span></td><td><span class="partial">Live Migration</span></td></tr>
+          <tr><td>Memory Tiering (RAM → NVMe)</td><td class="yes">✓ vSphere 8+</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Memory Overcommit (TPS)</td><td class="yes">✓ 3:1–4:1</td><td><span class="partial">KSM básico</span></td><td><span class="partial">Limitado</span></td></tr>
+          <tr><td>NUMA-aware scheduling</td><td class="yes">✓ Avanzado</td><td><span class="partial">Básico</span></td><td><span class="partial">Básico</span></td></tr>
+          <tr><td>Red definida por software (SDN)</td><td class="yes">✓ NSX Enterprise</td><td><span class="partial">SDN básico</span></td><td class="no">✗ Requiere Azure</td></tr>
+          <tr><td>Micro-segmentación / firewall distribuido</td><td class="yes">✓ NSX DFW</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Storage Policy-Based Management</td><td class="yes">✓ vSAN SPBM</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Kubernetes nativo (sin agente externo)</td><td class="yes">✓ VKS Enterprise</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Ciclo de vida unificado del stack</td><td class="yes">✓ SDDC Manager</td><td class="no">✗ Manual</td><td class="no">✗ Manual</td></tr>
+          <tr><td>API-first / automatización IaC</td><td class="yes">✓ REST + PowerCLI</td><td class="yes">✓ REST API</td><td><span class="partial">PowerShell / WMI</span></td></tr>
+          <tr><td>Soporte enterprise con SLA</td><td class="yes">✓ Broadcom</td><td class="no">Comunidad</td><td class="yes">✓ Microsoft</td></tr>
+          <tr><td>Certificaciones de cumplimiento (HIPAA, PCI)</td><td class="yes">✓ Documentadas</td><td class="no">No certificado</td><td class="yes">✓ Microsoft</td></tr>
+          <tr><td>Costo de licencia</td><td><span class="partial">Suscripción Broadcom</span></td><td class="yes">Open source</td><td><span class="partial">Incluido en Windows</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hw-note">Proxmox VE 8.x, Microsoft Hyper-V 2022, VMware vSphere 9 / VCF 9.1. Fuente: documentación oficial de fabricantes, análisis técnico Coresolutions 2025.</div>
   </div>
 </div>
 
