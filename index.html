@@ -394,6 +394,97 @@
   .cta-contact { margin-top: 36px; font-size: 12px; color: rgba(255,255,255,0.2); }
   .cta-contact strong { color: rgba(255,255,255,0.45); }
 
+  /* ── VCF LAYER STACK ── */
+  .vcf-stack { margin-top: 36px; border: 1px solid var(--border); overflow: hidden; }
+  .vcf-layer { border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
+  .vcf-layer:last-child { border-bottom: none; }
+  .vcf-layer-header { display: flex; align-items: center; gap: 14px; padding: 18px 22px; }
+  .vcf-layer-num { width: 26px; height: 26px; background: var(--blue-dim); border: 1px solid var(--border-s); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--blue-lt); flex-shrink: 0; }
+  .vcf-layer-name { font-size: 14px; font-weight: 700; flex: 1; }
+  .vcf-layer-tech { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+  .vcf-layer-chevron { color: var(--muted); font-size: 10px; transition: transform 0.25s; flex-shrink: 0; }
+  .vcf-layer.open .vcf-layer-chevron { transform: rotate(180deg); }
+  .vcf-layer-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .vcf-layer.open .vcf-layer-body { max-height: 180px; }
+  .vcf-layer-body-inner { padding: 0 22px 20px 62px; font-size: 13px; color: var(--muted); line-height: 1.65; border-top: 1px solid var(--border); padding-top: 14px; }
+  .vcf-layer.open { background: var(--bg-card); }
+  .vcf-layer.open .vcf-layer-name { color: var(--blue-lt); }
+  .vcf-layer.open .vcf-layer-num { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .vcf-stack-hint { font-size: 10px; color: var(--muted); margin-top: 10px; letter-spacing: 1px; text-align: right; }
+
+  /* ── CRISIS SIMULATOR ── */
+  .crisis-wrap { margin-top: 32px; }
+  .crisis-terminal { background: #040b18; border: 1px solid rgba(239,68,68,0.22); }
+  .crisis-topbar { background: rgba(239,68,68,0.06); border-bottom: 1px solid rgba(239,68,68,0.15); padding: 13px 20px; display: flex; align-items: center; gap: 12px; }
+  .crisis-blink { width: 9px; height: 9px; border-radius: 50%; background: var(--danger); animation: cblink 1s step-end infinite; flex-shrink: 0; }
+  .crisis-blink.ok { background: var(--success); animation: none; }
+  @keyframes cblink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .crisis-topbar-title { font-size: 12px; font-weight: 700; }
+  .crisis-topbar-time { margin-left: auto; font-size: 10px; font-family: monospace; color: var(--muted); }
+  .crisis-log { padding: 20px; display: flex; flex-direction: column; gap: 0; min-height: 60px; }
+  .crisis-line { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); opacity: 0; transform: translateY(5px); transition: opacity 0.4s, transform 0.4s; }
+  .crisis-line:last-child { border-bottom: none; }
+  .crisis-line.show { opacity: 1; transform: none; }
+  .crisis-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; width: 24px; text-align: center; }
+  .crisis-body { flex: 1; }
+  .crisis-label { font-size: 12px; font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .crisis-tag { font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 1px 7px; }
+  .crisis-tag.alert { background: rgba(239,68,68,0.12); color: var(--danger); }
+  .crisis-tag.auto  { background: rgba(26,86,219,0.15); color: var(--blue-lt); }
+  .crisis-tag.ok    { background: rgba(34,197,94,0.1); color: var(--success); }
+  .crisis-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .crisis-ts { font-size: 10px; color: rgba(255,255,255,0.15); font-family: monospace; margin-top: 4px; }
+  .crisis-footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .crisis-footer-note { font-size: 12px; color: var(--muted); }
+  .crisis-play-btn { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 22px; border: none; cursor: pointer; transition: all 0.2s; }
+  .crisis-play-btn.start { background: var(--danger); color: #fff; }
+  .crisis-play-btn.start:hover { background: #dc2626; }
+  .crisis-play-btn.reset { background: transparent; border: 1px solid var(--border-s); color: var(--muted); }
+
+  /* ── DOT DENSITY VISUALIZATION ── */
+  .density-visual { margin-top: 36px; display: flex; flex-direction: column; gap: 28px; }
+  .density-row { }
+  .density-row-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+  .density-row-name { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .density-best-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; background: var(--blue-dim); color: var(--blue-lt); padding: 2px 8px; }
+  .density-row-num { font-size: 26px; font-weight: 800; }
+  .density-row-num.vmw { color: var(--blue-lt); }
+  .density-row-num.dim { color: var(--muted); font-size: 22px; }
+  .density-dots { display: flex; flex-wrap: wrap; gap: 3px; }
+  .density-dot { width: 11px; height: 11px; border-radius: 1px; }
+  .density-dot.vmw { background: var(--blue); }
+  .density-dot.prx { background: #0ea5e9; }
+  .density-dot.hyp { background: rgba(255,255,255,0.22); }
+  .density-dot.empty { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+
+  /* ── QUIZ AUTODIAGNÓSTICO ── */
+  .quiz-intro { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
+  .quiz-list { list-style: none; border: 1px solid var(--border); }
+  .quiz-item { display: flex; align-items: center; gap: 16px; padding: 15px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; user-select: none; }
+  .quiz-item:last-child { border-bottom: none; }
+  .quiz-item:hover { background: rgba(255,255,255,0.02); }
+  .quiz-item.on { background: rgba(26,86,219,0.08); }
+  .quiz-box { width: 20px; height: 20px; border: 2px solid var(--border-s); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .quiz-item.on .quiz-box { background: var(--blue); border-color: var(--blue); }
+  .quiz-item.on .quiz-box::after { content: '✓'; font-size: 11px; color: #fff; font-weight: 700; }
+  .quiz-text { font-size: 13px; color: var(--muted); line-height: 1.45; }
+  .quiz-item.on .quiz-text { color: var(--text); }
+  .quiz-track { margin-top: 16px; height: 4px; background: rgba(255,255,255,0.06); }
+  .quiz-fill { height: 100%; background: var(--blue); width: 0; transition: width 0.4s ease; }
+  .quiz-result { margin-top: 16px; padding: 24px; border: 1px solid var(--border); display: none; }
+  .quiz-result.show { display: flex; align-items: center; gap: 24px; }
+  .quiz-result-num { font-size: 56px; font-weight: 800; line-height: 1; flex-shrink: 0; }
+  .quiz-result-num.green { color: var(--success); }
+  .quiz-result-num.orange { color: var(--orange); }
+  .quiz-result-num.muted { color: var(--muted); }
+  .quiz-result-text h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .quiz-result-text p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  /* ── COUNT-UP ── */
+  @keyframes count-in { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+  .count-trigger.visible .tco-stat-num,
+  .count-trigger.visible .hw-stat-num { animation: count-in 0.4s ease forwards; }
+
   /* ── REFERENCES ── */
   .refs-section { max-width: 960px; margin: 0 auto; padding: 0 24px 64px; }
   .refs-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.18); margin-bottom: 16px; }
@@ -463,50 +554,64 @@
     <div class="section-desc">VCF no es solo virtualización. Es el stack completo — cómputo, red, almacenamiento, seguridad, Kubernetes y automatización — integrado, certificado y operado como una sola plataforma. Lo mismo que AWS o Azure, pero en tu propiedad.</div>
   </div>
 
-  <div class="vcf-pillars">
-    <div class="pillar">
-      <div class="pillar-accent"></div>
-      <div class="pillar-icon">🏛</div>
-      <h3>Control total</h3>
-      <p>Tus datos, tus reglas. Sin dependencia de precios, zonas o condiciones de terceros. Cumplimiento regulatorio y soberanía de datos por diseño.</p>
+  <div class="vcf-stack" id="vcfStack">
+    <div class="vcf-layer" onclick="toggleLayer(this)">
+      <div class="vcf-layer-header">
+        <div class="vcf-layer-num">1</div>
+        <div>
+          <div class="vcf-layer-name">Cómputo — vSphere 9</div>
+          <div class="vcf-layer-tech">ESXi · vCenter · vMotion · HA · DRS</div>
+        </div>
+        <div class="vcf-layer-chevron">▼</div>
+      </div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">El hipervisor más usado del mundo. Consolida decenas de servidores virtuales sobre un servidor físico, con alta disponibilidad automática y migración en vivo. El 92% del mercado enterprise lo opera. <sup class="ref">[2]</sup></div></div>
     </div>
-    <div class="pillar">
-      <div class="pillar-accent" style="background:var(--vmw-teal);"></div>
-      <div class="pillar-icon">📊</div>
-      <h3>Costos predecibles</h3>
-      <p>Suscripción anual calculable. Sin facturas sorpresa. A escala de 300+ VMs, VCF es consistentemente más económico que cloud pública. <sup class="ref">[3]</sup></p>
+    <div class="vcf-layer" onclick="toggleLayer(this)">
+      <div class="vcf-layer-header">
+        <div class="vcf-layer-num">2</div>
+        <div>
+          <div class="vcf-layer-name">Almacenamiento — vSAN ESA</div>
+          <div class="vcf-layer-tech">All-NVMe · SPBM · compresión nativa · sin SAN externa</div>
+        </div>
+        <div class="vcf-layer-chevron">▼</div>
+      </div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Almacenamiento distribuido que vive dentro de los propios servidores. Elimina la SAN tradicional. Políticas de almacenamiento por VM (SPBM), deduplicación y compresión incluidas. Rendimiento NVMe nativo. <sup class="ref">[7]</sup></div></div>
     </div>
-    <div class="pillar">
-      <div class="pillar-accent" style="background:var(--vmw-green);"></div>
-      <div class="pillar-icon">⚡</div>
-      <h3>Operación simplificada</h3>
-      <p>Un stack. Un soporte. Un ciclo de vida. SDDC Manager unifica actualizaciones, parches y operación de todos los componentes automáticamente.</p>
+    <div class="vcf-layer" onclick="toggleLayer(this)">
+      <div class="vcf-layer-header">
+        <div class="vcf-layer-num">3</div>
+        <div>
+          <div class="vcf-layer-name">Red y Seguridad — NSX Enterprise</div>
+          <div class="vcf-layer-tech">SDN · micro-segmentación · firewall distribuido · L2/L3</div>
+        </div>
+        <div class="vcf-layer-chevron">▼</div>
+      </div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Red definida por software. Firewall distribuido que opera en cada VM individualmente — si un servidor es comprometido, no puede moverse lateralmente a los demás. Redes completas creadas en minutos sin tocar switches físicos. <sup class="ref">[7]</sup></div></div>
+    </div>
+    <div class="vcf-layer" onclick="toggleLayer(this)">
+      <div class="vcf-layer-header">
+        <div class="vcf-layer-num">4</div>
+        <div>
+          <div class="vcf-layer-name">Kubernetes y Automatización</div>
+          <div class="vcf-layer-tech">VKS Enterprise · Harbor Registry · VCF Automation · IaC</div>
+        </div>
+        <div class="vcf-layer-chevron">▼</div>
+      </div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Kubernetes nativo integrado al mismo stack — sin agentes externos ni herramientas adicionales. VCF Automation permite aprovisionar infraestructura completa (VMs, redes, almacenamiento) desde código o portal de autoservicio. <sup class="ref">[7]</sup></div></div>
+    </div>
+    <div class="vcf-layer" onclick="toggleLayer(this)">
+      <div class="vcf-layer-header">
+        <div class="vcf-layer-num">5</div>
+        <div>
+          <div class="vcf-layer-name">Gestión unificada — SDDC Manager</div>
+          <div class="vcf-layer-tech">lifecycle management · parches orquestados · visibilidad total</div>
+        </div>
+        <div class="vcf-layer-chevron">▼</div>
+      </div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">El cerebro de VCF. Orquesta actualizaciones de todos los componentes en orden seguro y probado — sin intervención manual. Antes necesitabas 4 equipos para parchear 4 productos. Con SDDC Manager, un flujo automatizado lo hace por ti. <sup class="ref">[5]</sup></div></div>
     </div>
   </div>
-
-  <div class="vcf-vs" style="margin-top:32px;">
-    <div class="vcf-vs-col theirs">
-      <h4>Infraestructura tradicional</h4>
-      <ul>
-        <li>3 o 4 proveedores distintos</li>
-        <li>Parches manuales por componente</li>
-        <li>Sin visibilidad unificada</li>
-        <li>Soporte dividido entre vendors</li>
-        <li>Kubernetes como proyecto aparte</li>
-      </ul>
-    </div>
-    <div class="vcf-vs-sep"><span>VS</span></div>
-    <div class="vcf-vs-col ours">
-      <h4>VMware Cloud Foundation</h4>
-      <ul>
-        <li>Un solo stack integrado</li>
-        <li>Actualizaciones orquestadas con SDDC Manager</li>
-        <li>Monitoreo y operaciones incluidas</li>
-        <li>Un contrato, un soporte</li>
-        <li>Kubernetes nativo con VKS Enterprise</li>
-      </ul>
-    </div>
-  </div>
+  <div class="vcf-stack-hint">▲ Selecciona cada capa para conocer su función</div>
 </div>
 
 <div class="divider"></div>
@@ -567,34 +672,72 @@
   <div class="peace-inner">
     <div class="section-header">
       <div class="section-eyebrow">Operación sin estrés</div>
-      <div class="section-title">Tu equipo descansa.<br><strong>La plataforma trabaja.</strong></div>
-      <div class="section-desc">Con VMware, los mantenimientos preventivos no requieren ventanas de impacto ni noches de trabajo. El hardware puede fallar — y VCF lo maneja solo, sin llamadas de emergencia a las 2 AM.</div>
+      <div class="section-title">Son las 2 AM.<br><strong>Un servidor acaba de fallar.</strong></div>
+      <div class="section-desc">Sin VCF, eso significa llamadas de emergencia, cortes de servicio y madrugadas de trabajo. Con VCF, el clúster se recupera solo. Presiona el botón y ve qué pasa.</div>
     </div>
 
-    <div class="peace-three">
-      <div class="peace-card">
-        <div class="peace-card-icon">🔄</div>
-        <h4>vMotion</h4>
-        <p>Migra VMs activas entre hosts en segundos. Actualiza, reinicia o reemplaza servidores físicos mientras producción corre sin interrupción. <sup class="ref">[6]</sup></p>
-      </div>
-      <div class="peace-card">
-        <div class="peace-card-icon">🛡</div>
-        <h4>vSphere HA</h4>
-        <p>Si un servidor físico falla, HA reinicia automáticamente todas sus VMs en otros hosts en minutos — sin intervención manual, sin alarmar a nadie. <sup class="ref">[5]</sup></p>
-      </div>
-      <div class="peace-card">
-        <div class="peace-card-icon">⚖️</div>
-        <h4>DRS Automático</h4>
-        <p>DRS detecta picos de carga y redistribuye workloads entre hosts automáticamente. El operador descansa. El clúster se autogestiona. <sup class="ref">[5]</sup></p>
+    <div class="crisis-wrap">
+      <div class="crisis-terminal">
+        <div class="crisis-topbar">
+          <div class="crisis-blink" id="crisisBlink"></div>
+          <div class="crisis-topbar-title">Monitor de clúster VMware — 3 hosts · 14 VMs activas</div>
+          <div class="crisis-topbar-time" id="crisisTime">02:17:01 AM</div>
+        </div>
+        <div class="crisis-log" id="crisisLog">
+          <div class="crisis-line" id="cline0">
+            <div class="crisis-icon">🔴</div>
+            <div class="crisis-body">
+              <div class="crisis-label">ESXi-03 sin respuesta <span class="crisis-tag alert">ALERTA</span></div>
+              <div class="crisis-desc">El servidor físico pierde comunicación con el clúster. vSphere detecta la falla en 3 segundos. Ningún operador ha sido llamado todavía.</div>
+              <div class="crisis-ts">02:17:04 AM</div>
+            </div>
+          </div>
+          <div class="crisis-line" id="cline1">
+            <div class="crisis-icon">⚡</div>
+            <div class="crisis-body">
+              <div class="crisis-label">vSphere HA activa respuesta <span class="crisis-tag auto">AUTOMÁTICO</span></div>
+              <div class="crisis-desc">HA evalúa recursos en ESXi-01 y ESXi-02. Tiene capacidad suficiente. Inicia reinicio de las 14 VMs afectadas en orden de prioridad.</div>
+              <div class="crisis-ts">02:17:07 AM</div>
+            </div>
+          </div>
+          <div class="crisis-line" id="cline2">
+            <div class="crisis-icon">🔄</div>
+            <div class="crisis-body">
+              <div class="crisis-label">Migración de workloads en curso <span class="crisis-tag auto">AUTOMÁTICO</span></div>
+              <div class="crisis-desc">Base de datos y ERP reinician primero. Servidores web y aplicaciones secundarias a continuación. Sin intervención manual.</div>
+              <div class="crisis-ts">02:17:31 AM</div>
+            </div>
+          </div>
+          <div class="crisis-line" id="cline3">
+            <div class="crisis-icon">⚖️</div>
+            <div class="crisis-body">
+              <div class="crisis-label">DRS rebalancea la carga <span class="crisis-tag auto">AUTOMÁTICO</span></div>
+              <div class="crisis-desc">Distributed Resource Scheduler redistribuye las VMs entre los 2 hosts activos para mantener rendimiento óptimo. Ningún servicio degradado.</div>
+              <div class="crisis-ts">02:18:15 AM</div>
+            </div>
+          </div>
+          <div class="crisis-line" id="cline4">
+            <div class="crisis-icon">✅</div>
+            <div class="crisis-body">
+              <div class="crisis-label">Todos los servicios operativos <span class="crisis-tag ok">RESUELTO</span></div>
+              <div class="crisis-desc">14 VMs corriendo en los hosts sobrevivientes. Ningún usuario fue impactado. Nadie fue llamado. El operador siguió durmiendo.</div>
+              <div class="crisis-ts">02:19:42 AM</div>
+            </div>
+          </div>
+        </div>
+        <div class="crisis-footer">
+          <div class="crisis-footer-note" id="crisisNote">Clúster operativo. Monitoreo activo. <span style="color:rgba(255,255,255,0.2);">Sin actividad.</span></div>
+          <button class="crisis-play-btn start" id="crisisBtn" onclick="crisisPlay()">▶ Simular falla de servidor</button>
+        </div>
       </div>
     </div>
 
-    <div class="peace-bottom">
+    <div class="peace-bottom" style="margin-top:32px;">
       <div class="peace-quote-bar"></div>
       <div>
         <div class="peace-quote-text">"La tranquilidad del operador y el tiempo en familia <strong>son más valiosos que cualquier SLA.</strong>"</div>
       </div>
-      <div class="peace-right-note">SDDC Manager coordina parches de todo el stack — sin ventanas caóticas ni sorpresas de compatibilidad.</div>
+      <div class="peace-right-note">Tiempo promedio de recuperación automática con vSphere HA: menos de 3 minutos. Sin llamadas. Sin cortes visibles.</div>
     </div>
   </div>
 </div>
@@ -675,76 +818,32 @@
     <div class="section-desc">VMware vSphere tiene la mayor densidad de VMs por servidor físico del mercado. Más VMs por host = menos servidores = menos CAPEX, electricidad y refrigeración. <sup class="ref">[1]</sup></div>
   </div>
 
-  <div class="hw-stat-row">
-    <div class="hw-stat">
-      <div class="hw-stat-num">3:1</div>
-      <div class="hw-stat-label">Ratio de overcommit de memoria sostenible en producción</div>
-      <div class="hw-stat-ref"><sup>[1]</sup> VMware vSphere 9 Documentation</div>
+  <p style="font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:8px;">Cada punto representa una VM. Mismo servidor físico. <span style="color:var(--text);">¿Cuántas caben según el hipervisor?</span> <sup class="ref">[2]</sup></p>
+
+  <div class="density-visual" id="dot-trigger">
+    <div class="density-row">
+      <div class="density-row-header">
+        <div class="density-row-name">VMware vSphere <span class="density-best-tag">MÁXIMA DENSIDAD</span></div>
+        <div class="density-row-num vmw">92 VMs</div>
+      </div>
+      <div class="density-dots" id="dots-vmw"></div>
     </div>
-    <div class="hw-stat">
-      <div class="hw-stat-num">40%</div>
-      <div class="hw-stat-label">Más VMs por servidor vs Hyper-V estándar</div>
-      <div class="hw-stat-ref"><sup>[2]</sup> Gartner Virtualization Benchmark 2024</div>
+    <div class="density-row">
+      <div class="density-row-header">
+        <div class="density-row-name">Proxmox / KVM</div>
+        <div class="density-row-num dim">65 VMs</div>
+      </div>
+      <div class="density-dots" id="dots-prx"></div>
     </div>
-    <div class="hw-stat">
-      <div class="hw-stat-num green">85%+</div>
-      <div class="hw-stat-label">Utilización efectiva de CPU con DRS correctamente configurado</div>
-      <div class="hw-stat-ref"><sup>[5]</sup> VMware DRS Best Practices Guide</div>
-    </div>
-    <div class="hw-stat">
-      <div class="hw-stat-num">92</div>
-      <div class="hw-stat-label">VMs por host en escenario referencia (2 socket, 32 cores, 512 GB RAM)</div>
-      <div class="hw-stat-ref"><sup>[2]</sup> Benchmark Coresolutions / Gartner 2024</div>
-    </div>
-    <div class="hw-stat">
-      <div class="hw-stat-num green">40%</div>
-      <div class="hw-stat-label">Reducción de DRAM necesaria con Memory Tiering (NVMe como nivel secundario de RAM)</div>
-      <div class="hw-stat-ref"><sup>[1]</sup> VMware vSphere 8+ Memory Tiering, Broadcom 2025</div>
+    <div class="density-row">
+      <div class="density-row-header">
+        <div class="density-row-name">Microsoft Hyper-V</div>
+        <div class="density-row-num dim">52 VMs</div>
+      </div>
+      <div class="density-dots" id="dots-hyp"></div>
     </div>
   </div>
-
-  <table class="density-table">
-    <thead>
-      <tr>
-        <th>Hipervisor</th>
-        <th>Densidad de VMs</th>
-        <th class="bar-cell">Índice de consolidación</th>
-        <th>Overcommit CPU</th>
-        <th>Balanceo automático</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong style="color:var(--vmw-blue);">VMware vSphere</strong></td>
-        <td><span class="density-val best">92 VMs</span></td>
-        <td><div class="density-bar-track"><div class="density-bar-fill vmw"></div></div></td>
-        <td style="color:var(--success);">Hasta 4:1 <sup class="ref">[5]</sup></td>
-        <td style="color:var(--success);">DRS automático</td>
-      </tr>
-      <tr>
-        <td>Proxmox / KVM</td>
-        <td><span class="density-val">65 VMs</span></td>
-        <td><div class="density-bar-track"><div class="density-bar-fill prx"></div></div></td>
-        <td style="color:#E07A30;">Manual</td>
-        <td style="color:#E07A30;">No nativo</td>
-      </tr>
-      <tr>
-        <td>Nutanix AHV</td>
-        <td><span class="density-val">58 VMs</span></td>
-        <td><div class="density-bar-track"><div class="density-bar-fill nut"></div></div></td>
-        <td style="color:#E07A30;">Limitado</td>
-        <td style="color:#E07A30;">Básico</td>
-      </tr>
-      <tr>
-        <td>Microsoft Hyper-V</td>
-        <td><span class="density-val">52 VMs</span></td>
-        <td><div class="density-bar-track"><div class="density-bar-fill hyp"></div></div></td>
-        <td style="color:#E07A30;">Básico</td>
-        <td style="color:#E07A30;">SCVMM requerido</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="hw-note">Escenario: servidor enterprise 2 socket, 32 cores físicos, 512 GB RAM. Fuente: análisis técnico Coresolutions basado en documentación oficial de fabricantes. <sup>[2][3]</sup></div>
+  <div class="hw-note" style="margin-top:12px;">Servidor referencia: 2 socket · 32 cores físicos · 512 GB RAM. Análisis técnico Coresolutions / documentación oficial de fabricantes. <sup>[2]</sup></div>
 
   <div style="margin-top:28px;">
     <div class="section-eyebrow" style="margin-bottom:16px;">Tecnologías clave de eficiencia en vSphere</div>
@@ -941,27 +1040,42 @@
     <div class="section-desc">No queremos que inviertas en algo que no te corresponde. Esta guía te ayuda a identificar si VCF es realmente la decisión correcta para tu organización.</div>
   </div>
 
-  <div class="fit-grid">
-    <div class="fit-col yes-col">
-      <div class="fit-col-label">VCF sí es para ti si…</div>
-      <ul class="fit-list">
-        <li><span class="bullet">✓</span><span>Tienes 50+ VMs en producción o planeas tenerlas en los próximos 12 meses</span></li>
-        <li><span class="bullet">✓</span><span>Necesitas control sobre tus datos por regulación, seguridad o soberanía</span></li>
-        <li><span class="bullet">✓</span><span>Quieres dejar de pagar facturas cloud variables e impredecibles</span></li>
-        <li><span class="bullet">✓</span><span>Tu equipo ya opera vSphere o tiene capacidad técnica para crecer</span></li>
-        <li><span class="bullet">✓</span><span>Quieres una plataforma que cubra también Kubernetes y automatización</span></li>
-        <li><span class="bullet">✓</span><span>Buscas un camino controlado hacia cloud pública cuando lo necesites</span></li>
-      </ul>
-    </div>
-    <div class="fit-col no-col">
-      <div class="fit-col-label">VCF no es para ti si…</div>
-      <ul class="fit-list">
-        <li><span class="bullet">✗</span><span>Buscas solo virtualización básica sin automatización ni networking avanzado</span></li>
-        <li><span class="bullet">✗</span><span>Eres startup con menos de 20 VMs sin planes de escalar pronto</span></li>
-        <li><span class="bullet">✗</span><span>No tienes equipo técnico ni intención de construir uno</span></li>
-        <li><span class="bullet">✗</span><span>Tu estrategia es 100% SaaS sin datacenter propio a largo plazo</span></li>
-        <li><span class="bullet">✗</span><span>No puedes comprometer presupuesto de infraestructura a 3 años</span></li>
-      </ul>
+  <p class="quiz-intro">Marca los criterios que aplican a tu organización. El resultado aparece en tiempo real.</p>
+
+  <ul class="quiz-list" id="quizList">
+    <li class="quiz-item" onclick="quizToggle(this)">
+      <div class="quiz-box"></div>
+      <div class="quiz-text">Tienes entre 30 y 200 VMs en producción — o planeas llegar ahí en los próximos 12 meses</div>
+    </li>
+    <li class="quiz-item" onclick="quizToggle(this)">
+      <div class="quiz-box"></div>
+      <div class="quiz-text">Necesitas control sobre tus datos por regulación, cumplimiento normativo o soberanía empresarial</div>
+    </li>
+    <li class="quiz-item" onclick="quizToggle(this)">
+      <div class="quiz-box"></div>
+      <div class="quiz-text">Las facturas de cloud pública son impredecibles o están creciendo más rápido de lo presupuestado</div>
+    </li>
+    <li class="quiz-item" onclick="quizToggle(this)">
+      <div class="quiz-box"></div>
+      <div class="quiz-text">Tu equipo ya opera vSphere, o tiene la capacidad técnica para adoptar una plataforma más avanzada</div>
+    </li>
+    <li class="quiz-item" onclick="quizToggle(this)">
+      <div class="quiz-box"></div>
+      <div class="quiz-text">Quieres también contenedores (Kubernetes) y automatización de infraestructura sin contratar otra herramienta</div>
+    </li>
+    <li class="quiz-item" onclick="quizToggle(this)">
+      <div class="quiz-box"></div>
+      <div class="quiz-text">Puedes comprometer presupuesto de infraestructura a 3 años a cambio de costos predecibles</div>
+    </li>
+  </ul>
+
+  <div class="quiz-track"><div class="quiz-fill" id="quizFill"></div></div>
+
+  <div class="quiz-result" id="quizResult">
+    <div class="quiz-result-num" id="quizNum">0/6</div>
+    <div class="quiz-result-text">
+      <h4 id="quizH4"></h4>
+      <p id="quizP"></p>
     </div>
   </div>
 </div>
@@ -1115,6 +1229,97 @@ function closeCard() {
 function closeOnBg(e) { if (e.target===document.getElementById('overlay')) closeCard(); }
 document.addEventListener('keydown', e => { if (e.key==='Escape') closeCard(); });
 window.addEventListener('load', () => { const h=location.hash.replace('#',''); if(ROLES[h]) openCard(h); });
+
+// ── VCF LAYER STACK ──
+function toggleLayer(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.vcf-layer').forEach(l => l.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+// ── CRISIS SIMULATOR ──
+let crisisRunning = false, crisisStep = 0, crisisTimer = null;
+function crisisPlay() {
+  if (crisisRunning) {
+    crisisRunning = false; crisisStep = 0;
+    clearTimeout(crisisTimer);
+    document.querySelectorAll('.crisis-line').forEach(l => l.classList.remove('show'));
+    document.getElementById('crisisBtn').textContent = '▶ Simular falla de servidor';
+    document.getElementById('crisisBtn').className = 'crisis-play-btn start';
+    document.getElementById('crisisBlink').className = 'crisis-blink';
+    document.getElementById('crisisNote').innerHTML = 'Clúster operativo. Monitoreo activo. <span style="color:rgba(255,255,255,0.2);">Sin actividad.</span>';
+    return;
+  }
+  crisisRunning = true;
+  document.getElementById('crisisBtn').textContent = '↺ Reiniciar simulación';
+  document.getElementById('crisisBtn').className = 'crisis-play-btn reset';
+  nextCrisisStep();
+}
+function nextCrisisStep() {
+  const lines = document.querySelectorAll('.crisis-line');
+  if (crisisStep >= lines.length) {
+    document.getElementById('crisisBlink').className = 'crisis-blink ok';
+    document.getElementById('crisisNote').innerHTML = '<span style="color:var(--success);font-weight:700;">Resuelto en 2m 38s.</span> Sin intervención manual. Sin llamadas de emergencia.';
+    return;
+  }
+  lines[crisisStep].classList.add('show');
+  crisisStep++;
+  crisisTimer = setTimeout(nextCrisisStep, crisisStep === 1 ? 900 : 1400);
+}
+
+// ── DOT DENSITY GRID ──
+function buildDots(id, count, total, cls) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'density-dot ' + (i < count ? cls : 'empty');
+    el.appendChild(d);
+  }
+  // stagger animation
+  el.querySelectorAll('.' + cls).forEach((d, i) => {
+    d.style.opacity = '0';
+    setTimeout(() => { d.style.transition = 'opacity 0.15s'; d.style.opacity = '1'; }, i * 10);
+  });
+}
+const dotObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      setTimeout(() => buildDots('dots-vmw', 92, 92, 'vmw'), 0);
+      setTimeout(() => buildDots('dots-prx', 65, 92, 'prx'), 300);
+      setTimeout(() => buildDots('dots-hyp', 52, 92, 'hyp'), 600);
+      dotObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const dotTrig = document.getElementById('dot-trigger');
+if (dotTrig) dotObs.observe(dotTrig);
+
+// ── QUIZ ──
+function quizToggle(item) {
+  item.classList.toggle('on');
+  const checked = document.querySelectorAll('.quiz-item.on').length;
+  const total = document.querySelectorAll('.quiz-item').length;
+  document.getElementById('quizFill').style.width = (checked / total * 100) + '%';
+  const result = document.getElementById('quizResult');
+  result.className = 'quiz-result show';
+  const num = document.getElementById('quizNum');
+  num.textContent = checked + '/' + total;
+  if (checked >= 4) {
+    num.className = 'quiz-result-num green';
+    document.getElementById('quizH4').textContent = 'VCF es para ti.';
+    document.getElementById('quizP').textContent = 'Tu organización tiene el perfil ideal. El siguiente paso es un assessment de 2–3 horas donde calculamos el TCO real con tus propios números, sin compromiso.';
+  } else if (checked >= 2) {
+    num.className = 'quiz-result-num orange';
+    document.getElementById('quizH4').textContent = 'VCF podría ser para ti.';
+    document.getElementById('quizP').textContent = 'Algunos factores son favorables. Vale la pena hacer un análisis más detallado antes de decidir — sin presión ni propuesta de venta inmediata.';
+  } else {
+    num.className = 'quiz-result-num muted';
+    document.getElementById('quizH4').textContent = 'Aún no es el momento.';
+    document.getElementById('quizP').textContent = 'Con este perfil, hay alternativas más adecuadas. Hablemos — podemos recomendarte la opción correcta sin presión y sin intentar venderte algo que no te corresponde.';
+  }
+}
 </script>
 </body>
 </html>
