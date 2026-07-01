@@ -502,24 +502,43 @@
   .pres-slide .section-eyebrow { margin-bottom:16px; }
 
   /* ── BEFORE / AFTER ── */
-  .ba-wrap { position:relative; overflow:hidden; height:320px; cursor:col-resize; user-select:none; touch-action:none; border:1px solid var(--border); margin-top:36px; }
-  @media(max-width:600px) { .ba-wrap { height:420px; } }
-  .ba-panel { position:absolute; inset:0; padding:32px 28px; display:flex; flex-direction:column; justify-content:center; }
-  .ba-left { background:#04111e; }
-  .ba-right { background:var(--bg-card); clip-path:inset(0 0 0 50%); transition:clip-path 0s; }
-  .ba-label { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:18px; }
-  .ba-left .ba-label { color:var(--danger); }
-  .ba-right .ba-label { color:var(--success); }
-  .ba-boxes { display:flex; flex-wrap:wrap; gap:8px; }
-  .ba-box { font-size:11px; font-weight:600; padding:10px 14px; border:1px solid; }
-  .ba-left .ba-box { border-color:rgba(239,68,68,0.3); color:rgba(255,255,255,0.5); background:rgba(239,68,68,0.04); }
-  .ba-right .ba-box { border-color:var(--border-s); color:var(--text); background:rgba(26,86,219,0.1); }
-  .ba-right .ba-box.highlight { border-color:var(--blue); background:var(--blue); font-weight:700; }
-  .ba-left .ba-chaos { font-size:11px; color:rgba(239,68,68,0.5); margin-top:16px; line-height:1.6; }
-  .ba-right .ba-unity { font-size:11px; color:var(--muted); margin-top:16px; line-height:1.6; }
-  .ba-handle { position:absolute; top:0; bottom:0; left:50%; width:2px; background:var(--blue-lt); transform:translateX(-50%); z-index:10; }
-  .ba-handle-grip { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:var(--blue-lt); border:3px solid #fff; display:flex; align-items:center; justify-content:center; font-size:14px; box-shadow:0 0 16px rgba(59,130,246,0.5); }
-  .ba-hint { text-align:center; font-size:10px; color:var(--muted); margin-top:10px; letter-spacing:1px; }
+  .ba-wrap { position:relative; overflow:hidden; height:380px; cursor:col-resize; user-select:none; touch-action:none; margin-top:36px; border:1px solid var(--border); }
+  @media(max-width:640px) { .ba-wrap { height:520px; } }
+  .ba-panel { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:28px 32px; }
+  .ba-left { background:#02080f; }
+  .ba-right { background:#021540; clip-path:inset(0 0 0 50%); }
+
+  /* LEFT — chaos */
+  .ba-left-header { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .ba-left-badge { background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.4); color:var(--danger); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; }
+  .ba-chaos-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; }
+  .ba-chaos-item { border:1px solid rgba(239,68,68,0.22); background:rgba(239,68,68,0.04); padding:10px 12px; position:relative; }
+  .ba-chaos-item::before { content:attr(data-vendor); position:absolute; top:-1px; right:4px; font-size:8px; color:rgba(239,68,68,0.4); font-weight:600; letter-spacing:1px; }
+  .ba-chaos-item-name { font-size:11px; font-weight:700; color:rgba(255,255,255,0.45); margin-bottom:3px; }
+  .ba-chaos-item-note { font-size:9px; color:rgba(239,68,68,0.45); line-height:1.4; }
+  .ba-chaos-warning { margin-top:16px; display:flex; flex-direction:column; gap:5px; }
+  .ba-chaos-warn { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(239,68,68,0.6); }
+  .ba-chaos-warn::before { content:'✗'; font-weight:700; flex-shrink:0; }
+
+  /* RIGHT — unity */
+  .ba-right-header { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .ba-right-badge { background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.35); color:var(--success); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; }
+  .ba-vcf-stack { display:flex; flex-direction:column; gap:4px; }
+  .ba-vcf-layer { border:1px solid var(--border-s); background:rgba(26,86,219,0.08); padding:10px 14px; display:flex; align-items:center; gap:10px; }
+  .ba-vcf-layer.top-layer { background:var(--blue); border-color:var(--blue); }
+  .ba-vcf-dot { width:8px; height:8px; border-radius:50%; background:var(--blue-lt); flex-shrink:0; }
+  .ba-vcf-layer.top-layer .ba-vcf-dot { background:#fff; }
+  .ba-vcf-name { font-size:11px; font-weight:700; flex:1; }
+  .ba-vcf-tag { font-size:9px; color:var(--muted); }
+  .ba-vcf-layer.top-layer .ba-vcf-tag { color:rgba(255,255,255,0.7); }
+  .ba-unity-wins { margin-top:14px; display:flex; flex-direction:column; gap:5px; }
+  .ba-unity-win { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(34,197,94,0.8); }
+  .ba-unity-win::before { content:'✓'; font-weight:700; flex-shrink:0; }
+
+  /* HANDLE */
+  .ba-handle { position:absolute; top:0; bottom:0; left:50%; width:3px; background:linear-gradient(180deg,var(--blue),var(--blue-lt)); transform:translateX(-50%); z-index:10; }
+  .ba-handle-grip { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:40px; height:40px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; box-shadow:0 0 24px rgba(59,130,246,0.7),0 2px 8px rgba(0,0,0,0.4); color:#001233; font-weight:900; }
+  .ba-hint { text-align:center; font-size:10px; color:var(--muted); margin-top:12px; letter-spacing:1.5px; text-transform:uppercase; }
 
   /* ── ADOPTION TIMELINE ── */
   .tl-wrap { position:relative; margin-top:40px; }
@@ -804,35 +823,89 @@
     <div class="section-desc">Arrastra el divisor para comparar la arquitectura fragmentada de hoy vs VCF unificado.</div>
   </div>
   <div class="ba-wrap" id="baWrap">
+
+    <!-- LEFT: CAOS SIN VCF -->
     <div class="ba-panel ba-left">
-      <div class="ba-label">⚠ Hoy — sin VCF</div>
-      <div class="ba-boxes">
-        <div class="ba-box">vSphere<br><span style="font-size:9px;opacity:0.5;">Contrato A</span></div>
-        <div class="ba-box">vSAN<br><span style="font-size:9px;opacity:0.5;">Contrato B</span></div>
-        <div class="ba-box">NSX<br><span style="font-size:9px;opacity:0.5;">Contrato C</span></div>
-        <div class="ba-box">Ops / Monitoreo<br><span style="font-size:9px;opacity:0.5;">Herramienta D</span></div>
-        <div class="ba-box">Kubernetes<br><span style="font-size:9px;opacity:0.5;">Proyecto aparte</span></div>
-        <div class="ba-box">Soporte<br><span style="font-size:9px;opacity:0.5;">4 vendors distintos</span></div>
+      <div class="ba-left-header">
+        <div class="ba-left-badge">⚠ Sin VCF — hoy</div>
       </div>
-      <div class="ba-chaos">4 contratos · 4 ciclos de parches · sin visibilidad unificada<br>Cada falla requiere coordinar múltiples proveedores.</div>
+      <div class="ba-chaos-grid">
+        <div class="ba-chaos-item" data-vendor="VMware">
+          <div class="ba-chaos-item-name">vSphere</div>
+          <div class="ba-chaos-item-note">Contrato A · soporte propio</div>
+        </div>
+        <div class="ba-chaos-item" data-vendor="Dell / NetApp">
+          <div class="ba-chaos-item-name">Storage SAN</div>
+          <div class="ba-chaos-item-note">Contrato B · vendor distinto</div>
+        </div>
+        <div class="ba-chaos-item" data-vendor="VMware / Cisco">
+          <div class="ba-chaos-item-name">NSX / Red</div>
+          <div class="ba-chaos-item-note">Contrato C · equipo separado</div>
+        </div>
+        <div class="ba-chaos-item" data-vendor="Varios">
+          <div class="ba-chaos-item-name">Monitoreo</div>
+          <div class="ba-chaos-item-note">Herramienta aparte · sin integrar</div>
+        </div>
+        <div class="ba-chaos-item" data-vendor="OpenShift / k8s">
+          <div class="ba-chaos-item-name">Kubernetes</div>
+          <div class="ba-chaos-item-note">Proyecto separado · sin soporte</div>
+        </div>
+        <div class="ba-chaos-item" data-vendor="Manual">
+          <div class="ba-chaos-item-name">Parches</div>
+          <div class="ba-chaos-item-note">Manuales · sin orden garantizado</div>
+        </div>
+      </div>
+      <div class="ba-chaos-warning">
+        <div class="ba-chaos-warn">4+ contratos, 4+ ciclos de parches independientes</div>
+        <div class="ba-chaos-warn">Cada falla requiere coordinar múltiples vendors</div>
+        <div class="ba-chaos-warn">Sin visibilidad unificada del entorno</div>
+      </div>
     </div>
+
+    <!-- RIGHT: ORDEN CON VCF -->
     <div class="ba-panel ba-right" id="baRight">
-      <div class="ba-label">✓ Con VCF — stack unificado</div>
-      <div class="ba-boxes">
-        <div class="ba-box">vSphere 9</div>
-        <div class="ba-box">vSAN ESA</div>
-        <div class="ba-box">NSX Enterprise</div>
-        <div class="ba-box">VCF Operations</div>
-        <div class="ba-box">VKS + Automation</div>
-        <div class="ba-box highlight">SDDC Manager</div>
+      <div class="ba-right-header">
+        <div class="ba-right-badge">✓ Con VCF — unificado</div>
       </div>
-      <div class="ba-unity">1 contrato · 1 soporte · ciclo de vida automatizado<br>SDDC Manager orquesta todo el stack en un solo flujo.</div>
+      <div class="ba-vcf-stack">
+        <div class="ba-vcf-layer">
+          <div class="ba-vcf-dot"></div>
+          <div class="ba-vcf-name">Cómputo — vSphere 9</div>
+          <div class="ba-vcf-tag">HA · DRS · vMotion</div>
+        </div>
+        <div class="ba-vcf-layer">
+          <div class="ba-vcf-dot"></div>
+          <div class="ba-vcf-name">Almacenamiento — vSAN ESA</div>
+          <div class="ba-vcf-tag">NVMe · sin SAN externa</div>
+        </div>
+        <div class="ba-vcf-layer">
+          <div class="ba-vcf-dot"></div>
+          <div class="ba-vcf-name">Red y Seguridad — NSX</div>
+          <div class="ba-vcf-tag">SDN · micro-segmentación</div>
+        </div>
+        <div class="ba-vcf-layer">
+          <div class="ba-vcf-dot"></div>
+          <div class="ba-vcf-name">Kubernetes + Automatización</div>
+          <div class="ba-vcf-tag">VKS · VCF Automation</div>
+        </div>
+        <div class="ba-vcf-layer top-layer">
+          <div class="ba-vcf-dot"></div>
+          <div class="ba-vcf-name">SDDC Manager</div>
+          <div class="ba-vcf-tag">1 contrato · 1 soporte · ciclo de vida automatizado</div>
+        </div>
+      </div>
+      <div class="ba-unity-wins">
+        <div class="ba-unity-win">Un solo contrato, un solo soporte</div>
+        <div class="ba-unity-win">Parches orquestados automáticamente</div>
+        <div class="ba-unity-win">Visibilidad y control total del stack</div>
+      </div>
     </div>
+
     <div class="ba-handle" id="baHandle">
       <div class="ba-handle-grip">⇄</div>
     </div>
   </div>
-  <div class="ba-hint">← Arrastra el divisor para comparar →</div>
+  <div class="ba-hint">← arrastra para comparar →</div>
 </div>
 
 <div class="divider"></div>
