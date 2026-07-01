@@ -160,7 +160,19 @@
   .deck-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--blue-lt); margin-bottom: 10px; }
   .deck-title { font-size: clamp(22px, 3vw, 36px); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
   .deck-desc { font-size: 14px; color: var(--muted); max-width: 440px; margin: 0 auto 16px; line-height: 1.6; }
-  .hint { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.2); text-align: center; margin: 20px 0 32px; }
+  .hint {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--blue-lt); text-align: center; margin: 20px 0 32px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .hint-dot {
+    width: 8px; height: 8px; background: var(--blue-lt); border-radius: 50%;
+    animation: pulse-dot 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.7); opacity: 0.4; }
+  }
   .deck-row { display: flex; justify-content: center; align-items: flex-end; gap: 12px; padding: 0 24px 80px; flex-wrap: nowrap; overflow-x: auto; }
 
   .card {
@@ -190,6 +202,20 @@
   .card-bar { position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: rgba(255,255,255,0.3); }
   .card-label { font-size: 15px; font-weight: 700; line-height: 1.2; position: relative; z-index: 2; letter-spacing: -0.3px; }
   .card-sub { font-size: 10px; font-weight: 500; letter-spacing: 1px; opacity: 0.5; margin-top: 6px; position: relative; z-index: 2; text-transform: uppercase; }
+  .card-tap {
+    position: absolute; top: 14px; right: 14px; z-index: 3;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; transition: background 0.2s;
+  }
+  .card:hover .card-tap { background: rgba(255,255,255,0.22); }
+  /* first card gentle glow to invite interaction */
+  @keyframes glow-invite {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+    50% { box-shadow: 0 0 0 6px rgba(59,130,246,0.25); }
+  }
+  .card:first-child { animation: glow-invite 2.4s ease-in-out 1.5s 3; }
 
   /* ── OVERLAY ── */
   .overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,10,30,0.9); backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
@@ -494,31 +520,36 @@
   <div class="deck-desc">Cada área tiene miedos legítimos y ganancias concretas. Selecciona tu perfil y ve los argumentos exactos que necesitas para defender esta decisión.</div>
 </div>
 
-<div class="hint">Selecciona una carta para ver argumentos por rol</div>
+<div class="hint"><div class="hint-dot"></div>Toca una carta para ver los argumentos de tu rol<div class="hint-dot"></div></div>
 
 <div class="deck-row">
   <div class="card" data-role="cio" onclick="openCard('cio')">
     <div class="card-texture"></div><div class="card-bar"></div>
+    <div class="card-tap">👆</div>
     <div class="card-label">CIO /<br>Director TI</div>
     <div class="card-sub">Estrategia</div>
   </div>
   <div class="card" data-role="cfo" onclick="openCard('cfo')">
     <div class="card-texture"></div><div class="card-bar"></div>
+    <div class="card-tap">👆</div>
     <div class="card-label">CFO /<br>Finanzas</div>
     <div class="card-sub">TCO & Costo</div>
   </div>
   <div class="card" data-role="itm" onclick="openCard('itm')">
     <div class="card-texture"></div><div class="card-bar" style="background:rgba(0,0,0,0.2);"></div>
+    <div class="card-tap">👆</div>
     <div class="card-label">Gerente<br>de Infra</div>
     <div class="card-sub">Operación</div>
   </div>
   <div class="card" data-role="ops" onclick="openCard('ops')">
     <div class="card-texture"></div><div class="card-bar"></div>
+    <div class="card-tap">👆</div>
     <div class="card-label">Arquitecto<br>/ Ops</div>
     <div class="card-sub">Técnico</div>
   </div>
   <div class="card" data-role="ceo" onclick="openCard('ceo')">
     <div class="card-texture"></div><div class="card-bar"></div>
+    <div class="card-tap">👆</div>
     <div class="card-label">CEO /<br>Dirección</div>
     <div class="card-sub">Negocio</div>
   </div>
