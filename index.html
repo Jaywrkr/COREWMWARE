@@ -502,8 +502,8 @@
   .pres-slide .section-eyebrow { margin-bottom:16px; }
 
   /* ── BEFORE / AFTER ── */
-  .ba-wrap { position:relative; overflow:hidden; height:400px; cursor:col-resize; user-select:none; touch-action:none; margin-top:36px; }
-  @media(max-width:640px) { .ba-wrap { height:560px; } }
+  .ba-wrap { position:relative; overflow:hidden; height:420px; cursor:col-resize; user-select:none; touch-action:none; margin-top:36px; }
+  @media(max-width:640px) { .ba-wrap { height:600px; } }
   /* both panels fill 100% width, right panel hides its left portion via clip */
   .ba-panel { position:absolute; top:0; bottom:0; width:100%; }
   .ba-left  { left:0; background:#010810; }
@@ -523,9 +523,9 @@
   /* ticket / alert labels */
   .cc-ticket { position:absolute; font-size:8px; font-weight:600; letter-spacing:1px; color:rgba(239,68,68,0.45); z-index:2; font-family:monospace; }
 
-  /* RIGHT — unity */
-  .ba-right-badge { position:absolute; top:16px; left:20px; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.35); color:var(--success); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; z-index:2; }
-  .ba-vcf-wrap { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:56px 28px 24px; }
+  /* RIGHT — unity: inner wrapper anchored to right half so content centers in visible area */
+  .ba-right-badge { position:absolute; top:16px; left:calc(50% + 16px); background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.35); color:var(--success); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; z-index:2; }
+  .ba-vcf-wrap { position:absolute; top:0; bottom:0; left:50%; right:0; display:flex; flex-direction:column; justify-content:center; padding:52px 24px 20px 20px; }
   .ba-vcf-stack { display:flex; flex-direction:column; gap:4px; }
   .ba-vcf-layer { border:1px solid var(--border-s); background:rgba(26,86,219,0.09); padding:11px 16px; display:flex; align-items:center; gap:12px; }
   .ba-vcf-layer.top-layer { background:var(--blue); border-color:var(--blue); margin-top:2px; }
@@ -832,54 +832,51 @@
       <div class="ba-chaos-bg"></div>
       <div class="ba-left-badge">⚠ Sin VCF — hoy</div>
 
-      <!-- bloques flotantes, rotados, desorganizados -->
-      <div class="cc" style="top:54px;left:18px;transform:rotate(-3deg);border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.06);color:rgba(255,255,255,0.55);width:130px;">
-        vSphere<span class="cc-sub">Contrato A · renovar en dic</span>
+      <!-- bloques flotantes — organizados en 2 columnas con rotación, sin colisión -->
+      <!-- Col izquierda -->
+      <div class="cc" style="top:50px;left:20px;transform:rotate(-4deg);border-color:rgba(239,68,68,0.5);background:rgba(239,68,68,0.08);color:rgba(255,255,255,0.75);width:38%;">
+        vSphere <span style="color:rgba(239,68,68,0.9);font-size:8px;margin-left:4px;">← RENOVAR DIC</span>
+        <span class="cc-sub">Contrato A · Vendor A · 3 servidores</span>
         <div class="cc-err">!</div>
       </div>
 
-      <div class="cc" style="top:46px;left:170px;transform:rotate(2deg);border-color:rgba(249,115,22,0.4);background:rgba(249,115,22,0.05);color:rgba(255,255,255,0.5);width:120px;">
-        Storage SAN<span class="cc-sub">Vendor B · ticket abierto</span>
+      <div class="cc" style="top:145px;left:8px;transform:rotate(3deg);border-color:rgba(249,115,22,0.55);background:rgba(249,115,22,0.07);color:rgba(255,255,255,0.7);width:36%;">
+        Storage SAN<span class="cc-sub">Vendor B · ticket #4821 sin resp.</span>
         <div class="cc-err">3</div>
       </div>
 
-      <div class="cc" style="top:42px;left:308px;transform:rotate(-1.5deg);border-color:rgba(239,68,68,0.28);background:rgba(239,68,68,0.04);color:rgba(255,255,255,0.45);width:110px;">
-        NSX / Red<span class="cc-sub">Equipo separado</span>
-      </div>
-
-      <div class="cc" style="top:150px;left:30px;transform:rotate(2.5deg);border-color:rgba(239,68,68,0.25);background:rgba(239,68,68,0.03);color:rgba(255,255,255,0.4);width:115px;">
+      <div class="cc" style="top:248px;left:18px;transform:rotate(-2deg);border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05);color:rgba(255,255,255,0.55);width:38%;">
         Monitoreo<span class="cc-sub">Herramienta D · sin integrar</span>
         <div class="cc-err">!</div>
       </div>
 
-      <div class="cc" style="top:158px;left:165px;transform:rotate(-2deg);border-color:rgba(249,115,22,0.35);background:rgba(249,115,22,0.04);color:rgba(255,255,255,0.4);width:125px;">
-        Kubernetes<span class="cc-sub">Proyecto aparte · sin SLA</span>
+      <!-- Col derecha -->
+      <div class="cc" style="top:62px;left:46%;transform:rotate(3.5deg);border-color:rgba(249,115,22,0.45);background:rgba(249,115,22,0.06);color:rgba(255,255,255,0.65);width:36%;">
+        NSX / Red<span class="cc-sub">Equipo separado · Vendor C</span>
       </div>
 
-      <div class="cc" style="top:148px;left:308px;transform:rotate(3deg);border-color:rgba(239,68,68,0.22);background:rgba(239,68,68,0.03);color:rgba(255,255,255,0.35);width:105px;">
-        Parches<span class="cc-sub">Manuales · sin orden</span>
+      <div class="cc" style="top:165px;left:48%;transform:rotate(-3deg);border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.06);color:rgba(255,255,255,0.6);width:34%;">
+        Kubernetes<span class="cc-sub">Proyecto paralelo · sin SLA</span>
+      </div>
+
+      <div class="cc" style="top:262px;left:44%;transform:rotate(2deg);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);color:rgba(255,255,255,0.5);width:36%;">
+        Parches<span class="cc-sub">Manuales · sin ventana ni orden</span>
         <div class="cc-err">!</div>
       </div>
 
-      <!-- flechas de caos -->
-      <div class="cc-arrow" style="top:118px;left:62px;transform:rotate(70deg);">↕</div>
-      <div class="cc-arrow" style="top:112px;left:195px;transform:rotate(-30deg);">↗</div>
-      <div class="cc-arrow" style="top:120px;left:335px;transform:rotate(110deg);">↙</div>
-      <div class="cc-arrow" style="top:145px;left:140px;transform:rotate(20deg);font-size:22px;">⟷</div>
+      <!-- flecha de conflicto central -->
+      <div class="cc-arrow" style="top:114px;left:42%;transform:rotate(-15deg);font-size:20px;color:rgba(239,68,68,0.45);">⟷</div>
+      <div class="cc-arrow" style="top:212px;left:42%;transform:rotate(10deg);font-size:18px;color:rgba(249,115,22,0.4);">↕</div>
 
-      <!-- tickets flotantes -->
-      <div class="cc-ticket" style="top:256px;left:22px;">TICKET #4821 — SIN RESPUESTA 3 DÍAS</div>
-      <div class="cc-ticket" style="top:280px;left:22px;">PARCHE FALLIDO — ROLLBACK MANUAL</div>
-      <div class="cc-ticket" style="top:304px;left:22px;">4 CONTRATOS · 4 VENDORS · 0 VISIBILIDAD</div>
-      <div class="cc-ticket" style="top:328px;left:22px;color:rgba(239,68,68,0.7);">⚠ INCOMPATIBILIDAD NSX ↔ STORAGE VERSION</div>
+      <!-- banner de alerta abajo -->
+      <div class="cc-ticket" style="top:340px;left:12px;width:calc(50% - 24px);">⚠ INCOMPATIBILIDAD NSX ↔ STORAGE</div>
+      <div class="cc-ticket" style="top:358px;left:12px;width:calc(50% - 24px);">4 CONTRATOS · 4 VENDORS · 0 VISIBILIDAD</div>
     </div>
 
     <!-- RIGHT: ORDEN CON VCF -->
     <div class="ba-panel ba-right" id="baRight">
-      <div class="ba-right-header">
-        <div class="ba-right-badge">✓ Con VCF — unificado</div>
-      </div>
-      <div class="ba-vcf-stack">
+      <div class="ba-right-badge">✓ Con VCF — unificado</div>
+      <div class="ba-vcf-wrap"><div class="ba-vcf-stack">
         <div class="ba-vcf-layer">
           <div class="ba-vcf-dot"></div>
           <div class="ba-vcf-name">Cómputo — vSphere 9</div>
@@ -906,11 +903,13 @@
           <div class="ba-vcf-tag">1 contrato · 1 soporte · ciclo de vida automatizado</div>
         </div>
       </div>
+      </div><!-- /ba-vcf-stack -->
       <div class="ba-unity-wins">
         <div class="ba-unity-win">Un solo contrato, un solo soporte</div>
         <div class="ba-unity-win">Parches orquestados automáticamente</div>
         <div class="ba-unity-win">Visibilidad y control total del stack</div>
       </div>
+      </div><!-- /ba-vcf-wrap -->
     </div>
 
     <div class="ba-handle" id="baHandle">
