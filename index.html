@@ -544,7 +544,7 @@
   .ba-hint { text-align:center; font-size:10px; color:var(--muted); margin-top:12px; letter-spacing:1.5px; text-transform:uppercase; }
 
   /* ── ADOPTION TIMELINE ── */
-  .tl-wrap { position:relative; margin-top:40px; }
+  .tl-wrap { position:relative; margin-top:40px; max-width:860px; margin-left:auto; margin-right:auto; }
   .tl-track { display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
   .tl-track::before { content:''; position:absolute; top:18px; left:calc(12.5%); right:calc(12.5%); height:2px; background:var(--border); z-index:0; }
   .tl-node { display:flex; flex-direction:column; align-items:center; position:relative; cursor:pointer; }
@@ -565,6 +565,39 @@
   .tl-item { background:var(--bg); border:1px solid var(--border); padding:14px 16px; }
   .tl-item-label { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
   .tl-item-text { font-size:12px; line-height:1.5; }
+
+  /* ── PRESENTATION INTERACTIVE LAYERS (ps1) ── */
+  .pres-layer { cursor:pointer; padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:14px; transition:background 0.2s; }
+  .pres-layer:last-child { border-bottom:none; }
+  .pres-layer:hover { background:rgba(26,86,219,0.08); }
+  .pres-layer.active { background:rgba(26,86,219,0.14); }
+  .pres-layer-icon { font-size:18px; flex-shrink:0; width:28px; text-align:center; }
+  .pres-layer-name { font-size:13px; font-weight:700; flex:1; }
+  .pres-layer-tag { font-size:10px; color:var(--muted); }
+  .pres-layer-detail { max-height:0; overflow:hidden; transition:max-height 0.35s ease; background:rgba(26,86,219,0.06); border-bottom:1px solid var(--border); }
+  .pres-layer-detail.open { max-height:100px; }
+  .pres-layer-detail-inner { padding:10px 20px 14px 62px; font-size:12px; color:var(--muted); line-height:1.6; }
+  /* ps4 crisis animation */
+  .pres-crisis-line { opacity:0; transform:translateY(6px); transition:opacity 0.4s ease, transform 0.4s ease; }
+  .pres-crisis-line.show { opacity:1; transform:none; }
+  /* ps2 TCO count-up */
+  .tco-bar-wrap { margin-top:12px; display:flex; flex-direction:column; gap:14px; }
+  .tco-bar-row { display:flex; align-items:center; gap:14px; }
+  .tco-bar-label { font-size:12px; width:200px; flex-shrink:0; }
+  .tco-bar-track { flex:1; height:10px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden; }
+  .tco-bar-fill { height:100%; border-radius:3px; width:0; transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
+  .tco-bar-amt { font-size:14px; font-weight:800; width:68px; text-align:right; }
+  /* ps5 timeline in pres */
+  .pres-steps { display:flex; flex-direction:column; gap:8px; }
+  .pres-step { border:1px solid var(--border); background:var(--bg-card); padding:16px 20px; cursor:pointer; display:flex; align-items:center; gap:16px; transition:border-color 0.2s; }
+  .pres-step:hover { border-color:var(--blue-lt); }
+  .pres-step.active { border-color:var(--blue); background:rgba(26,86,219,0.1); }
+  .pres-step-num { font-size:28px; font-weight:800; color:var(--blue-lt); flex-shrink:0; line-height:1; width:36px; }
+  .pres-step-body { flex:1; }
+  .pres-step-title { font-size:13px; font-weight:700; margin-bottom:3px; }
+  .pres-step-sub { font-size:11px; color:var(--muted); }
+  .pres-step-detail { font-size:11px; color:rgba(200,215,255,0.7); line-height:1.5; margin-top:8px; display:none; }
+  .pres-step.active .pres-step-detail { display:block; }
 
   /* ── PRINT STYLES ── */
   @media print {
@@ -1508,26 +1541,80 @@
   </div>
   <div class="pres-slide" id="ps1">
     <div class="section-eyebrow">¿Qué incluye VCF?</div>
-    <div class="section-title" style="margin:20px 0 24px;">5 capas de tecnología.<br><strong>Un solo stack integrado.</strong></div>
+    <div class="section-title" style="margin:20px 0 8px;">5 capas de tecnología.<br><strong>Un solo stack integrado.</strong></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Haz clic en cada capa para ver qué hace</div>
     <div style="border:1px solid var(--border);overflow:hidden;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
-        <div style="padding:20px 24px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">CÓMPUTO</div><div style="font-size:13px;color:var(--muted);">vSphere 9 · ESXi · vCenter · HA · DRS · vMotion</div></div>
-        <div style="padding:20px 24px;border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">ALMACENAMIENTO</div><div style="font-size:13px;color:var(--muted);">vSAN ESA · All-NVMe · SPBM · sin SAN externa</div></div>
-        <div style="padding:20px 24px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">RED Y SEGURIDAD</div><div style="font-size:13px;color:var(--muted);">NSX Enterprise · SDN · micro-segmentación · DFW</div></div>
-        <div style="padding:20px 24px;border-bottom:1px solid var(--border);"><div style="font-size:11px;color:var(--blue-lt);font-weight:700;letter-spacing:1px;margin-bottom:6px;">KUBERNETES</div><div style="font-size:13px;color:var(--muted);">VKS Enterprise · Harbor Registry · VCF Automation</div></div>
+      <div class="pres-layer" onclick="presLayerClick(this)">
+        <div class="pres-layer-icon">🖥️</div>
+        <div class="pres-layer-name">Cómputo — vSphere 9</div>
+        <div class="pres-layer-tag">ESXi · vCenter · HA · DRS · vMotion</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--muted);">▼</div>
       </div>
-      <div style="padding:20px 24px;background:var(--blue);"><div style="font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:4px;">GESTIÓN UNIFICADA</div><div style="font-size:13px;opacity:0.85;">SDDC Manager — ciclo de vida de todo el stack, automatizado y en orden seguro</div></div>
+      <div class="pres-layer-detail">
+        <div class="pres-layer-detail-inner">Alta disponibilidad automática, balanceo de carga entre hosts, migración en caliente (vMotion) sin apagar VMs. El motor que mantiene todo corriendo sin intervención humana.</div>
+      </div>
+      <div class="pres-layer" onclick="presLayerClick(this)">
+        <div class="pres-layer-icon">💾</div>
+        <div class="pres-layer-name">Almacenamiento — vSAN ESA</div>
+        <div class="pres-layer-tag">All-NVMe · sin SAN externa · SPBM</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--muted);">▼</div>
+      </div>
+      <div class="pres-layer-detail">
+        <div class="pres-layer-detail-inner">Almacenamiento distribuido usando los discos NVMe de los propios servidores. Elimina la necesidad de una SAN externa costosa. Políticas de almacenamiento por VM.</div>
+      </div>
+      <div class="pres-layer" onclick="presLayerClick(this)">
+        <div class="pres-layer-icon">🔒</div>
+        <div class="pres-layer-name">Red y Seguridad — NSX Enterprise</div>
+        <div class="pres-layer-tag">SDN · micro-segmentación · firewall distribuido</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--muted);">▼</div>
+      </div>
+      <div class="pres-layer-detail">
+        <div class="pres-layer-detail-inner">Redes virtuales sin tocar switches físicos. Micro-segmentación: cada VM tiene su propio firewall. Visible y controlable desde una sola consola.</div>
+      </div>
+      <div class="pres-layer" onclick="presLayerClick(this)">
+        <div class="pres-layer-icon">☸️</div>
+        <div class="pres-layer-name">Kubernetes + Automatización</div>
+        <div class="pres-layer-tag">VKS Enterprise · Harbor · VCF Automation</div>
+        <div style="margin-left:auto;font-size:11px;color:var(--muted);">▼</div>
+      </div>
+      <div class="pres-layer-detail">
+        <div class="pres-layer-detail-inner">Clústeres Kubernetes nativos sobre el mismo hipervisor. Automatización IaC de infraestructura completa. Registry privado de contenedores incluido.</div>
+      </div>
+      <div class="pres-layer" onclick="presLayerClick(this)" style="background:var(--blue);border-top:1px solid rgba(255,255,255,0.15);">
+        <div class="pres-layer-icon">⚙️</div>
+        <div class="pres-layer-name" style="color:#fff;">SDDC Manager — Gestión unificada</div>
+        <div class="pres-layer-tag" style="color:rgba(255,255,255,0.7);">ciclo de vida · parches · 1 contrato</div>
+        <div style="margin-left:auto;font-size:11px;color:rgba(255,255,255,0.5);">▼</div>
+      </div>
+      <div class="pres-layer-detail">
+        <div class="pres-layer-detail-inner">Orquesta actualizaciones de todo el stack en orden seguro y validado. Un solo contrato, un solo soporte, una sola herramienta para gestionar todo.</div>
+      </div>
     </div>
   </div>
   <div class="pres-slide" id="ps2">
     <div class="section-eyebrow">TCO · 3 años · 60 VMs</div>
-    <div class="section-title" style="margin:20px 0 32px;">Los números que<br><strong>cambian la conversación.</strong></div>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;">Cloud pública (AWS / Azure)</span><span style="font-size:32px;font-weight:800;color:var(--danger);">~$380K</span></div>
-      <div style="background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.2);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;">Infraestructura fragmentada</span><span style="font-size:32px;font-weight:800;color:var(--orange);">~$290K</span></div>
-      <div style="background:rgba(26,86,219,0.1);border:1px solid var(--blue);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;font-weight:700;">VMware Cloud Foundation</span><span style="font-size:36px;font-weight:800;color:var(--blue-lt);">~$190K</span></div>
+    <div class="section-title" style="margin:20px 0 28px;">Los números que<br><strong>cambian la conversación.</strong></div>
+    <div class="tco-bar-wrap" id="ps2Bars">
+      <div class="tco-bar-row">
+        <div class="tco-bar-label" style="color:rgba(255,255,255,0.7);">Cloud pública</div>
+        <div class="tco-bar-track"><div class="tco-bar-fill" id="ps2b1" style="background:var(--danger);"></div></div>
+        <div class="tco-bar-amt" style="color:var(--danger);">~$380K</div>
+      </div>
+      <div class="tco-bar-row">
+        <div class="tco-bar-label" style="color:rgba(255,255,255,0.7);">Infraestructura fragmentada</div>
+        <div class="tco-bar-track"><div class="tco-bar-fill" id="ps2b2" style="background:var(--orange);"></div></div>
+        <div class="tco-bar-amt" style="color:var(--orange);">~$290K</div>
+      </div>
+      <div class="tco-bar-row">
+        <div class="tco-bar-label" style="font-weight:700;">VMware Cloud Foundation</div>
+        <div class="tco-bar-track"><div class="tco-bar-fill" id="ps2b3" style="background:var(--blue-lt);"></div></div>
+        <div class="tco-bar-amt" style="color:var(--blue-lt);font-size:18px;">~$190K</div>
+      </div>
     </div>
-    <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,0.2);">Estimación orientativa para entorno mediano en Ecuador. Coresolutions puede calcular el tuyo con datos reales.</div>
+    <div style="margin-top:28px;padding:14px 18px;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);font-size:13px;color:var(--success);">
+      50% menos que cloud · 35% menos que infraestructura fragmentada
+    </div>
+    <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.2);">Estimación orientativa para entorno mediano en Ecuador. Coresolutions calcula el tuyo con datos reales.</div>
   </div>
   <div class="pres-slide" id="ps3">
     <div class="section-eyebrow">Eficiencia de hardware</div>
@@ -1541,23 +1628,67 @@
   </div>
   <div class="pres-slide" id="ps4">
     <div class="section-eyebrow">Operación sin estrés</div>
-    <div class="section-title" style="margin:20px 0 24px;">Son las 2 AM.<br><strong>Un servidor falla. Nadie llama.</strong></div>
-    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border);">
-      <div style="display:flex;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);"><span style="font-size:18px;">🔴</span><div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">ESXi-03 sin respuesta <span style="background:rgba(239,68,68,0.12);color:var(--danger);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:04</span></div><div style="font-size:12px;color:var(--muted);">Servidor físico pierde comunicación. vSphere detecta la falla en 3 segundos.</div></div></div>
-      <div style="display:flex;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);"><span style="font-size:18px;">⚡</span><div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">vSphere HA activa respuesta automática <span style="background:rgba(26,86,219,0.15);color:var(--blue-lt);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:07</span></div><div style="font-size:12px;color:var(--muted);">Las 14 VMs afectadas reinician en los hosts disponibles. Sin intervención manual.</div></div></div>
-      <div style="display:flex;gap:14px;padding:18px 20px;"><span style="font-size:18px;">✅</span><div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">Todos los servicios operativos <span style="background:rgba(34,197,94,0.1);color:var(--success);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:19:42</span></div><div style="font-size:12px;color:var(--muted);">Resuelto en 2m 38s. Ningún usuario impactado. El operador siguió durmiendo.</div></div></div>
+    <div class="section-title" style="margin:20px 0 10px;">Son las 2 AM.<br><strong>Un servidor falla. Nadie llama.</strong></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Observa cómo VCF reacciona solo — en tiempo real</div>
+    <div style="border:1px solid var(--border);overflow:hidden;margin-bottom:16px;" id="ps4Log">
+      <div class="pres-crisis-line" id="pc1" style="display:flex;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <span style="font-size:18px;">🔴</span>
+        <div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">ESXi-03 sin respuesta <span style="background:rgba(239,68,68,0.12);color:var(--danger);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:04</span></div><div style="font-size:12px;color:var(--muted);">Servidor físico pierde comunicación. vSphere detecta la falla en 3 segundos.</div></div>
+      </div>
+      <div class="pres-crisis-line" id="pc2" style="display:flex;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <span style="font-size:18px;">⚡</span>
+        <div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">vSphere HA activa respuesta <span style="background:rgba(26,86,219,0.15);color:var(--blue-lt);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:07</span></div><div style="font-size:12px;color:var(--muted);">14 VMs reinician en los hosts disponibles. Sin intervención manual.</div></div>
+      </div>
+      <div class="pres-crisis-line" id="pc3" style="display:flex;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <span style="font-size:18px;">📊</span>
+        <div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">DRS rebalancea el clúster <span style="background:rgba(249,115,22,0.12);color:var(--orange);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:17:22</span></div><div style="font-size:12px;color:var(--muted);">Carga redistribuida entre ESXi-01 y ESXi-02. CPU en 61%.</div></div>
+      </div>
+      <div class="pres-crisis-line" id="pc4" style="display:flex;gap:14px;padding:16px 20px;">
+        <span style="font-size:18px;">✅</span>
+        <div><div style="font-size:13px;font-weight:700;margin-bottom:3px;">Todos los servicios operativos <span style="background:rgba(34,197,94,0.1);color:var(--success);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:2px 7px;text-transform:uppercase;margin-left:8px;">02:19:42</span></div><div style="font-size:12px;color:var(--muted);">Resuelto en 2m 38s. 0 usuarios impactados. El operador siguió durmiendo.</div></div>
+      </div>
     </div>
+    <button onclick="presPlayCrisis()" style="background:var(--blue);color:#fff;border:none;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;">▶ Repetir simulación</button>
   </div>
   <div class="pres-slide" id="ps5">
     <div class="section-eyebrow">Próximos pasos · Sin compromisos</div>
-    <div class="section-title" style="margin:20px 0 32px;">El camino hacia<br><strong>una decisión informada.</strong></div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:32px;">
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">1</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Workshop de Assessment</div><div style="font-size:12px;color:var(--muted);">2–3 horas. Entendemos tu entorno, workloads y objetivos reales.</div></div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">2</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Análisis de TCO personalizado</div><div style="font-size:12px;color:var(--muted);">Calculamos el costo real con tus números, no con estimaciones genéricas.</div></div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">3</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Proof of Concept</div><div style="font-size:12px;color:var(--muted);">Validamos VCF en tu entorno real antes de cualquier compromiso de compra.</div></div>
-      <div style="background:var(--bg-card);border:1px solid var(--border);padding:22px;"><div style="font-size:28px;font-weight:800;color:var(--blue-lt);margin-bottom:8px;">4</div><div style="font-size:14px;font-weight:700;margin-bottom:6px;">Decisión informada</div><div style="font-size:12px;color:var(--muted);">Con datos propios en mano, la decisión la tomas tú con total claridad.</div></div>
+    <div class="section-title" style="margin:20px 0 8px;">El camino hacia<br><strong>una decisión informada.</strong></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Haz clic en cada paso para ver qué ocurre</div>
+    <div class="pres-steps">
+      <div class="pres-step active" onclick="presStepClick(this)">
+        <div class="pres-step-num">1</div>
+        <div class="pres-step-body">
+          <div class="pres-step-title">Workshop de Assessment</div>
+          <div class="pres-step-sub">Semana 1–2 · sin costo · sin compromiso</div>
+          <div class="pres-step-detail">Mapeamos tu entorno actual: servidores, VMs, workloads y arquitectura de red. Al final tienes un diagnóstico claro — y sabes si VCF aplica o no a tu caso.</div>
+        </div>
+      </div>
+      <div class="pres-step" onclick="presStepClick(this)">
+        <div class="pres-step-num">2</div>
+        <div class="pres-step-body">
+          <div class="pres-step-title">Análisis de TCO personalizado</div>
+          <div class="pres-step-sub">Mes 1 · con tus números reales</div>
+          <div class="pres-step-detail">Calculamos costo a 3 años: hardware, licencias, electricidad y personal. Entregamos un documento presentable ante el directorio.</div>
+        </div>
+      </div>
+      <div class="pres-step" onclick="presStepClick(this)">
+        <div class="pres-step-num">3</div>
+        <div class="pres-step-body">
+          <div class="pres-step-title">Proof of Concept en tu entorno</div>
+          <div class="pres-step-sub">Mes 2–3 · VCF en tu hardware real</div>
+          <div class="pres-step-detail">Desplegamos VCF sobre tu infraestructura real. Tu equipo lo opera de primera mano. Producción no se toca. Rollback disponible.</div>
+        </div>
+      </div>
+      <div class="pres-step" onclick="presStepClick(this)">
+        <div class="pres-step-num">4</div>
+        <div class="pres-step-body">
+          <div class="pres-step-title">Migración y producción</div>
+          <div class="pres-step-sub">Mes 4–6 · incremental · sin big bang</div>
+          <div class="pres-step-detail">Migramos workloads por etapas con HCX. Cada servicio se mueve validado. La decisión de cada paso la toman tú y tu equipo.</div>
+        </div>
+      </div>
     </div>
-    <div style="font-size:14px;color:var(--muted);">Coresolutions Ecuador · <strong style="color:var(--text);">ventas@coresolutions.ec</strong></div>
+    <div style="margin-top:20px;font-size:13px;color:var(--muted);">Coresolutions Ecuador · <strong style="color:var(--text);">ventas@coresolutions.ec</strong></div>
   </div>
 </div>
 <div class="pres-ui" id="presUI">
@@ -1679,10 +1810,48 @@ function presShow() {
   document.getElementById('presPrev').disabled = presIdx === 0;
   document.getElementById('presNext').disabled = presIdx === PRES_SLIDES - 1;
   document.getElementById('presProgFill').style.width = ((presIdx + 1) / PRES_SLIDES * 100) + '%';
+  // per-slide interactions
+  if (presIdx === 2) setTimeout(presAnimTCO, 200);
+  if (presIdx === 3) setTimeout(presPlayCrisis, 400);
 }
 function presNav(dir) {
   presIdx = Math.max(0, Math.min(PRES_SLIDES - 1, presIdx + dir));
   presShow();
+}
+// ps1: layer accordion
+function presLayerClick(el) {
+  const detail = el.nextElementSibling;
+  const isOpen = detail.classList.contains('open');
+  document.querySelectorAll('.pres-layer-detail').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.pres-layer').forEach(l => l.classList.remove('active'));
+  if (!isOpen) { detail.classList.add('open'); el.classList.add('active'); }
+}
+// ps2: TCO bar animation
+function presAnimTCO() {
+  const b1 = document.getElementById('ps2b1');
+  const b2 = document.getElementById('ps2b2');
+  const b3 = document.getElementById('ps2b3');
+  if (!b1) return;
+  b1.style.width = '0'; b2.style.width = '0'; b3.style.width = '0';
+  requestAnimationFrame(() => {
+    b1.style.width = '100%';
+    setTimeout(() => { b2.style.width = '76%'; }, 200);
+    setTimeout(() => { b3.style.width = '50%'; }, 400);
+  });
+}
+// ps4: crisis animation
+function presPlayCrisis() {
+  const lines = ['pc1','pc2','pc3','pc4'];
+  lines.forEach(id => { const el = document.getElementById(id); if(el) el.classList.remove('show'); });
+  const delays = [200, 1100, 2000, 3100];
+  lines.forEach((id, i) => {
+    setTimeout(() => { const el = document.getElementById(id); if(el) el.classList.add('show'); }, delays[i]);
+  });
+}
+// ps5: step click
+function presStepClick(el) {
+  document.querySelectorAll('.pres-step').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
 }
 document.addEventListener('keydown', e => {
   if (!document.body.classList.contains('pres-mode')) return;
