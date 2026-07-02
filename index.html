@@ -502,46 +502,82 @@
   .pres-slide .section-eyebrow { margin-bottom:16px; }
 
   /* ── BEFORE / AFTER ── */
-  .ba-wrap { position:relative; overflow:hidden; height:420px; cursor:col-resize; user-select:none; touch-action:none; margin-top:36px; }
-  @media(max-width:640px) { .ba-wrap { height:600px; } }
-  /* both panels fill 100% width, right panel hides its left portion via clip */
-  .ba-panel { position:absolute; top:0; bottom:0; width:100%; }
-  .ba-left  { left:0; background:#010810; }
-  .ba-right { left:0; background:#021540; }
-  /* seam fix: extend clip by 1px to avoid sub-pixel gap */
-  .ba-right { clip-path:inset(0 0 0 calc(50% - 1px)); }
+  .ba-wrap {
+    position:relative; overflow:clip; height:380px;
+    cursor:col-resize; user-select:none; touch-action:none;
+    margin-top:36px; border:1px solid var(--border);
+  }
+  @media(max-width:640px) { .ba-wrap { height:500px; } }
 
-  /* LEFT — absolute chaos layout */
-  .ba-chaos-bg { position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(239,68,68,0.03) 0,rgba(239,68,68,0.03) 1px,transparent 1px,transparent 14px); }
-  .ba-left-badge { position:absolute; top:16px; left:20px; background:rgba(239,68,68,0.18); border:1px solid rgba(239,68,68,0.5); color:var(--danger); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; z-index:2; }
-  /* chaos floating blocks — each positioned/rotated individually */
-  .cc { position:absolute; font-size:10px; font-weight:700; padding:9px 12px; border:1px solid; z-index:2; line-height:1.3; }
-  .cc-sub { font-size:8px; font-weight:400; opacity:0.55; display:block; margin-top:2px; }
-  .cc-err { position:absolute; top:-7px; right:-7px; width:14px; height:14px; border-radius:50%; background:var(--danger); font-size:7px; color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; }
-  /* arrow connectors */
-  .cc-arrow { position:absolute; font-size:18px; color:rgba(239,68,68,0.3); z-index:1; transform-origin:center; }
-  /* ticket / alert labels */
-  .cc-ticket { position:absolute; font-size:8px; font-weight:600; letter-spacing:1px; color:rgba(239,68,68,0.45); z-index:2; font-family:monospace; }
+  /* Two panels, side by side using absolute positioning */
+  .ba-panel { position:absolute; top:0; bottom:0; }
+  .ba-left  { left:0; width:50%; background:#010810; border-right:none; }
+  .ba-right { right:0; width:50%; background:#021540; }
 
-  /* RIGHT — unity: inner wrapper anchored to right half so content centers in visible area */
-  .ba-right-badge { position:absolute; top:16px; left:calc(50% + 16px); background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.35); color:var(--success); font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; z-index:2; }
-  .ba-vcf-wrap { position:absolute; top:0; bottom:0; left:50%; right:0; display:flex; flex-direction:column; justify-content:center; padding:52px 24px 20px 20px; }
-  .ba-vcf-stack { display:flex; flex-direction:column; gap:4px; }
-  .ba-vcf-layer { border:1px solid var(--border-s); background:rgba(26,86,219,0.09); padding:11px 16px; display:flex; align-items:center; gap:12px; }
-  .ba-vcf-layer.top-layer { background:var(--blue); border-color:var(--blue); margin-top:2px; }
-  .ba-vcf-dot { width:8px; height:8px; border-radius:50%; background:var(--blue-lt); flex-shrink:0; }
+  /* Labels */
+  .ba-label {
+    position:absolute; top:14px;
+    font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    padding:4px 10px; z-index:3;
+  }
+  .ba-label-left { left:14px; background:rgba(239,68,68,0.18); border:1px solid rgba(239,68,68,0.5); color:var(--danger); }
+  .ba-label-right { left:14px; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.35); color:var(--success); }
+
+  /* LEFT: chaos grid — 3 rows × 2 cols, all within left panel */
+  .ba-chaos-bg { position:absolute; inset:0; background:repeating-linear-gradient(45deg,rgba(239,68,68,0.04) 0,rgba(239,68,68,0.04) 1px,transparent 1px,transparent 14px); }
+  .ba-chaos-grid { position:absolute; inset:44px 12px 12px 12px; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,1fr); gap:8px; }
+  .cc {
+    border:1px solid; padding:10px 12px; font-size:10px; font-weight:700;
+    line-height:1.35; position:relative; overflow:hidden;
+  }
+  .cc:nth-child(1) { transform:rotate(-2.5deg); border-color:rgba(239,68,68,0.55); background:rgba(239,68,68,0.08); color:rgba(255,255,255,0.8); }
+  .cc:nth-child(2) { transform:rotate(2deg);   border-color:rgba(249,115,22,0.5);  background:rgba(249,115,22,0.07); color:rgba(255,255,255,0.7); }
+  .cc:nth-child(3) { transform:rotate(1.5deg);  border-color:rgba(249,115,22,0.45); background:rgba(249,115,22,0.06); color:rgba(255,255,255,0.65); }
+  .cc:nth-child(4) { transform:rotate(-1deg);   border-color:rgba(239,68,68,0.4);   background:rgba(239,68,68,0.05); color:rgba(255,255,255,0.6); }
+  .cc:nth-child(5) { transform:rotate(-2deg);   border-color:rgba(239,68,68,0.35);  background:rgba(239,68,68,0.04); color:rgba(255,255,255,0.55); }
+  .cc:nth-child(6) { transform:rotate(3deg);    border-color:rgba(239,68,68,0.3);   background:rgba(239,68,68,0.04); color:rgba(255,255,255,0.5); }
+  .cc-sub { font-size:8px; font-weight:400; opacity:0.55; display:block; margin-top:3px; }
+  .cc-err {
+    position:absolute; top:-6px; right:-6px; width:14px; height:14px;
+    border-radius:50%; background:var(--danger);
+    font-size:7px; color:#fff; font-weight:900;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ba-chaos-footer {
+    position:absolute; bottom:10px; left:10px; right:10px;
+    font-size:8px; font-weight:600; letter-spacing:1px;
+    color:rgba(239,68,68,0.5); font-family:monospace; line-height:1.8;
+  }
+
+  /* RIGHT: VCF stack */
+  .ba-vcf-inner { position:absolute; inset:44px 12px 12px 12px; display:flex; flex-direction:column; justify-content:center; gap:5px; }
+  .ba-vcf-layer { border:1px solid var(--border-s); background:rgba(26,86,219,0.09); padding:10px 14px; display:flex; align-items:center; gap:10px; }
+  .ba-vcf-layer.top-layer { background:var(--blue); border-color:var(--blue); }
+  .ba-vcf-dot { width:7px; height:7px; border-radius:50%; background:var(--blue-lt); flex-shrink:0; }
   .ba-vcf-layer.top-layer .ba-vcf-dot { background:#fff; }
-  .ba-vcf-name { font-size:11px; font-weight:700; flex:1; }
-  .ba-vcf-tag { font-size:9px; color:var(--muted); }
+  .ba-vcf-name { font-size:10px; font-weight:700; flex:1; }
+  .ba-vcf-tag { font-size:8px; color:var(--muted); }
   .ba-vcf-layer.top-layer .ba-vcf-tag { color:rgba(255,255,255,0.75); }
-  .ba-unity-wins { margin-top:14px; display:flex; flex-direction:column; gap:5px; }
-  .ba-unity-win { font-size:11px; color:rgba(34,197,94,0.85); display:flex; gap:8px; align-items:center; }
+  .ba-unity-wins { margin-top:8px; display:flex; flex-direction:column; gap:4px; }
+  .ba-unity-win { font-size:10px; color:rgba(34,197,94,0.85); display:flex; gap:7px; align-items:center; }
   .ba-unity-win::before { content:'✓'; font-weight:900; }
 
-  /* HANDLE — solid to prevent seam */
-  .ba-handle { position:absolute; top:0; bottom:0; left:50%; width:4px; background:#fff; transform:translateX(-50%); z-index:20; box-shadow:0 0 12px 2px rgba(59,130,246,0.6); }
-  .ba-handle-grip { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:var(--blue-lt); border:3px solid #fff; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:900; color:#001233; box-shadow:0 0 28px rgba(59,130,246,0.8),0 2px 10px rgba(0,0,0,0.5); }
-  .ba-hint { text-align:center; font-size:10px; color:var(--muted); margin-top:12px; letter-spacing:1.5px; text-transform:uppercase; }
+  /* DIVIDER handle — no box-shadow to prevent bleed */
+  .ba-divider {
+    position:absolute; top:0; bottom:0; left:50%;
+    width:3px; background:#fff; transform:translateX(-50%);
+    z-index:10; cursor:col-resize;
+  }
+  .ba-divider-grip {
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:36px; height:36px; border-radius:50%;
+    background:var(--blue-lt); border:3px solid #fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:900; color:#001233;
+    pointer-events:none;
+  }
+  .ba-hint { text-align:center; font-size:10px; color:var(--muted); margin-top:10px; letter-spacing:1.5px; text-transform:uppercase; }
 
   /* ── ADOPTION TIMELINE ── */
   .tl-wrap { position:relative; margin-top:40px; max-width:860px; margin-left:auto; margin-right:auto; }
@@ -860,56 +896,28 @@
   </div>
   <div class="ba-wrap" id="baWrap">
 
-    <!-- LEFT: CAOS SIN VCF -->
-    <div class="ba-panel ba-left">
+    <!-- LEFT: CAOS SIN VCF — contenido dentro del panel izquierdo únicamente -->
+    <div class="ba-panel ba-left" id="baLeft">
       <div class="ba-chaos-bg"></div>
-      <div class="ba-left-badge">⚠ Sin VCF — hoy</div>
-
-      <!-- bloques flotantes — organizados en 2 columnas con rotación, sin colisión -->
-      <!-- Col izquierda -->
-      <div class="cc" style="top:50px;left:20px;transform:rotate(-4deg);border-color:rgba(239,68,68,0.5);background:rgba(239,68,68,0.08);color:rgba(255,255,255,0.75);width:38%;">
-        vSphere <span style="color:rgba(239,68,68,0.9);font-size:8px;margin-left:4px;">← RENOVAR DIC</span>
-        <span class="cc-sub">Contrato A · Vendor A · 3 servidores</span>
-        <div class="cc-err">!</div>
+      <div class="ba-label ba-label-left">⚠ Sin VCF — hoy</div>
+      <div class="ba-chaos-grid">
+        <div class="cc">vSphere<span class="cc-sub">Contrato A · vence dic</span><div class="cc-err">!</div></div>
+        <div class="cc">NSX / Red<span class="cc-sub">Vendor C · equipo separado</span></div>
+        <div class="cc">Storage SAN<span class="cc-sub">Vendor B · ticket sin resp.</span><div class="cc-err">3</div></div>
+        <div class="cc">Kubernetes<span class="cc-sub">Proyecto aparte · sin SLA</span></div>
+        <div class="cc">Monitoreo<span class="cc-sub">Tool D · sin integrar</span><div class="cc-err">!</div></div>
+        <div class="cc">Parches<span class="cc-sub">Manuales · sin calendario</span><div class="cc-err">!</div></div>
       </div>
-
-      <div class="cc" style="top:145px;left:8px;transform:rotate(3deg);border-color:rgba(249,115,22,0.55);background:rgba(249,115,22,0.07);color:rgba(255,255,255,0.7);width:36%;">
-        Storage SAN<span class="cc-sub">Vendor B · ticket #4821 sin resp.</span>
-        <div class="cc-err">3</div>
+      <div class="ba-chaos-footer">
+        ⚠ 4 CONTRATOS · 4 VENDORS · 0 VISIBILIDAD<br>
+        INCOMPATIBILIDAD NSX ↔ STORAGE VERSION
       </div>
-
-      <div class="cc" style="top:248px;left:18px;transform:rotate(-2deg);border-color:rgba(239,68,68,0.35);background:rgba(239,68,68,0.05);color:rgba(255,255,255,0.55);width:38%;">
-        Monitoreo<span class="cc-sub">Herramienta D · sin integrar</span>
-        <div class="cc-err">!</div>
-      </div>
-
-      <!-- Col derecha -->
-      <div class="cc" style="top:62px;left:46%;transform:rotate(3.5deg);border-color:rgba(249,115,22,0.45);background:rgba(249,115,22,0.06);color:rgba(255,255,255,0.65);width:36%;">
-        NSX / Red<span class="cc-sub">Equipo separado · Vendor C</span>
-      </div>
-
-      <div class="cc" style="top:165px;left:48%;transform:rotate(-3deg);border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.06);color:rgba(255,255,255,0.6);width:34%;">
-        Kubernetes<span class="cc-sub">Proyecto paralelo · sin SLA</span>
-      </div>
-
-      <div class="cc" style="top:262px;left:44%;transform:rotate(2deg);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);color:rgba(255,255,255,0.5);width:36%;">
-        Parches<span class="cc-sub">Manuales · sin ventana ni orden</span>
-        <div class="cc-err">!</div>
-      </div>
-
-      <!-- flecha de conflicto central -->
-      <div class="cc-arrow" style="top:114px;left:42%;transform:rotate(-15deg);font-size:20px;color:rgba(239,68,68,0.45);">⟷</div>
-      <div class="cc-arrow" style="top:212px;left:42%;transform:rotate(10deg);font-size:18px;color:rgba(249,115,22,0.4);">↕</div>
-
-      <!-- banner de alerta abajo -->
-      <div class="cc-ticket" style="top:340px;left:12px;width:calc(50% - 24px);">⚠ INCOMPATIBILIDAD NSX ↔ STORAGE</div>
-      <div class="cc-ticket" style="top:358px;left:12px;width:calc(50% - 24px);">4 CONTRATOS · 4 VENDORS · 0 VISIBILIDAD</div>
     </div>
 
-    <!-- RIGHT: ORDEN CON VCF -->
+    <!-- RIGHT: ORDEN CON VCF — contenido dentro del panel derecho únicamente -->
     <div class="ba-panel ba-right" id="baRight">
-      <div class="ba-right-badge">✓ Con VCF — unificado</div>
-      <div class="ba-vcf-wrap"><div class="ba-vcf-stack">
+      <div class="ba-label ba-label-right">✓ Con VCF — unificado</div>
+      <div class="ba-vcf-inner">
         <div class="ba-vcf-layer">
           <div class="ba-vcf-dot"></div>
           <div class="ba-vcf-name">Cómputo — vSphere 9</div>
@@ -933,23 +941,22 @@
         <div class="ba-vcf-layer top-layer">
           <div class="ba-vcf-dot"></div>
           <div class="ba-vcf-name">SDDC Manager</div>
-          <div class="ba-vcf-tag">1 contrato · 1 soporte · ciclo de vida automatizado</div>
+          <div class="ba-vcf-tag">1 contrato · ciclo de vida automatizado</div>
+        </div>
+        <div class="ba-unity-wins">
+          <div class="ba-unity-win">Un solo contrato, un solo soporte</div>
+          <div class="ba-unity-win">Parches orquestados automáticamente</div>
+          <div class="ba-unity-win">Visibilidad y control total</div>
         </div>
       </div>
-      </div><!-- /ba-vcf-stack -->
-      <div class="ba-unity-wins">
-        <div class="ba-unity-win">Un solo contrato, un solo soporte</div>
-        <div class="ba-unity-win">Parches orquestados automáticamente</div>
-        <div class="ba-unity-win">Visibilidad y control total del stack</div>
-      </div>
-      </div><!-- /ba-vcf-wrap -->
     </div>
 
-    <div class="ba-handle" id="baHandle">
-      <div class="ba-handle-grip">⇄</div>
+    <!-- DIVIDER -->
+    <div class="ba-divider" id="baHandle">
+      <div class="ba-divider-grip">⇄</div>
     </div>
   </div>
-  <div class="ba-hint">← arrastra para comparar →</div>
+  <div class="ba-hint">← arrastra el divisor para comparar →</div>
 </div>
 
 <div class="divider"></div>
@@ -1862,20 +1869,22 @@ document.addEventListener('keydown', e => {
 
 // ── BEFORE / AFTER SLIDER ──
 (function() {
-  const wrap = document.getElementById('baWrap');
+  const wrap   = document.getElementById('baWrap');
   const handle = document.getElementById('baHandle');
-  const right = document.getElementById('baRight');
+  const left   = document.getElementById('baLeft');
+  const right  = document.getElementById('baRight');
   if (!wrap) return;
   let dragging = false;
   function setPos(x) {
     const rect = wrap.getBoundingClientRect();
-    const pct = Math.max(5, Math.min(95, (x - rect.left) / rect.width * 100));
-    handle.style.left = pct + '%';
-    right.style.clipPath = `inset(0 0 0 calc(${pct}% - 1px))`;
+    const pct  = Math.max(5, Math.min(95, (x - rect.left) / rect.width * 100));
+    left.style.width   = pct + '%';
+    right.style.width  = (100 - pct) + '%';
+    handle.style.left  = pct + '%';
   }
   handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
   document.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
-  document.addEventListener('mouseup', () => { dragging = false; });
+  document.addEventListener('mouseup',  () => { dragging = false; });
   handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
   document.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, { passive: true });
   document.addEventListener('touchend', () => { dragging = false; });
