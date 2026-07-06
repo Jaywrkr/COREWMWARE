@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VMware Cloud Foundation — Guía de decisión | Coresolutions Ecuador</title>
-<meta name="description" content="Guía completa post-presentación de VMware VCF 9.1. Argumentos por rol, análisis de TCO, comparativas técnicas y autodiagnóstico. Elaborado por Coresolutions Ecuador.">
+<meta name="description" content="Guía completa post-presentación de VMware VCF. Argumentos por rol, análisis de TCO, comparativas técnicas y autodiagnóstico. Elaborado por Coresolutions Ecuador.">
 <meta property="og:title" content="VMware Cloud Foundation — ¿Es la decisión correcta para tu empresa?">
 <meta property="og:description" content="Guía interactiva para evaluar VCF: TCO a 3 años, densidad de VMs, argumentos por cargo y autodiagnóstico. Coresolutions Ecuador.">
 <meta property="og:type" content="website">
@@ -95,11 +95,13 @@
   }
 
   /* ── HERO ── */
+  #heroNet { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.35; }
   .hero {
     min-height: 92vh;
     display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
     align-items: center; max-width: 1100px; margin: 0 auto;
     padding: 120px 32px 80px;
+    position: relative; z-index: 1;
   }
   @media (max-width: 720px) { .hero { grid-template-columns: 1fr; padding: 100px 24px 64px; } }
   .hero-left { display: flex; flex-direction: column; align-items: flex-start; }
@@ -276,7 +278,7 @@
   .fears .exp-box-label { color: #f87171; }
   .wins  .exp-box-label { color: var(--success); }
   .exp-list { list-style: none; }
-  .exp-list li { font-size: 12px; line-height: 1.5; padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; color: var(--muted); }
+  .exp-list li { font-size: 13px; line-height: 1.5; padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; color: var(--muted); }
   .exp-list li:last-child { border-bottom: none; }
   .exp-list li span { flex: 1; }
   .args-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 20px; }
@@ -513,7 +515,7 @@
   /* Two real panels side by side */
   .ba-panel { position:absolute; top:0; bottom:0; overflow:hidden; }
   .ba-left  { left:0; width:50%; background:#1a0000; }
-  .ba-right { right:0; width:50%; background:#00112b; }
+  .ba-right { left:50%; right:0; width:auto; background:#00112b; }
 
   /* Labels */
   .ba-label {
@@ -650,6 +652,31 @@
   .pres-step-detail { font-size:11px; color:rgba(200,215,255,0.7); line-height:1.5; margin-top:8px; display:none; }
   .pres-step.active .pres-step-detail { display:block; }
 
+  @keyframes layer-invite { 0%,100%{background:transparent} 50%{background:rgba(26,86,219,0.07)} }
+  .vcf-layer:first-child { animation: layer-invite 2s ease-in-out 1.2s 3; }
+
+  @media (max-width: 720px) {
+    .hero-panel { margin-top: 0; }
+    .hero-stack-grid { grid-template-columns: 1fr 1fr; }
+    .peace-three { grid-template-columns: 1fr; }
+    .vcf-layer-header { padding: 14px 16px; gap: 10px; }
+    .vcf-layer-name { font-size: 13px; }
+    .section { padding: 60px 20px; }
+    .deck-row { gap: 8px; padding: 0 16px 60px; }
+    .card { width: 140px; height: 240px; }
+    .ba-wrap { height: 480px; }
+    .cc { font-size: 9px; padding: 7px 9px; }
+    .tco-stats { grid-template-columns: 1fr 1fr; }
+    .tl-items { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 28px; }
+    .deck-row { flex-wrap: wrap; justify-content: center; }
+    .card { width: 130px; height: 220px; }
+    .exp-cols { grid-template-columns: 1fr; }
+    .tco-stats { grid-template-columns: 1fr; }
+  }
+
   /* ── PRINT STYLES ── */
   @media print {
     .topnav, .wa-btn, #scroll-track, .overlay, .hint,
@@ -672,7 +699,7 @@
   }
 
   /* ── VCF LAYER STACK ── */
-  .vcf-stack { margin-top: 36px; border: 1px solid var(--border); overflow: hidden; }
+  .vcf-stack { margin-top: 36px; border: 1px solid var(--border); overflow: visible; }
   .vcf-layer { border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
   .vcf-layer:last-child { border-bottom: none; }
   .vcf-layer-header { display: flex; align-items: center; gap: 14px; padding: 18px 22px; }
@@ -778,6 +805,8 @@
 </head>
 <body>
 
+<canvas id="heroNet"></canvas>
+
 <div id="scroll-track"><div id="scroll-fill"></div></div>
 
 <!-- WHATSAPP -->
@@ -789,7 +818,7 @@
 <!-- TOP NAV -->
 <nav class="topnav">
   <div class="topnav-brand">Coresolutions</div>
-  <div class="topnav-tag">VMware Cloud Foundation · VCF 9.1</div>
+  <div class="topnav-tag">VMware Cloud Foundation</div>
   <button class="topnav-pres-btn" onclick="presEnter()">▶ Presentar</button>
 </nav>
 
@@ -798,7 +827,7 @@
 ════════════════════════════════════════════ -->
 <div class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">VMware Cloud Foundation · VCF 9.1</div>
+    <div class="hero-eyebrow">VMware Cloud Foundation</div>
     <h1>Tu infraestructura,<br><strong>a la velocidad de la nube</strong></h1>
     <p class="hero-sub">Una referencia completa para evaluar VCF — con datos, comparativas y argumentos por rol. Diseñada para que llegues a una decisión con claridad.</p>
     <a class="hero-cta" href="#roles">Ver mi perfil</a>
@@ -823,9 +852,26 @@
         Gestión
       </div>
     </div>
-    <div class="hero-stack-highlight">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      Una sola plataforma, un solo soporte
+    <div class="hero-stack-grid" style="margin-bottom:0;">
+      <div class="hero-stack-item" style="font-size:11px;padding:10px 12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        NSX Enterprise
+      </div>
+      <div class="hero-stack-item" style="font-size:11px;padding:10px 12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        VKS + Kubernetes
+      </div>
+      <div class="hero-stack-item" style="font-size:11px;padding:10px 12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+        SDDC Manager
+      </div>
+      <div class="hero-stack-item" style="font-size:11px;padding:10px 12px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        VCF Automation
+      </div>
+    </div>
+    <div style="margin-top:8px;padding:10px 14px;background:rgba(26,86,219,0.15);border:1px solid rgba(26,86,219,0.3);font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--blue-lt);text-transform:uppercase;">
+      1 contrato · 1 soporte · 1 ciclo de vida
     </div>
   </div>
 </div>
@@ -850,7 +896,7 @@
         </div>
         <div class="vcf-layer-chevron">▼</div>
       </div>
-      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">El hipervisor más usado del mundo. Consolida decenas de servidores virtuales sobre un servidor físico, con alta disponibilidad automática y migración en vivo. El 92% del mercado enterprise lo opera. <sup class="ref">[2]</sup></div></div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">El motor de virtualización más maduro del mercado. <strong>vSphere HA</strong> reinicia VMs automáticamente si un host falla — sin que el usuario note nada. <strong>vMotion</strong> migra VMs en caliente entre servidores en segundos. <strong>DRS</strong> balancea la carga automáticamente. Soporta 92 VMs por host físico vs 52 de Hyper-V — mismo hardware, más densidad. <sup class="ref">[2]</sup></div></div>
     </div>
     <div class="vcf-layer" onclick="toggleLayer(this)">
       <div class="vcf-layer-header">
@@ -861,18 +907,18 @@
         </div>
         <div class="vcf-layer-chevron">▼</div>
       </div>
-      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Almacenamiento distribuido que vive dentro de los propios servidores. Elimina la SAN tradicional. Políticas de almacenamiento por VM (SPBM), deduplicación y compresión incluidas. Rendimiento NVMe nativo. <sup class="ref">[7]</sup></div></div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Convierte los discos NVMe de tus propios servidores en un pool de almacenamiento distribuido. <strong>Elimina la SAN externa</strong> y su costo. vSAN ESA (Express Storage Architecture) soporta deduplicación, compresión y cifrado nativo. Políticas de almacenamiento por VM (SPBM): defines rendimiento y redundancia por aplicación, no por disco. <sup class="ref">[7]</sup></div></div>
     </div>
     <div class="vcf-layer" onclick="toggleLayer(this)">
       <div class="vcf-layer-header">
         <div class="vcf-layer-num">3</div>
         <div>
           <div class="vcf-layer-name">Red y Seguridad — <span class="tip" data-tip="Plataforma de red y seguridad definida por software. Crea redes virtuales y firewalls sin tocar switches físicos.">NSX</span> Enterprise</div>
-          <div class="vcf-layer-tech">SDN · micro-segmentación · firewall distribuido · L2/L3</div>
+          <div class="vcf-layer-tech">SDN · L2/L3 · load balancer · firewall distribuido* · micro-segmentación*</div>
         </div>
         <div class="vcf-layer-chevron">▼</div>
       </div>
-      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Red definida por software. Firewall distribuido que opera en cada VM individualmente — si un servidor es comprometido, no puede moverse lateralmente a los demás. Redes completas creadas en minutos sin tocar switches físicos. <sup class="ref">[7]</sup></div></div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Red y seguridad definidas por software. NSX crea redes virtuales sin tocar switches físicos — VLANs, routing L2/L3, load balancer y VPN incluidos. <strong>Nota:</strong> El firewall distribuido (NSX DFW) y micro-segmentación son funciones del add-on de seguridad avanzada de NSX — no están incluidos en VCF base.* <sup class="ref">[7]</sup></div></div>
     </div>
     <div class="vcf-layer" onclick="toggleLayer(this)">
       <div class="vcf-layer-header">
@@ -883,7 +929,7 @@
         </div>
         <div class="vcf-layer-chevron">▼</div>
       </div>
-      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">Kubernetes nativo integrado al mismo stack — sin agentes externos ni herramientas adicionales. VCF Automation permite aprovisionar infraestructura completa (VMs, redes, almacenamiento) desde código o portal de autoservicio. <sup class="ref">[7]</sup></div></div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner"><strong>VKS Enterprise</strong> (vSphere Kubernetes Service) provee clústeres Kubernetes nativos sobre el mismo hipervisor — sin agentes externos ni plataformas separadas. <strong>Harbor Registry</strong> incluido para imágenes de contenedores. <strong>VCF Automation</strong> (antes vRA) permite aprovisionar VMs, redes y almacenamiento desde código (Terraform/Ansible) o un portal de autoservicio para los equipos de desarrollo. <sup class="ref">[7]</sup></div></div>
     </div>
     <div class="vcf-layer" onclick="toggleLayer(this)">
       <div class="vcf-layer-header">
@@ -894,10 +940,10 @@
         </div>
         <div class="vcf-layer-chevron">▼</div>
       </div>
-      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">El cerebro de VCF. Orquesta actualizaciones de todos los componentes en orden seguro y probado — sin intervención manual. Antes necesitabas 4 equipos para parchear 4 productos. Con <span class="tip" data-tip="Herramienta que coordina actualizaciones y parches de todo el stack VCF en orden seguro y automático.">SDDC Manager</span>, un flujo automatizado lo hace por ti. <sup class="ref">[5]</sup></div></div>
+      <div class="vcf-layer-body"><div class="vcf-layer-body-inner">El cerebro operativo de VCF. <strong>SDDC Manager</strong> orquesta el ciclo de vida de todo el stack: valida compatibilidades, descarga parches, aplica actualizaciones en orden seguro y hace rollback si algo falla — todo sin intervención manual. Incluye también <strong>VCF Operations</strong> (observabilidad, alertas, capacity planning) y acceso a <strong>Broadcom Academy</strong> (cursos bajo demanda para todo el equipo, sin costo adicional). <sup class="ref">[5]</sup></div></div>
     </div>
   </div>
-  <div class="vcf-stack-hint">▲ Selecciona cada capa para conocer su función</div>
+  <div class="vcf-stack-hint">👆 Haz clic en cada capa para expandir su función</div>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -1114,12 +1160,25 @@
       </div>
     </div>
 
-    <div class="peace-bottom" style="margin-top:32px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:28px 0;">
+      <div style="background:rgba(26,86,219,0.08);border:1px solid var(--border);padding:20px 18px;text-align:center;">
+        <div style="font-size:32px;font-weight:800;color:var(--blue-lt);line-height:1;">2:38</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">min promedio de recuperación automática con vSphere HA</div>
+      </div>
+      <div style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15);padding:20px 18px;text-align:center;">
+        <div style="font-size:32px;font-weight:800;color:var(--success);line-height:1;">0</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">llamadas al equipo de TI durante el incidente</div>
+      </div>
+      <div style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15);padding:20px 18px;text-align:center;">
+        <div style="font-size:32px;font-weight:800;color:var(--success);line-height:1;">100%</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">servicios recuperados sin intervención visible para usuarios</div>
+      </div>
+    </div>
+    <div class="peace-bottom" style="margin-top:8px;">
       <div class="peace-quote-bar"></div>
       <div>
         <div class="peace-quote-text">"La tranquilidad del operador y el tiempo en familia <strong>son más valiosos que cualquier SLA.</strong>"</div>
       </div>
-      <div class="peace-right-note">Tiempo promedio de recuperación automática con <span class="tip" data-tip="High Availability: si un servidor falla, las VMs se reinician automáticamente en otro servidor del clúster.">vSphere HA</span>: menos de 3 minutos. Sin llamadas. Sin cortes visibles.</div>
     </div>
   </div>
 </div>
@@ -1137,33 +1196,33 @@
   </div>
 
   <div class="tco-chart">
-    <div class="tco-chart-title">Costo total estimado — 60 VMs · 3 años · empresa mediana Ecuador</div>
+    <div class="tco-chart-title">Comparativa de costo relativo — 60 VMs · 3 años · empresa mediana · VCF = referencia base</div>
 
     <div class="tco-bar-group">
       <div class="tco-bar-label">
         <span class="tco-bar-name">Cloud pública (AWS / Azure)</span>
-        <span class="tco-bar-value" style="color:var(--danger);">~$380K</span>
+        <span class="tco-bar-value" style="color:var(--danger);">~2× más</span>
       </div>
       <div class="tco-bar-track"><div class="tco-bar-fill cloud"></div></div>
-      <div class="tco-bar-note">Instancias + almacenamiento + egress + soporte. El costo real crece cada año y suele superar la proyección inicial en 30–40%. <sup>[3]</sup></div>
+      <div class="tco-bar-note">Instancias + almacenamiento + egress + soporte. El costo sube cada año — suele superar la proyección inicial en un 30–40%. <sup>[3]</sup></div>
     </div>
 
     <div class="tco-bar-group">
       <div class="tco-bar-label">
         <span class="tco-bar-name">Infraestructura fragmentada (sin VCF)</span>
-        <span class="tco-bar-value" style="color:#E07A30;">~$290K</span>
+        <span class="tco-bar-value" style="color:#E07A30;">~50% más</span>
       </div>
       <div class="tco-bar-track"><div class="tco-bar-fill frag"></div></div>
-      <div class="tco-bar-note">Licencias separadas + personal adicional para operar cada componente + integraciones manuales y soporte dividido entre vendors.</div>
+      <div class="tco-bar-note">Licencias separadas + personal adicional por herramienta + integraciones manuales y soporte dividido entre múltiples vendors.</div>
     </div>
 
     <div class="tco-bar-group">
       <div class="tco-bar-label">
-        <span class="tco-bar-name">VMware Cloud Foundation (VCF)</span>
-        <span class="tco-bar-value" style="color:var(--vmw-blue);">~$190K</span>
+        <span class="tco-bar-name">VMware Cloud Foundation — referencia</span>
+        <span class="tco-bar-value" style="color:var(--blue-lt);">base 100%</span>
       </div>
       <div class="tco-bar-track"><div class="tco-bar-fill vcf"></div></div>
-      <div class="tco-bar-note">Stack unificado sobre hardware propio amortizado. Menos personal operativo. Incluye educación del equipo. Costo predecible a 3 años.</div>
+      <div class="tco-bar-note">Stack unificado en hardware propio amortizado. Menos personal operativo. Educación incluida. Costo predecible a 3 años.</div>
     </div>
   </div>
 
@@ -1274,7 +1333,7 @@
           <tr><td>Memory Overcommit (TPS)</td><td class="yes">✓ 3:1–4:1</td><td><span class="partial">KSM básico</span></td><td><span class="partial">Limitado</span></td></tr>
           <tr><td>NUMA-aware scheduling</td><td class="yes">✓ Avanzado</td><td><span class="partial">Básico</span></td><td><span class="partial">Básico</span></td></tr>
           <tr><td>Red definida por software (SDN)</td><td class="yes">✓ <span class="tip" data-tip="Plataforma de red y seguridad definida por software. Crea redes virtuales y firewalls sin tocar switches físicos.">NSX</span> Enterprise</td><td><span class="partial">SDN básico</span></td><td class="no">✗ Requiere Azure</td></tr>
-          <tr><td>Micro-segmentación / firewall distribuido</td><td class="yes">✓ <span class="tip" data-tip="Plataforma de red y seguridad definida por software. Crea redes virtuales y firewalls sin tocar switches físicos.">NSX</span> DFW</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Micro-segmentación / firewall distribuido <span style="color:var(--orange);font-size:9px;">*add-on</span></td><td class="partial">✓* add-on NSX DFW</td><td class="no">✗</td><td class="no">✗</td></tr>
           <tr><td>Storage Policy-Based Management</td><td class="yes">✓ <span class="tip" data-tip="Almacenamiento distribuido que usa los discos internos de los servidores. Elimina la necesidad de una SAN externa.">vSAN</span> SPBM</td><td class="no">✗</td><td class="no">✗</td></tr>
           <tr><td>Kubernetes nativo (sin agente externo)</td><td class="yes">✓ VKS Enterprise</td><td class="no">✗</td><td class="no">✗</td></tr>
           <tr><td>Ciclo de vida unificado del stack</td><td class="yes">✓ SDDC Manager</td><td class="no">✗ Manual</td><td class="no">✗ Manual</td></tr>
@@ -1285,7 +1344,8 @@
         </tbody>
       </table>
     </div>
-    <div class="hw-note">Proxmox VE 8.x, Microsoft Hyper-V 2022, VMware vSphere 9 / VCF 9.1. Fuente: documentación oficial de fabricantes, análisis técnico Coresolutions 2025.</div>
+    <div class="hw-note">Proxmox VE 8.x, Microsoft Hyper-V 2022, VMware vSphere 9 / VCF. Fuente: documentación oficial de fabricantes, análisis técnico Coresolutions 2025.</div>
+    <div class="hw-note">* Firewall distribuido (NSX DFW) y micro-segmentación requieren el add-on de seguridad avanzada de NSX — no está incluido en VCF base.</div>
   </div>
 </div>
 
@@ -1642,21 +1702,21 @@
       <div class="tco-bar-row">
         <div class="tco-bar-label" style="color:rgba(255,255,255,0.7);">Cloud pública</div>
         <div class="tco-bar-track"><div class="tco-bar-fill" id="ps2b1" style="background:var(--danger);"></div></div>
-        <div class="tco-bar-amt" style="color:var(--danger);">~$380K</div>
+        <div class="tco-bar-amt" style="color:var(--danger);">~2× más</div>
       </div>
       <div class="tco-bar-row">
         <div class="tco-bar-label" style="color:rgba(255,255,255,0.7);">Infraestructura fragmentada</div>
         <div class="tco-bar-track"><div class="tco-bar-fill" id="ps2b2" style="background:var(--orange);"></div></div>
-        <div class="tco-bar-amt" style="color:var(--orange);">~$290K</div>
+        <div class="tco-bar-amt" style="color:var(--orange);">~50% más</div>
       </div>
       <div class="tco-bar-row">
         <div class="tco-bar-label" style="font-weight:700;">VMware Cloud Foundation</div>
         <div class="tco-bar-track"><div class="tco-bar-fill" id="ps2b3" style="background:var(--blue-lt);"></div></div>
-        <div class="tco-bar-amt" style="color:var(--blue-lt);font-size:18px;">~$190K</div>
+        <div class="tco-bar-amt" style="color:var(--blue-lt);font-size:18px;">base 100%</div>
       </div>
     </div>
     <div style="margin-top:28px;padding:14px 18px;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);font-size:13px;color:var(--success);">
-      50% menos que cloud · 35% menos que infraestructura fragmentada
+      Cloud pública cuesta el doble · Infraestructura fragmentada un 50% más cara
     </div>
     <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.2);">Estimación orientativa para entorno mediano en Ecuador. Coresolutions calcula el tuyo con datos reales.</div>
   </div>
@@ -1800,9 +1860,6 @@ function openCard(role) {
   const d = ROLES[role];
   const overlay = document.getElementById('overlay');
   const card    = document.getElementById('expandedCard');
-  const fearsHtml = d.fears.map(f => `<li>🔴 <span>${f}</span></li>`).join('');
-  const winsHtml  = d.wins.map(w  => `<li>🟢 <span>${w}</span></li>`).join('');
-  const argsHtml  = d.args.map(a  => `<div class="arg-card" style="border-left-color:${d.accent};"><div class="arg-tag" style="color:${d.accent};">${a.tag}</div><p>${a.text}</p></div>`).join('');
   const bgSize = d.textureBgSize ? `background-size:${d.textureBgSize};` : '';
   card.innerHTML = `
     <div class="exp-header" style="background:${d.bg};color:${d.color};">
@@ -1813,12 +1870,12 @@ function openCard(role) {
     </div>
     <div class="exp-body">
       <div class="exp-cols">
-        <div class="exp-box fears"><div class="exp-box-label">Lo que te preocupa</div><ul class="exp-list">${fearsHtml}</ul></div>
-        <div class="exp-box wins"><div class="exp-box-label">Lo que VCF te da</div><ul class="exp-list">${winsHtml}</ul></div>
+        <div class="exp-box fears"><div class="exp-box-label">🔴 Preocupaciones típicas</div><ul class="exp-list">${d.fears.map(f=>`<li><span>${f}</span></li>`).join('')}</ul></div>
+        <div class="exp-box wins"><div class="exp-box-label">✅ Lo que VCF resuelve</div><ul class="exp-list">${d.wins.map(w=>`<li><span>${w}</span></li>`).join('')}</ul></div>
       </div>
       <hr class="args-divider">
-      <div class="args-label">Argumentos para usar ante tus superiores</div>
-      ${argsHtml}
+      <div class="args-label">💬 Argumentos concretos</div>
+      ${d.args.map(a=>`<div class="arg-card" style="border-left-color:${d.accent};"><div class="arg-tag" style="color:${d.accent};">${a.tag}</div><p>${a.text}</p></div>`).join('')}
     </div>`;
   overlay.classList.add('open');
   history.replaceState(null,'','#'+role);
@@ -1915,9 +1972,9 @@ document.addEventListener('keydown', e => {
   function setPos(x) {
     const rect = wrap.getBoundingClientRect();
     const pct  = Math.max(5, Math.min(95, (x - rect.left) / rect.width * 100));
-    left.style.width   = pct + '%';
-    right.style.width  = (100 - pct) + '%';
-    handle.style.left  = pct + '%';
+    left.style.width  = pct + '%';
+    right.style.left  = pct + '%';
+    handle.style.left = pct + '%';
   }
   handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
   document.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
@@ -2040,6 +2097,38 @@ function quizToggle(item) {
     document.getElementById('quizP').textContent = 'Con este perfil, hay alternativas más adecuadas. Hablemos — podemos recomendarte la opción correcta sin presión y sin intentar venderte algo que no te corresponde.';
   }
 }
+
+// ── HERO NETWORK ANIMATION ──
+(function(){
+  const cv = document.getElementById('heroNet');
+  if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W, H, pts;
+  const N = 55, MAX_DIST = 140;
+  function resize(){ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; }
+  function mkPts(){ pts=Array.from({length:N},()=>({ x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35 })); }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<N;i++){
+      const p=pts[i];
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,2,0,Math.PI*2);
+      ctx.fillStyle='rgba(59,130,246,0.6)'; ctx.fill();
+      for(let j=i+1;j<N;j++){
+        const q=pts[j], dx=q.x-p.x, dy=q.y-p.y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<MAX_DIST){
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=`rgba(59,130,246,${(1-d/MAX_DIST)*0.25})`; ctx.lineWidth=1; ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', ()=>{ resize(); mkPts(); });
+  resize(); mkPts(); draw();
+})();
 </script>
 </body>
 </html>
